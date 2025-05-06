@@ -1,0 +1,44 @@
+.counter {
+ position: relative;
+ width: 90px;
+}
+
+.counter input {
+ background-color: #505050;
+ border: 1px solid #505050;
+ color: #ffffff;
+ text-align: center;
+ width: 100%;
+ height: 50px;
+ border-radius: 5px;
+ outline: none;
+ font-size: 16px;
+ font-weight: bold;
+}
+
+.counter button {
+ position: absolute;
+ top: 50%;
+ transform: translateY(-50%);
+ background: none;
+ cursor: pointer;
+ color: white;
+ display: flex;
+ gap: 560px;
+
+ svg {
+  color: white;
+ }
+}
+
+.counter button:first-of-type {
+ left: 15px;
+ font-weight: bold;
+ font-size: 16px;
+}
+
+.counter button:last-of-type {
+ font-size: 20px;
+ font-weight: bold;
+ right: 15px;
+}

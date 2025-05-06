@@ -1,0 +1,28 @@
+@use "./abstracts/animation";
+@use "./abstracts/fonts";
+@use "./abstracts/variables";
+@use "./abstracts/resets";
+@use "./abstracts/mixins";
+
+
+@use './layouts/header';
+@use './layouts/main';
+@use './layouts/footer';
+
+
+@use './routes/home';
+@use './routes/shop';
+@use './routes/singleProduct';
+@use './routes/login-register-container';
+
+
+@use './components/loading';
+@use './components/searchBlur';
+@use './components/carousel';
+@use './components/services';
+@use './components/routeBanner';
+@use './components/filter';
+@use './components/products';
+@use './components/counter';
+@use './components/login';
+@use './components/register'; 

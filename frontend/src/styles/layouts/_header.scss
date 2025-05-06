@@ -1,0 +1,222 @@
+@use '../abstracts' as *;
+
+header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .headerTop {
+        display: flex;
+        width: 100%;
+        height: 49px;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $light-green;
+        color: white;
+        padding: 0 19vw;
+        font-size: 14px;
+        text-transform: uppercase;
+
+        p {
+            letter-spacing: 1.1px;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            span {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+        }
+    }
+
+    .headerMiddle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100px;
+        padding: 0 20vw;
+        border-bottom: 1px solid #dee2e6;
+
+        nav {
+            display: flex;
+            gap: 15px;
+            font-size: 23px;
+
+            .burgerIcon {
+                display: none;
+            }
+
+            svg {
+                cursor: pointer;
+                transition: 400ms;
+                color: #525252;
+
+                &:hover {
+                    color: $light-green;
+                }
+            }
+        }
+
+        img {
+            cursor: pointer;
+            height: auto;
+            max-height: 80px;
+        }
+
+        .contactNumber {
+            display: flex;
+            gap: 15px;
+            font-size: 18px;
+            align-items: center;
+            transition: 400ms;
+
+            .phoneIconContainer {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $light-green;
+                color: white;
+                border-radius: 10px;
+
+                .phoneIcon {
+                    font-size: 24px;
+                }
+            }
+
+            p {
+                cursor: pointer;
+                transition: 400ms;
+                color: #525252;
+
+                &:hover {
+                    color: $light-green;
+                }
+            }
+        }
+    }
+
+    .headerBottom {
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        height: 50px;
+        align-items: center;
+
+        a {
+            color: $gray;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: 400ms;
+
+            &:hover {
+                color: $light-green;
+            }
+        }
+    }
+
+    .fixedHeader {
+        position: fixed;
+        z-index: 1000;
+        top: -120px;
+        left: 0;
+        width: 100%;
+        height: 96px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 5px 0px;
+        transition: 0.8s ease-in-out;
+        display: flex;
+        align-items: center;
+        padding: 0 350px;
+
+        &.visible {
+            top: 0;
+        }
+
+        .fixedHeaderContent {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            nav {
+                display: flex;
+                gap: 35px;
+
+                a {
+                    color: $gray;
+                    text-transform: uppercase;
+                    font-size: 14px;
+                    transition: 400ms;
+
+                    &:hover {
+                        color: $light-green;
+                    }
+                }
+            }
+
+            .fixedHeaderIcons {
+                display: flex;
+                gap: 15px;
+                font-size: 23px;
+
+                svg {
+                    cursor: pointer;
+                    transition: 400ms;
+                    color: #525252;
+
+                    &:hover {
+                        color: $light-green;
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+
+
+
+@media (max-width: 992px) {
+    header {
+
+        .headerTop {
+            display: none;
+        }
+
+        .headerBottom {
+            display: none;
+        }
+
+        .headerMiddle {
+            padding: 0 5vw;
+
+            .contactNumber {
+                display: none;
+            }
+
+
+            nav {
+                .userIcon {
+                    display: none;
+                }
+
+                .heartIcon {
+                    display: none;
+                }
+
+                .burgerIcon {
+                    display: flex;
+                }
+            }
+        }
+    }
+
+}

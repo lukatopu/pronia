@@ -1,0 +1,115 @@
+@use '../abstracts' as *;
+
+.singleProductPage {
+  display: flex;
+  margin: 100px auto 0 auto;
+  width: fit-content;
+  gap: 40px;
+
+
+  .singleProductImage {
+    width: 544px;
+
+    img {
+      width: 100%;
+      border: 1px solid rgb(190, 190, 190);
+    }
+  }
+
+  .singleProductDetails {
+    width: 575px;
+
+    h1 {
+      color: #303030;
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-size: 30px;
+      color: $light-green;
+      margin-bottom: 15px;
+    }
+
+    .ratingContainer {
+      color: #ffe24d;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 35px;
+    }
+
+    .productDescription {
+      margin-bottom: 30px;
+
+      p {
+        font-weight: 300;
+        color: #000000;
+        line-height: 31px;
+      }
+    }
+
+    .buttonsContainer {
+      display: flex;
+      gap: 10px;
+
+      .addToCartButton {
+        width: 165px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 16px;
+        background-color: $light-green;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 300ms;
+
+        &:hover {
+          background-color: #525252;
+        }
+      }
+
+      .wishlistButton {
+        background-color: #3d3d3d;
+        text-align: center;
+        color: #ffffff;
+        border-radius: 5px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 300ms;
+
+        &:hover {
+          background-color: $light-green;
+        }
+      }
+
+      .compareButton {
+        background-color: #3d3d3d;
+        text-align: center;
+        color: #ffffff;
+        border-radius: 5px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 300ms;
+
+        svg {
+          rotate: 60deg;
+        }
+
+        &:hover {
+          background-color: $light-green;
+        }
+      }
+    }
+  }
+
+
+
+}

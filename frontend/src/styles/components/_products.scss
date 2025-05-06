@@ -1,0 +1,100 @@
+@use '../abstracts' as *;
+
+.productContainer {
+  width: 75%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.product {
+  position: relative;
+  margin-bottom: 3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+
+  .productImageContainer {
+    position: relative;
+    width: 300px;
+
+    .mainImage {
+      transition: opacity 0.3s ease-in-out;
+      width: 100%;
+    }
+
+    .hoverImage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      width: 100%;
+      transition: opacity 0.3s;
+    }
+
+    &:hover .mainImage {
+      opacity: 0;
+    }
+
+    &:hover .hoverImage {
+      opacity: 1;
+    }
+
+    .buttonGroup {
+      position: absolute;
+      bottom: 0%;
+      left: 20%;
+      transform: translate(-50%, -50%) translateX(-100%);
+      opacity: 0;
+      display: flex;
+      gap: 10px;
+      transition: opacity 0.3s ease, transform 0.4s ease;
+
+      .productHoverButton {
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        background-color: #ffffff;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        cursor: pointer;
+        transition: 300ms;
+
+        &:hover {
+          background-color: $light-green;
+          color: white;
+        }
+      }
+    }
+
+    &:hover .buttonGroup {
+      opacity: 1;
+      transform: translate(-50%, -50%) translateX(20%);
+    }
+  }
+
+  .ratingContainer {
+    display: flex;
+    gap: 6px;
+    color: #ffe24d;
+  }
+
+  .productTextContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-right: auto;
+
+    a {
+      color: #303030;
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 21px;
+      color: $light-green;
+    }
+  }
+}

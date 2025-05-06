@@ -1,0 +1,118 @@
+.searchBlur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.4s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .closeSearchContainer {
+
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vw;
+
+    .tooltip {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.1);
+      visibility: hidden;
+      opacity: 0;
+      padding: 3px;
+      border-radius: 5px;
+      font-size: 15px;
+
+      &.active {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    .closeSearch {
+      background-color: transparent;
+      color: white;
+      font-size: 25px;
+      cursor: pointer;
+      transition: 500ms;
+
+
+      &:hover {
+        transform: rotate(-360deg) !important;
+      }
+
+    }
+  }
+
+
+
+  .searchInputContainer {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    justify-content: center;
+    border-bottom: 1px solid #ffffff;
+    position: relative;
+
+    svg {
+      color: white;
+      font-size: 30px;
+      position: absolute;
+      top: 50%;
+      right: 5px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    input {
+      background-color: transparent;
+      border: 0;
+      color: #ffffff;
+      height: 100px;
+      line-height: 100px;
+      width: 100%;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 300;
+      outline: none;
+      margin-right: 5vw;
+
+      &::placeholder {
+        color: #ffffff;
+        transition: color 0.3s ease;
+      }
+
+      &:focus {
+        &::placeholder {
+          color: transparent;
+        }
+      }
+    }
+  }
+
+
+  p {
+    margin-bottom: 30px;
+    font-size: 20px;
+    display: block;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+
+}
