@@ -1,17 +1,20 @@
-import React from 'react'
-import { PiMagnifyingGlassBold } from "react-icons/pi";
+import React from 'react';
+import { PiMagnifyingGlassBold } from 'react-icons/pi';
 function Filter() {
   return (
-    <div className='filter'>
-      <div className='searchContainer'>
-        <input type='text' placeholder='Search'/>
-        <PiMagnifyingGlassBold className='filterSearchIcon'/>
+    <div className="filter">
+      <div className="searchContainer">
+        <input
+          type="text"
+          placeholder="Search"
+        />
+        <PiMagnifyingGlassBold className="filterSearchIcon" />
       </div>
 
-      <div className='filtersContainer'>
-        <div className='Filter'>
+      <div className="filtersContainer">
+        <div className="Filter">
           <h2>Categories</h2>
-          <div className='FiltersContainer'>
+          <div className="FiltersContainer">
             <a>All</a>
             <a>Bansai</a>
             <a>House Plants</a>
@@ -21,9 +24,9 @@ function Filter() {
             <a>Garden Tools</a>
           </div>
         </div>
-        <div className='Filter'>
+        <div className="Filter">
           <h2>Color</h2>
-          <div className='FiltersContainer'>
+          <div className="FiltersContainer">
             <a>All</a>
             <a>Gold</a>
             <a>Green</a>
@@ -31,9 +34,9 @@ function Filter() {
             <a>Black</a>
           </div>
         </div>
-        <div className='Filter'>
+        <div className="Filter">
           <h2>Categories</h2>
-          <div className='FiltersContainer'>
+          <div className="FiltersContainer">
             <a>All</a>
             <a>Bansai</a>
             <a>House Plants</a>
@@ -45,7 +48,7 @@ function Filter() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Filter
+export default Filter;

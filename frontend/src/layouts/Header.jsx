@@ -1,8 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
-import { PiPhone, PiMagnifyingGlassThin, PiUserThin, PiHeartStraightThin, PiShoppingBagThin, PiCaretDownBold, PiList } from "react-icons/pi";
-import proniaLogo from "../images/proniaLogo.png";
-import SearchBlur from "../components/SearchBlur";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  PiPhone,
+  PiMagnifyingGlassThin,
+  PiUserThin,
+  PiHeartStraightThin,
+  PiShoppingBagThin,
+  PiCaretDownBold,
+  PiList,
+} from 'react-icons/pi';
+import proniaLogo from '../images/proniaLogo.png';
+import SearchBlur from '../components/SearchBlur';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
@@ -14,7 +22,7 @@ function Header() {
     setIsSearchClicked(true);
   };
 
-  const closeSearch = (e) => {
+  const closeSearch = () => {
     setIsSearchClicked(false);
   };
 
@@ -31,7 +39,6 @@ function Header() {
 
     window.addEventListener('scroll', handleScroll);
 
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -42,8 +49,12 @@ function Header() {
       <div className="headerTop">
         <p>HELLO EVERYONE! 25% Off All Products</p>
         <div className="curAndLanguageContainer">
-          <span>USD <PiCaretDownBold /></span>
-          <span>ENGLISH <PiCaretDownBold /></span>
+          <span>
+            USD <PiCaretDownBold />
+          </span>
+          <span>
+            ENGLISH <PiCaretDownBold />
+          </span>
         </div>
       </div>
 
@@ -55,18 +66,30 @@ function Header() {
           <p>+00 123 456 789</p>
         </div>
         <div>
-          <a href="/"><img src={proniaLogo} alt="Pronia Logo" /></a>
+          <a href="/">
+            <img
+              src={proniaLogo}
+              alt="Pronia Logo"
+            />
+          </a>
         </div>
         <nav>
           <PiMagnifyingGlassThin onClick={handleSearch} />
-          <Link to='/login-register'><PiUserThin className="userIcon" /></Link>
-          <Link to='/wishlist'>
+          <Link to="/login-register">
+            <PiUserThin className="userIcon" />
+          </Link>
+          <Link to="/wishlist">
             <PiHeartStraightThin className="heartIcon" />
           </Link>
-          <Link to='cart'><PiShoppingBagThin /></Link>
+          <Link to="cart">
+            <PiShoppingBagThin />
+          </Link>
           <PiList className="burgerIcon" />
         </nav>
-        <SearchBlur closeSearch={closeSearch} isActive={isSearchClicked} />
+        <SearchBlur
+          closeSearch={closeSearch}
+          isActive={isSearchClicked}
+        />
       </div>
 
       <nav className="headerBottom">
@@ -78,10 +101,15 @@ function Header() {
         <Link to="/contact">contact us</Link>
       </nav>
 
-
       <div className={`fixedHeader ${isFixed ? 'visible' : ''}`}>
         <div className="fixedHeaderContent">
-          <a href="/"><img src={proniaLogo} alt="Pronia Logo" className="fixed-logo" /></a>
+          <a href="/">
+            <img
+              src={proniaLogo}
+              alt="Pronia Logo"
+              className="fixed-logo"
+            />
+          </a>
           <nav className="fixedHeaderNav">
             <Link to="/">home</Link>
             <Link to="/shop">shop</Link>
@@ -92,9 +120,15 @@ function Header() {
           </nav>
           <div className="fixedHeaderIcons">
             <PiMagnifyingGlassThin onClick={handleSearch} />
-            <Link to='/login-register'><PiUserThin/></Link>
-            <Link to='wishlist'><PiHeartStraightThin /></Link>
-            <Link to='cart'><PiShoppingBagThin /></Link>
+            <Link to="/login-register">
+              <PiUserThin />
+            </Link>
+            <Link to="wishlist">
+              <PiHeartStraightThin />
+            </Link>
+            <Link to="cart">
+              <PiShoppingBagThin />
+            </Link>
           </div>
         </div>
       </div>

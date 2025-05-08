@@ -1,14 +1,11 @@
-import React, {useEffect} from 'react'
-import { useLoader } from '../hooks/useLoader'
+import React, { useEffect } from 'react';
+import { useLoader } from '../hooks/useLoader';
 function NotFound() {
+  const { useFakeLoader } = useLoader();
 
-   const { useFakeLoader } = useLoader()
-  
-    useEffect(() => useFakeLoader(), [])
-  
-  return (
-    <div>NotFound</div>
-  )
+  useEffect(() => useFakeLoader(), []);
+
+  return <div>NotFound</div>;
 }
 
-export default NotFound
+export default NotFound;

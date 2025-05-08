@@ -7,6 +7,7 @@ import connectDB from './db/connection.js'
 import { rateLimit } from 'express-rate-limit'
 import helmet from "helmet";
 import compression from 'compression';
+import cookieParser from 'cookie-parser'
 
 dotenv.config()
 const app = express()
@@ -33,6 +34,7 @@ app.use(cors({
 
 app.use(helmet())
 app.use(express.json())
+app.use(cookieParser());
 app.use(compression())
 
 

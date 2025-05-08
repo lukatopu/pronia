@@ -1,15 +1,12 @@
-import React, {useEffect} from 'react'
-import { useLoader } from '../hooks/useLoader'
-
+import React, { useEffect } from 'react';
+import { useLoader } from '../hooks/useLoader';
 
 function Blog() {
-   const { useFakeLoader } = useLoader()
-  
-    useEffect(() => useFakeLoader(), [])
-  
-  return (
-    <div>Blog</div>
-  )
+  const { useFakeLoader } = useLoader();
+
+  useEffect(() => useFakeLoader(), []);
+
+  return <div>Blog</div>;
 }
 
-export default Blog
+export default Blog;

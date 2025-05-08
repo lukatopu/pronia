@@ -1,17 +1,12 @@
-import React, {useEffect} from 'react'
-import { useLoader } from '../hooks/useLoader'
+import React, { useEffect } from 'react';
+import { useLoader } from '../hooks/useLoader';
 
 function Contact() {
+  const { useFakeLoader } = useLoader();
 
-  const { useFakeLoader } = useLoader()
+  useEffect(() => useFakeLoader(), []);
 
-  useEffect(() => useFakeLoader(), [])
-
-  return (
-    <div className='contact'>
-      contact
-    </div>
-  )
+  return <div className="contact">contact</div>;
 }
 
-export default Contact
+export default Contact;

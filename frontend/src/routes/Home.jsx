@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react'
-import { useLoader } from '../hooks/useLoader'
-import Carousel from '../components/Carousel'
-import Services from '../components/Services'
-import ProductsList from '../components/ProductsList'
+import React, { useEffect } from 'react';
+import { useLoader } from '../hooks/useLoader';
+import Carousel from '../components/Carousel';
+import Services from '../components/Services';
+import ProductsList from '../components/ProductsList';
 
 function Home() {
+  const { useFakeLoader } = useLoader();
 
-  const { useFakeLoader } = useLoader()
+  useEffect(() => useFakeLoader(), []);
 
-  useEffect(() => useFakeLoader(), [])
-  
   return (
     <>
       <Carousel />
       <Services />
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

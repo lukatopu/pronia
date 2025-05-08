@@ -1,16 +1,13 @@
 import axios from 'axios';
 
-
-
 export const getProducts = async () => {
   try {
     const response = await axios.get('http://localhost:3000/api/products');
     return response.data;
-  } catch (err) {
+  } catch {
     throw new Error('Error fetching products');
   }
 };
-
 
 export const loginUser = async (email, password) => {
   try {

@@ -1,16 +1,12 @@
-import React, {useEffect} from 'react'
-import { useLoader } from '../hooks/useLoader'
+import React, { useEffect } from 'react';
+import { useLoader } from '../hooks/useLoader';
 
 function Pages() {
+  const { useFakeLoader } = useLoader();
 
-  const { useFakeLoader } = useLoader()
+  useEffect(() => useFakeLoader(), []);
 
-  useEffect(() => useFakeLoader(), [])
-
-
-  return (
-    <div>NOT FOUND</div>
-  );
+  return <div>NOT FOUND</div>;
 }
 
 export default Pages;

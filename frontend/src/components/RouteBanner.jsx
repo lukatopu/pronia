@@ -10,40 +10,40 @@ function RouteBanner() {
   const titles = {
     '/shop': {
       title: 'shop Default',
-      mainTitle: 'shop'
+      mainTitle: 'shop',
     },
     '/blog': {
       title: 'Blog Grid View',
-      mainTitle: 'blog'
+      mainTitle: 'blog',
     },
     '/aboutUs': {
       title: 'About Us',
-      mainTitle: 'about us'
+      mainTitle: 'about us',
     },
     '/contact': {
       title: 'Contact Us',
-      mainTitle: 'contact'
+      mainTitle: 'contact',
     },
     '/pages': {
       title: 'pages',
-      mainTitle: 'pages'
+      mainTitle: 'pages',
     },
     '/wishlist': {
       title: 'Wishlist',
-      mainTitle: 'Wishlist Page'
+      mainTitle: 'Wishlist Page',
     },
     '/product/:id': {
       title: 'Single Product variable',
-      mainTitle: 'Single Product'
+      mainTitle: 'Single Product',
     },
     '/login-register': {
-      title:'Login | Register',
-      mainTitle: 'LOGIN & REGISTER PAGE'
+      title: 'Login | Register',
+      mainTitle: 'LOGIN & REGISTER PAGE',
     },
     '/cart': {
-      title:'Cart Page',
-      mainTitle:'CART PAGE'
-    }
+      title: 'Cart Page',
+      mainTitle: 'CART PAGE',
+    },
   };
 
   useEffect(() => {
@@ -52,12 +52,10 @@ function RouteBanner() {
     if (titles[path]) {
       setTitle(titles[path].title);
       setMainTitle(titles[path].mainTitle);
-    } 
-
-    else if (matchPath('/product/:id', path)) {
+    } else if (matchPath('/product/:id', path)) {
       setTitle(titles['/product/:id'].title);
       setMainTitle(titles['/product/:id'].mainTitle);
-    } 
+    }
   }, [location]);
 
   return (
