@@ -11,7 +11,6 @@
   overflow-y: hidden;
 
   &:hover {
-
     .caretLeftContainer,
     .caretRightContainer {
       opacity: 1;
@@ -21,22 +20,19 @@
 
   .caretLeftContainer,
   .caretRightContainer {
-    width: 2.7vw;
-    height: 2.7vw;
-    background-color: white;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
     transition: 600ms;
-    width: 50px;
-    height: 50px;
 
     &:hover {
       background-color: $light-green;
@@ -46,7 +42,6 @@
     .caretLeft,
     .caretRight {
       font-size: 30px;
-
     }
   }
 
@@ -62,34 +57,36 @@
     user-select: none;
     flex-shrink: 0;
 
+    .saleText,
+    .plantName,
+    .descriptionText {
+      opacity: 0;
+    }
 
     .saleText {
       font-size: 47px;
       font-weight: 100;
-      opacity: 0;
-    }
 
-    .saleText.animate {
-      animation: carouselTextAppear 1s forwards;
+      &.animate {
+        animation: carouselTextAppear 1s forwards;
+      }
     }
 
     .plantName {
       font-size: 90px;
       font-weight: 400;
-      opacity: 0;
-    }
 
-    .plantName.animate {
-      animation: carouselTextAppear 1s 0.5s forwards;
+      &.animate {
+        animation: carouselTextAppear 1s 0.5s forwards;
+      }
     }
 
     .descriptionText {
       font-size: 22px;
-      opacity: 0;
-    }
 
-    .descriptionText.animate {
-      animation: carouselTextAppear 1s 1s forwards;
+      &.animate {
+        animation: carouselTextAppear 1s 1s forwards;
+      }
     }
 
     button {
@@ -126,12 +123,11 @@
 
     img {
       width: 100%;
-
     }
-  }
 
-  .imageContainer.animate {
-    animation: carouselImageAppear 1s 2s forwards;
+    &.animate {
+      animation: carouselImageAppear 1s 2s forwards;
+    }
   }
 
   .carouselDotContainer {
@@ -149,9 +145,9 @@
       transition: border-color 0.3s ease;
 
       &::before {
+        content: "";
         background-color: $light-green;
         border-radius: 100%;
-        content: "";
         position: absolute;
         top: 2px;
         left: 2px;
@@ -166,8 +162,7 @@
   }
 }
 
-
-
+// ---------- MEDIA QUERIES ----------
 
 @media (max-width: 1200px) {
   .carousel {
@@ -184,19 +179,18 @@
     .imageContainer {
       width: 470px;
     }
-
   }
 }
 
 @media (max-width: 992px) {
   .carousel {
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 20px;
     padding: 20px;
     height: 700px;
+    text-align: center;
 
     .imageContainer {
       order: 1;
@@ -211,7 +205,6 @@
 
     .carouselDescriptionContainer {
       order: 2;
-      text-align: center;
 
       .saleText {
         font-size: 30px;
@@ -238,6 +231,5 @@
       order: 3;
       margin-top: 40px;
     }
-
   }
 }

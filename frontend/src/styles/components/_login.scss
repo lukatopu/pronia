@@ -1,87 +1,82 @@
 @use '../abstracts' as *;
 
 .loginContainer {
- box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
- background-color: #ffffff;
- padding: 30px;
- width: 560px;
- height: 435px;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 560px;
+  height: 435px;
 
- .error {
-  margin-bottom: 20px;
-  color: red;
-  height: 18px;
- }
-
- button {
-  width: 165px;
-  height: 50px;
-  font-size: 16px;
-  background-color: $light-green;
-  color: white;
-  border-radius: 23.5px;
-  cursor: pointer;
-  transition: 300ms;
-  margin-top: 48px;
-
-  &:hover {
-   background-color: #525252;
-  }
- }
-
-
-
- .InputContainer {
-  display: flex;
-  flex-direction: column;
-
-  
-
-  label {
-   font-size: 14px;
-   margin-bottom: 12px;
-   font-weight: 500;
-   color: #525252;
+  .error {
+    color: red;
+    margin-bottom: 20px;
+    height: 18px;
   }
 
-  input {
-   width: 100%;
-   background-color: transparent;
-   border: 1px solid #dee2e6;
-   border-radius: 0;
-   line-height: 23px;
-   padding: 10px 20px;
-   font-size: 14px;
-   margin-bottom: 15px;
-   outline: none;
+  button {
+    width: 165px;
+    height: 50px;
+    margin-top: 48px;
+    font-size: 16px;
+    color: white;
+    background-color: $light-green;
+    border-radius: 23.5px;
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+      background-color: #525252;
+    }
   }
 
- }
+  .InputContainer {
+    display: flex;
+    flex-direction: column;
 
- .loginAddOns {
-  display: flex;
-  justify-content: space-between;
+    label {
+      margin-bottom: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #525252;
+    }
 
-  a {
-   font-size: 14px;
-   color: rgb(82, 82, 82);
-   transition: 300ms;
-
-   &:hover {
-    color: $light-green;
-   }
+    input {
+      width: 100%;
+      padding: 10px 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 23px;
+      background-color: transparent;
+      border: 1px solid #dee2e6;
+      border-radius: 0;
+      outline: none;
+    }
   }
 
-  .checkboxContainer {
-   display: flex;
-   gap: 10px;
+  .loginAddOns {
+    display: flex;
+    justify-content: space-between;
 
-   label {
-    line-height: 20px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #525252;
-   }
+    a {
+      font-size: 14px;
+      color: #525252;
+      transition: 300ms;
+
+      &:hover {
+        color: $light-green;
+      }
+    }
+
+    .checkboxContainer {
+      display: flex;
+      gap: 10px;
+
+      label {
+        font-size: 14px;
+        font-weight: 400;
+        color: #525252;
+        line-height: 20px;
+      }
+    }
   }
- }
 }

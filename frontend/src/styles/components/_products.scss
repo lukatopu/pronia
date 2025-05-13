@@ -4,7 +4,6 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  
 }
 
 .product {
@@ -20,9 +19,10 @@
     position: relative;
     width: 300px;
 
-    .mainImage {
-      transition: opacity 0.3s ease-in-out;
+    .mainImage,
+    .hoverImage {
       width: 100%;
+      transition: opacity 0.3s ease-in-out;
     }
 
     .hoverImage {
@@ -31,36 +31,41 @@
       left: 0;
       opacity: 0;
       pointer-events: none;
-      width: 100%;
-      transition: opacity 0.3s;
     }
 
-    &:hover .mainImage {
-      opacity: 0;
-    }
+    &:hover {
+      .mainImage {
+        opacity: 0;
+      }
 
-    &:hover .hoverImage {
-      opacity: 1;
+      .hoverImage {
+        opacity: 1;
+      }
+
+      .buttonGroup {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateX(20%);
+      }
     }
 
     .buttonGroup {
       position: absolute;
-      bottom: 0%;
+      bottom: 0;
       left: 20%;
       transform: translate(-50%, -50%) translateX(-100%);
-      opacity: 0;
       display: flex;
       gap: 10px;
+      opacity: 0;
       transition: opacity 0.3s ease, transform 0.4s ease;
 
       .productHoverButton {
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-        background-color: #ffffff;
-        font-size: 20px;
         width: 40px;
         height: 40px;
+        background-color: #ffffff;
+        font-size: 20px;
         text-align: center;
         cursor: pointer;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         transition: 300ms;
 
         &:hover {
@@ -68,11 +73,6 @@
           color: white;
         }
       }
-    }
-
-    &:hover .buttonGroup {
-      opacity: 1;
-      transform: translate(-50%, -50%) translateX(20%);
     }
   }
 
@@ -89,8 +89,8 @@
     margin-right: auto;
 
     a {
-      color: #303030;
       font-size: 18px;
+      color: #303030;
     }
 
     p {

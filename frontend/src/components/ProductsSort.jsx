@@ -20,7 +20,10 @@ function ProductsSort() {
 
   return (
     <div className="productsSortContainer">
-      <div className="productsAmount"><span className='foundProducts'>{products.length}</span> Products Found of <span className='totalProducts'>30</span></div>
+      <div className="productsAmount">
+        <span className="foundProducts">{products.length}</span> Products Found of{' '}
+        <span className="totalProducts">30</span>
+      </div>
       <div className="gridView">
         <PiGridNineFill />
       </div>

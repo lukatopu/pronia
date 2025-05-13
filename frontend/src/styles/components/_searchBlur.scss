@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transition: 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
   opacity: 0;
   visibility: hidden;
 
@@ -20,7 +20,6 @@
   }
 
   .closeSearchContainer {
-
     position: absolute;
     top: 5px;
     right: 5px;
@@ -29,13 +28,14 @@
     gap: 0.8vw;
 
     .tooltip {
-      color: white;
-      background-color: rgba(0, 0, 0, 0.1);
       visibility: hidden;
       opacity: 0;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: white;
+      font-size: 15px;
       padding: 3px;
       border-radius: 5px;
-      font-size: 15px;
+      transition: opacity 0.3s ease;
 
       &.active {
         visibility: visible;
@@ -48,17 +48,13 @@
       color: white;
       font-size: 25px;
       cursor: pointer;
-      transition: 500ms;
-
+      transition: transform 500ms;
 
       &:hover {
-        transform: rotate(-360deg) !important;
+        transform: rotate(-360deg);
       }
-
     }
   }
-
-
 
   .searchInputContainer {
     display: flex;
@@ -79,15 +75,15 @@
     }
 
     input {
-      background-color: transparent;
-      border: 0;
-      color: #ffffff;
+      width: 100%;
       height: 100px;
       line-height: 100px;
-      width: 100%;
-      text-align: center;
       font-size: 30px;
       font-weight: 300;
+      text-align: center;
+      color: #ffffff;
+      background-color: transparent;
+      border: none;
       outline: none;
       margin-right: 5vw;
 
@@ -96,23 +92,17 @@
         transition: color 0.3s ease;
       }
 
-      &:focus {
-        &::placeholder {
-          color: transparent;
-        }
+      &:focus::placeholder {
+        color: transparent;
       }
     }
   }
 
-
   p {
     margin-bottom: 30px;
     font-size: 20px;
-    display: block;
     color: #ffffff;
-    letter-spacing: 0.5px;
     text-align: center;
+    letter-spacing: 0.5px;
   }
-
-
 }

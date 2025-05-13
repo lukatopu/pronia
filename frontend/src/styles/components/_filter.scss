@@ -4,30 +4,25 @@
   gap: 50px;
   width: 280px;
 
-
   .searchContainer {
     display: flex;
-    background-color: #F6F7FB;
-    padding: 30px;
-    border-radius: 10px;
     justify-content: center;
     align-items: center;
     position: relative;
-
+    background-color: #f6f7fb;
+    padding: 30px;
+    border-radius: 10px;
 
     input {
-      border: 1px solid #dee2e6;
-      background-color: #f6f7fb;
-      border-radius: 10px;
-      height: 45px;
-      line-height: 45px;
-      padding-left: 15px;
-      padding-right: 35px;
-      color: #969696;
-      outline: none;
-      font-size: 17px;
       width: 200px;
-
+      height: 45px;
+      padding: 0 35px 0 15px;
+      font-size: 17px;
+      color: #969696;
+      background-color: inherit;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      outline: none;
     }
 
     .filterSearchIcon {
@@ -42,10 +37,10 @@
   .filtersContainer {
     background-color: #f6f7fb;
     padding: 20px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 30px;
-    border-radius: 10px;
 
     .Filter {
       display: flex;
@@ -55,19 +50,19 @@
       h2 {
         font-size: 24px;
         color: #6c6c6c;
-        position: relative;
         text-align: center;
-      }
+        position: relative;
 
-      h2::after {
-        background-color: #abd373;
-        content: "";
-        width: 30px;
-        height: 2px;
-        position: absolute;
-        bottom: -40%;
-        left: 50%;
-        transform: translateX(-50%);
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -40%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 30px;
+          height: 2px;
+          background-color: #abd373;
+        }
       }
 
       .FiltersContainer {
@@ -75,14 +70,12 @@
         flex-direction: column;
 
         a {
-          border-bottom: 1px solid #dee2e6;
+          color: #6a6a6a;
           padding-bottom: 10px;
           margin-bottom: 10px;
-          color: #6a6a6a;
+          border-bottom: 1px solid #dee2e6;
         }
       }
     }
   }
-
-
 }

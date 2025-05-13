@@ -1,111 +1,79 @@
 @use '../abstracts' as *;
 
 .registerContainer {
- box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
- background-color: #ffffff;
- padding: 30px;
- width: 560px;
- height: auto;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 560px;
+  height: auto;
 
- .error {
-  margin-bottom: 20px;
-  color: red;
-  height: 18px;
- }
-
- label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 12px;
-  font-weight: 500;
-  color: #525252;
- }
-
-
- button {
-  width: 165px;
-  height: 50px;
-  font-size: 16px;
-  background-color: $light-green;
-  color: white;
-  border-radius: 23.5px;
-  cursor: pointer;
-  transition: 300ms;
-
-
-  &:hover {
-   background-color: #525252;
-  }
- }
-
-
-
- .nameInputContainer {
-
-  display: flex;
-  justify-content: space-between;
-
-  input {
-   width: 95%;
-   background-color: transparent;
-   border: 1px solid #dee2e6;
-   border-radius: 0;
-   line-height: 23px;
-   padding: 10px 20px;
-   font-size: 14px;
-   margin-bottom: 15px;
-   outline: none;
+  .error {
+    color: red;
+    margin-bottom: 20px;
+    height: 18px;
   }
 
-  .firstNameContainer {
-   width: 100%;
-   display: flex;
-   flex-direction: column;
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #525252;
   }
 
-  .lastNameContainer {
-   width: 100%;
-   display: flex;
-   flex-direction: column;
-  }
- }
+  button {
+    width: 165px;
+    height: 50px;
+    font-size: 16px;
+    background-color: $light-green;
+    color: white;
+    border-radius: 23.5px;
+    cursor: pointer;
+    transition: 300ms;
 
- .emailContainer {
-  input {
-   width: 100%;
-   background-color: transparent;
-   border: 1px solid #dee2e6;
-   border-radius: 0;
-   line-height: 23px;
-   padding: 10px 20px;
-   font-size: 14px;
-   margin-bottom: 15px;
-   outline: none;
-  }
- }
-
- .passwordsContainer {
-  display: flex;
-  justify-content: space-between;
-
-  input {
-   width: 95%;
-   background-color: transparent;
-   border: 1px solid #dee2e6;
-   border-radius: 0;
-   line-height: 23px;
-   padding: 10px 20px;
-   font-size: 14px;
-   margin-bottom: 15px;
-   outline: none;
+    &:hover {
+      background-color: #525252;
+    }
   }
 
-  .passwordContainer {
-   width: 100%;
+  .nameInputContainer,
+  .passwordsContainer {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      width: 95%;
+      background-color: transparent;
+      border: 1px solid #dee2e6;
+      border-radius: 0;
+      line-height: 23px;
+      padding: 10px 20px;
+      font-size: 14px;
+      margin-bottom: 15px;
+      outline: none;
+    }
+
+    .firstNameContainer,
+    .lastNameContainer,
+    .passwordContainer,
+    .confirmPasswordContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
-  .confirmPasswordContainer {
-   width: 100%;
+  .emailContainer {
+    input {
+      width: 100%;
+      background-color: transparent;
+      border: 1px solid #dee2e6;
+      border-radius: 0;
+      line-height: 23px;
+      padding: 10px 20px;
+      font-size: 14px;
+      margin-bottom: 15px;
+      outline: none;
+    }
   }
- }
 }

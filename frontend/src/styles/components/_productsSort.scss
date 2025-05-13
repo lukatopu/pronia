@@ -2,41 +2,31 @@
 
 .productsSortContainer {
   display: flex;
-  padding-bottom: 50px;
-  width: 100%;
-  height: 96px;
   justify-content: center;
   gap: 15px;
+  width: 100%;
+  height: 96px;
+  padding-bottom: 50px;
 
-  .productsAmount {
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    padding: 10px 30px;
+  .productsAmount,
+  .sortBy {
     display: flex;
     align-items: center;
     gap: 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px 30px;
 
     span {
       color: $light-green;
     }
   }
 
-  .gridView {
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    padding: 10px;
+  .gridView,
+  .listView {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-
-    svg {
-      font-size: 20px;
-    }
-  }
-
-
-  .listView {
     border: 1px solid #dee2e6;
     border-radius: 5px;
     padding: 10px;
@@ -45,15 +35,5 @@
     svg {
       font-size: 20px;
     }
-  }
-
-  .sortBy {
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    padding: 10px 30px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-
   }
 }
