@@ -1,9 +1,10 @@
 @use '../abstracts' as *;
 
-.productContainer {
-  width: 75%;
+.productsContainer {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  
 }
 
 .product {

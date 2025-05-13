@@ -4,7 +4,7 @@ import ProductsList from '../components/ProductsList';
 
 function Shop() {
   return (
-    <div className="shop">
+    <div className='shop'>
       <Filter />
       <ProductsList />
     </div>

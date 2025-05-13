@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import { getProducts } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
+import ProductsSort from './ProductsSort.jsx'
 
 function ProductsList() {
   const [products, setProducts] = useState([]);
@@ -13,13 +14,16 @@ function ProductsList() {
   }, []);
 
   return (
-    <div className="productContainer">
-      {products?.map((product, index) => (
-        <Product
-          key={index}
-          product={product}
-        />
-      ))}
+    <div className='productsWrapper'>
+      <ProductsSort />
+      <div className="productsContainer">
+        {products?.map((product, index) => (
+          <Product
+            key={index}
+            product={product}
+          />
+        ))}
+      </div>
     </div>
   );
 }

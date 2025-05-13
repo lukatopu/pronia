@@ -110,20 +110,36 @@ header {
         align-items: center;
 
         a {
+            position: relative;
             color: $gray;
             text-transform: uppercase;
             font-size: 14px;
             transition: 400ms;
 
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -16px;
+                width: 0;
+                height: 1px;
+                background-color: $light-green;
+                transition: 0.3s ease;
+            }
+
             &:hover {
                 color: $light-green;
+            }
+
+            &:hover::after {
+                width: 100%;
             }
         }
     }
 
     .fixedHeader {
         position: fixed;
-        z-index: 1000;
+        z-index: 998;
         top: -120px;
         left: 0;
         width: 100%;

@@ -1,0 +1,59 @@
+@use '../abstracts' as *;
+
+.productsSortContainer {
+  display: flex;
+  padding-bottom: 50px;
+  width: 100%;
+  height: 96px;
+  justify-content: center;
+  gap: 15px;
+
+  .productsAmount {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    span {
+      color: $light-green;
+    }
+  }
+
+  .gridView {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    svg {
+      font-size: 20px;
+    }
+  }
+
+
+  .listView {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+
+    svg {
+      font-size: 20px;
+    }
+  }
+
+  .sortBy {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+  }
+}
