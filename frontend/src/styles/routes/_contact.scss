@@ -1,3 +1,5 @@
+@use '../abstracts/' as *;
+
 .contactContainer {
   padding: 100px 350px;
 
@@ -7,7 +9,6 @@
 
     .contactInfoContainer {
       width: 33%;
-      background-color: red;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -85,5 +86,23 @@
         font-size: 17px;
       }
     }
+
+    .commentButtonContainer {
+      width: 100%;
+      display: flex;
+      justify-content: end;
+
+      .commentButton {
+        width: 210px;
+        height: 65px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: $light-green;
+        color: white;
+        
+      }
+    }
+
   }
 }
