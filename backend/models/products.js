@@ -9,7 +9,16 @@ const ProductsSchema = new mongoose.Schema({
  },
  rating: {
   type: Number,
- }
+ },
+ image: {
+  type: String,
+ },
+ hoverImage: {
+  type: String,
+ },
+ description: {
+  type: String,
+ },
 });
 
 export default mongoose.model("Products", ProductsSchema);
