@@ -1,20 +1,21 @@
 import jwt from 'jsonwebtoken';
 import Users from '../models/users.js';
 import bcrypt from 'bcrypt';
+import mailSender from '../utils/mailSender.js';
 
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
         const user = await Users.findOne({ email });
-        
+
         if (!user) {
             return res.status(401).json({ err: 'Invalid email or password' });
         }
 
         const isPasswordValid = await bcrypt.compare(password + process.env.BCRYPT_PEPPER, user.password);
 
-        if(!isPasswordValid) {
+        if (!isPasswordValid) {
             return res.status(401).json({ err: 'Invalid email or password' });
         }
 
@@ -29,7 +30,7 @@ export const loginUser = async (req, res) => {
 
 export const registerUser = async (req, res) => {
     try {
-        const {firstName, lastName, email, password } = req.body;
+        const { firstName, lastName, email, password } = req.body;
 
         const emailExists = await Users.findOne({ email });
         if (emailExists) {
@@ -60,3 +61,29 @@ export const registerUser = async (req, res) => {
         res.status(500).json({ err: err.message });
     }
 };
+
+export const forgotPasswordUser = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+
+        let user = await Users.findOne({ email: email });
+        if (!user) {
+            return res.status(400).json({ msg: "Email is incorrect!" })
+        }
+
+        const access_token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
+        const url = `http://localhost:5173/reset-password/${access_token}`
+        console.log(process.env.JWT_SECRET_KEY)
+
+        console.log('EMAIL:', process.env.MAIL_SENDER_EMAIL);
+        console.log('PASS:', process.env.MAIL_SENDER_PASS);
+
+        await mailSender(process.env.MAIL_SENDER_EMAIL, email, url)
+
+        res.status(200).json({ msg: "Check your email for further instructions" })
+    } catch (err) {
+        return res.status(500).json({ msg: err.message })
+    }
+
+}

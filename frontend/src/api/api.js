@@ -40,3 +40,9 @@ export const registerUser = async (firstName, lastName, email, password) => {
     throw new Error(err.response?.data?.err || 'Registration failed');
   }
 };
+
+export const forgotPasswordUser = (data) => {
+  return axios.put(`http://localhost:3000/api/users/forgot-password`, data, {
+    withCredentials: true,
+  });
+};

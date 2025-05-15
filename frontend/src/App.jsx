@@ -20,6 +20,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import useTitle from './hooks/useTitle';
 import './styles/main.scss';
 import Loading from './components/Loading';
+import ForgotPassword from './routes/ForgotPassword';
 
 function App() {
   useTitle();
@@ -92,6 +93,10 @@ function App() {
           <Route
             path="/pages"
             element={<Pages />}
+          />
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword />}
           />
         </Routes>
       </Main>

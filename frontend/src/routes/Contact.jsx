@@ -27,13 +27,12 @@ function Contact() {
       if (value.includes(' ')) return;
     }
 
-    if(name === 'message') {
-      if(value.includes('  ')) return
+    if (name === 'message') {
+      if (value.includes('  ')) return;
     }
 
-
     setContactData({ ...contactData, [name]: value });
-    console.log([contactData])
+    console.log([contactData]);
   };
 
   const handleSubmit = (e) => {
@@ -44,10 +43,8 @@ function Contact() {
     } else if (!contactData.email.includes('@')) {
       alert('email must contain @');
     } else {
-      alert('succesfuly sent message')
+      alert('succesfuly sent message');
     }
-
-
   };
 
   return (
