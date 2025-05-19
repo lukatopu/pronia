@@ -16,6 +16,7 @@ function Header() {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   const [triggerHeight, setTriggerHeight] = useState(0);
+  const [isUserClicked, setIsUserClicked] = useState(false);
   const headerRef = useRef(null);
 
   const handleSearch = () => {
@@ -24,6 +25,10 @@ function Header() {
 
   const closeSearch = () => {
     setIsSearchClicked(false);
+  };
+
+  const handleUserClick = () => {
+    setIsUserClicked((prev) => !prev);
   };
 
   useEffect(() => {
@@ -75,13 +80,25 @@ function Header() {
         </div>
         <nav>
           <PiMagnifyingGlassThin onClick={handleSearch} />
-          <Link to="/login-register">
-            <PiUserThin className="userIcon" />
-          </Link>
+          <div className="userIconContainer">
+            <PiUserThin
+              onClick={handleUserClick}
+              className="userIcon"
+            />
+            <div className={`userIconDropdown ${isUserClicked ? 'clicked' : ''}`}>
+              <button>My account</button>
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+              <Link to="/register">
+                <button>Register</button>
+              </Link>
+            </div>
+          </div>
           <Link to="/wishlist">
             <PiHeartStraightThin className="heartIcon" />
           </Link>
-          <Link to="cart">
+          <Link to="/cart">
             <PiShoppingBagThin />
           </Link>
           <PiList className="burgerIcon" />

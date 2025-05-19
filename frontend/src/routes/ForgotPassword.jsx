@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { forgotPasswordUser } from '../api/api.js';
 
 function ForgotPassword() {
-  const [formData, setformData] = useState({});
+  const [formData, setformData] = useState({
+    email: '',
+  });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   };
 
   const handleSubmit = async (e) => {

@@ -28,6 +28,18 @@ function useTitle() {
       case '/cart':
         document.title = 'Pronia - Cart';
         break;
+      case '/forgot-password':
+        document.title = 'Pronia - Forgot Password';
+        break;
+      case '/reset-password/:token':
+        document.title = 'Pronia - Reset Password';
+        break;
+      case '/login':
+        document.title = 'Pronia - Login';
+        break;
+      case '/register':
+        document.title = 'Pronia - Register';
+        break;
     }
   }, [window.location.pathname]);
 }

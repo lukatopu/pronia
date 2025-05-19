@@ -13,8 +13,11 @@
 @use './routes/home';
 @use './routes/shop';
 @use './routes/singleProduct';
-@use './routes/login-register-container';
 @use './routes/contact';
+@use './routes/wishlist';
+@use './routes/login';
+@use './routes/register'; 
+@use './routes/cart';
 
 
 @use './components/loading';
@@ -25,6 +28,5 @@
 @use './components/filter';
 @use './components/products';
 @use './components/counter';
-@use './components/login';
-@use './components/register'; 
 @use './components/productsSort';
+@use './components/shoppingCartModal';

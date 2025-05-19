@@ -9,11 +9,11 @@ header {
         display: flex;
         width: 100%;
         height: 49px;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         background-color: $light-green;
         color: white;
-        padding: 0 19vw;
+        gap: 644px;
         font-size: 14px;
         text-transform: uppercase;
 
@@ -36,10 +36,10 @@ header {
 
     .headerMiddle {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        height: 100px;
-        padding: 0 20vw;
+        height: 120px;
+        gap: 322px;
         border-bottom: 1px solid #dee2e6;
 
         nav {
@@ -49,6 +49,50 @@ header {
 
             .burgerIcon {
                 display: none;
+            }
+
+            .userIconContainer {
+                position: relative;
+
+                .userIconDropdown {
+                    position: absolute;
+                    top: 150%;
+                    right: 100%;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+                    background-color: white;
+                    height: 100px;
+                    width: 164px;
+                    border-radius: 5px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px 0px;
+                    justify-content: space-between;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: 300ms;
+
+                    &.clicked {
+                        opacity: 1;
+                        visibility: visible;
+                        top: 100%;
+                    }
+
+                   
+
+                    button {
+                        width: 100%;
+                        height: 100%;
+                        background-color: transparent;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: 300ms;
+
+                        &:hover {
+                            background-color: $light-green;
+                            color: white;
+                        }
+                    }
+                }
             }
 
             svg {
@@ -75,6 +119,10 @@ header {
             align-items: center;
             transition: 400ms;
 
+            p {
+                white-space: nowrap;
+            }
+
             .phoneIconContainer {
                 width: 40px;
                 height: 40px;
@@ -84,6 +132,7 @@ header {
                 background-color: $light-green;
                 color: white;
                 border-radius: 10px;
+                
 
                 .phoneIcon {
                     font-size: 24px;
@@ -104,7 +153,7 @@ header {
 
     .headerBottom {
         display: flex;
-        gap: 25px;
+        gap: 35px;
         justify-content: center;
         height: 50px;
         align-items: center;

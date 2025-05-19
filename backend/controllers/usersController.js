@@ -87,3 +87,28 @@ export const forgotPasswordUser = async (req, res) => {
     }
 
 }
+
+
+export const resetPasswordUser = async (req, res) => {
+    try {
+        const {password} = req.body;
+        const token = req.header('Authorization');
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const userId = decoded.id;
+
+        const hashedPassword = await bcrypt.hash(password + process.env.BCRYPT_PEPPER, 11)
+
+        await Users.findOneAndUpdate({_id: userId}, {
+            password: hashedPassword
+        })
+
+        console.log(decoded)
+
+        res.status(200).json({msg: "Password successfully changed!"})
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({msg: err.message})
+    }
+
+}

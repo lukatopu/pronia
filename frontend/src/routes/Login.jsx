@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { loginUser } from '../api/api';
+import { useLoader } from '../hooks/useLoader';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const { useFakeLoader } = useLoader();
+
+  useEffect(() => useFakeLoader(), []);
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',

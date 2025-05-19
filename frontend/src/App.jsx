@@ -8,7 +8,6 @@ import Checkout from './routes/Checkout';
 import Compare from './routes/Compare';
 import Contact from './routes/Contact';
 import Home from './routes/Home';
-import LoginAndRegister from './routes/LoginAndRegister';
 import NotFound from './routes/NotFound';
 import Profile from './routes/Profile';
 import Shop from './routes/Shop';
@@ -21,10 +20,27 @@ import useTitle from './hooks/useTitle';
 import './styles/main.scss';
 import Loading from './components/Loading';
 import ForgotPassword from './routes/ForgotPassword';
+import ResetPassword from './routes/ResetPassword';
+import { useState } from 'react';
+import Register from './routes/Register';
+import Login from './routes/Login';
 
 function App() {
   useTitle();
   const location = useLocation();
+
+  const [wishlist, setWishlist] = useState('');
+  const [cart, setCart] = useState('');
+
+  const addToWishlist = (product) => {
+    setWishlist((prevWishlist) => [...prevWishlist, product]);
+    console.log(wishlist);
+  };
+
+  const addToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
+    console.log(cart);
+  };
 
   return (
     <>
@@ -44,7 +60,12 @@ function App() {
           />
           <Route
             path="/product/:id"
-            element={<SingleProduct />}
+            element={
+              <SingleProduct
+                addToWishlist={addToWishlist}
+                addToCart={addToCart}
+              />
+            }
           />
           <Route
             path="/aboutUs"
@@ -56,7 +77,7 @@ function App() {
           />
           <Route
             path="/cart"
-            element={<Cart />}
+            element={<Cart cart={cart} />}
           />
           <Route
             path="/checkout"
@@ -71,8 +92,12 @@ function App() {
             element={<Compare />}
           />
           <Route
-            path="/login-register"
-            element={<LoginAndRegister />}
+            path="/login"
+            element={<Login />}
+          />
+          <Route
+            path="/register"
+            element={<Register />}
           />
           <Route
             path="/profile"
@@ -84,7 +109,7 @@ function App() {
           />
           <Route
             path="/wishlist"
-            element={<Wishlist />}
+            element={<Wishlist wishlist={wishlist} />}
           />
           <Route
             path="/notFound"
@@ -97,6 +122,10 @@ function App() {
           <Route
             path="/forgot-password"
             element={<ForgotPassword />}
+          />
+          <Route
+            path="/reset-password/:token"
+            element={<ResetPassword />}
           />
         </Routes>
       </Main>

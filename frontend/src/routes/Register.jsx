@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLoader } from '../hooks/useLoader';
 import { registerUser } from '../api/api';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const { useFakeLoader } = useLoader();
+
+  useEffect(() => useFakeLoader(), []);
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',

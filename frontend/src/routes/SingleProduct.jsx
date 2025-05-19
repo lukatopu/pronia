@@ -7,7 +7,7 @@ import { getProducts } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
 import Services from '../components/Services.jsx';
 
-function SingleProduct() {
+function SingleProduct({ addToWishlist, addToCart }) {
   const [products, setProducts] = useState([]);
   const { id } = useParams();
 
@@ -21,6 +21,18 @@ function SingleProduct() {
 
   const renderStars = (count) => {
     return Array.from({ length: count }, (_, i) => <PiStarFill key={i} />);
+  };
+
+  const handleAddToWishlist = () => {
+    if (product) {
+      addToWishlist(product);
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product);
+    }
   };
 
   if (!product) return <h2>Product not found</h2>;
@@ -42,8 +54,16 @@ function SingleProduct() {
         </div>
         <div className="buttonsContainer">
           <Counter />
-          <button className="addToCartButton">ADD TO CART</button>
-          <button className="wishlistButton">
+          <button
+            onClick={handleAddToCart}
+            className="addToCartButton"
+          >
+            ADD TO CART
+          </button>
+          <button
+            onClick={handleAddToWishlist}
+            className="wishlistButton"
+          >
             <PiHeartStraight />
           </button>
           <button className="compareButton">

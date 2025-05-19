@@ -36,13 +36,25 @@ function RouteBanner() {
       title: 'Single Product variable',
       mainTitle: 'Single Product',
     },
-    '/login-register': {
-      title: 'Login | Register',
-      mainTitle: 'LOGIN & REGISTER PAGE',
+    '/login': {
+      title: 'Login',
+      mainTitle: 'LOGIN PAGE',
+    },
+    '/register': {
+      title: 'Register',
+      mainTitle: 'REGISTER PAGE',
     },
     '/cart': {
       title: 'Cart Page',
       mainTitle: 'CART PAGE',
+    },
+    '/forgot-password': {
+      title: 'forgot password',
+      mainTitle: 'FORGOT PASSWORD',
+    },
+    '/reset-password/:token': {
+      title: 'reset password',
+      mainTitle: 'RESET PASSWORD',
     },
   };
 
