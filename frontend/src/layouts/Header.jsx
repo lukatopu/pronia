@@ -11,6 +11,7 @@ import {
 import proniaLogo from '../images/proniaLogo.png';
 import SearchBlur from '../components/SearchBlur';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Header() {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
@@ -18,6 +19,8 @@ function Header() {
   const [triggerHeight, setTriggerHeight] = useState(0);
   const [isUserClicked, setIsUserClicked] = useState(false);
   const headerRef = useRef(null);
+
+  const { t, i18n } = useTranslation();
 
   const handleSearch = () => {
     setIsSearchClicked(true);
@@ -29,6 +32,10 @@ function Header() {
 
   const handleUserClick = () => {
     setIsUserClicked((prev) => !prev);
+  };
+
+  const handleDropdownClick = () => {
+    setIsUserClicked(false);
   };
 
   useEffect(() => {
@@ -49,17 +56,27 @@ function Header() {
     };
   }, [triggerHeight]);
 
+  const handleChangeLanguage = (e) => {
+    // window.location.reload();
+    i18n.changeLanguage(e.target.value);
+    localStorage.setItem('lang', e.target.value);
+  };
+
   return (
     <header ref={headerRef}>
       <div className="headerTop">
-        <p>HELLO EVERYONE! 25% Off All Products</p>
+        <p>{t('HeaderTopText')}</p>
         <div className="curAndLanguageContainer">
           <span>
             USD <PiCaretDownBold />
           </span>
-          <span>
-            ENGLISH <PiCaretDownBold />
-          </span>
+          <select
+            value={i18n.language}
+            onChange={handleChangeLanguage}
+          >
+            <option value="eng">ENG</option>
+            <option value="geo">GEO</option>
+          </select>
         </div>
       </div>
 
@@ -86,12 +103,12 @@ function Header() {
               className="userIcon"
             />
             <div className={`userIconDropdown ${isUserClicked ? 'clicked' : ''}`}>
-              <button>My account</button>
+              <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
               <Link to="/login">
-                <button>Login</button>
+                <button onClick={handleDropdownClick}>{t('LoginL')}</button>
               </Link>
               <Link to="/register">
-                <button>Register</button>
+                <button onClick={handleDropdownClick}>{t('Register')}</button>
               </Link>
             </div>
           </div>
@@ -110,12 +127,12 @@ function Header() {
       </div>
 
       <nav className="headerBottom">
-        <Link to="/">home</Link>
-        <Link to="/shop">shop</Link>
-        <Link to="/blog">blog</Link>
-        <Link to="/aboutUs">about us</Link>
-        <Link to="/pages">pages</Link>
-        <Link to="/contact">contact us</Link>
+        <Link to="/">{t('Home')}</Link>
+        <Link to="/shop">{t('Shop')}</Link>
+        <Link to="/blog">{t('Blog')}</Link>
+        <Link to="/aboutUs">{t('AboutUs')}</Link>
+        <Link to="/pages">{t('Pages')}</Link>
+        <Link to="/contact">{t('Contact')}</Link>
       </nav>
 
       <div className={`fixedHeader ${isFixed ? 'visible' : ''}`}>
@@ -128,12 +145,12 @@ function Header() {
             />
           </a>
           <nav className="fixedHeaderNav">
-            <Link to="/">home</Link>
-            <Link to="/shop">shop</Link>
-            <Link to="/blog">blog</Link>
-            <Link to="/aboutUs">about us</Link>
-            <Link to="/pages">pages</Link>
-            <Link to="/contact">contact us</Link>
+            <Link to="/">{t('Home')}</Link>
+            <Link to="/shop">{t('Shop')}</Link>
+            <Link to="/blog">{t('Blog')}</Link>
+            <Link to="/aboutUs">{t('AboutUs')}</Link>
+            <Link to="/pages">{t('Pages')}</Link>
+            <Link to="/contact">{t('Contact')}</Link>
           </nav>
           <div className="fixedHeaderIcons">
             <PiMagnifyingGlassThin onClick={handleSearch} />

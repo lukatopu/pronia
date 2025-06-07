@@ -6,18 +6,22 @@ import Counter from '../components/Counter';
 import { getProducts } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
 import Services from '../components/Services.jsx';
+import { useTranslation } from 'react-i18next';
 
-function SingleProduct({ addToWishlist, addToCart }) {
+function SingleProduct({ addToWishlist, addToCart, cart }) {
   const [products, setProducts] = useState([]);
   const { id } = useParams();
-
   const { useDataLoader } = useLoader();
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
     useDataLoader(() => getProducts().then((data) => setProducts(data)));
   }, []);
 
   const product = products.find((p) => p._id === id || p.id === id);
+
+  // ✅ Check if this product is in the cart
+  const isInCart = product && cart.some((item) => item._id === product._id);
 
   const renderStars = (count) => {
     return Array.from({ length: count }, (_, i) => <PiStarFill key={i} />);
@@ -30,7 +34,7 @@ function SingleProduct({ addToWishlist, addToCart }) {
   };
 
   const handleAddToCart = () => {
-    if (product) {
+    if (product && !isInCart) {
       addToCart(product);
     }
   };
@@ -42,11 +46,11 @@ function SingleProduct({ addToWishlist, addToCart }) {
       <div className="singleProductImage">
         <img
           src={product.image}
-          alt={product.name}
+          alt={product.name?.[i18n.language] || product.name}
         />
       </div>
       <div className="singleProductDetails">
-        <h1>{product.name}</h1>
+        <h1>{product.name?.[i18n.language] || product.name}</h1>
         <p className="price">{product.price}</p>
         <div className="ratingContainer">{renderStars(product.rating)}</div>
         <div className="productDescription">
@@ -57,8 +61,9 @@ function SingleProduct({ addToWishlist, addToCart }) {
           <button
             onClick={handleAddToCart}
             className="addToCartButton"
+            disabled={isInCart}
           >
-            ADD TO CART
+            {isInCart ? t('AlreadyInCart') : t('AddToCart')}
           </button>
           <button
             onClick={handleAddToWishlist}
@@ -70,7 +75,6 @@ function SingleProduct({ addToWishlist, addToCart }) {
             <BsArrowRepeat />
           </button>
         </div>
-
         <Services small={true} />
       </div>
     </div>

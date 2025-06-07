@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PiMagnifyingGlassBold } from 'react-icons/pi';
-function Filter() {
+import { useTranslation } from 'react-i18next';
+import Slider from '@mui/material/Slider';
+
+function Filter({ priceRange, setPriceRange }) {
+  const { t } = useTranslation();
+
+  const handleSliderChange = (e, newValue) => {
+    setPriceRange(newValue);
+  };
+
   return (
     <div className="filter">
       <div className="searchContainer">
@@ -13,37 +22,67 @@ function Filter() {
 
       <div className="filtersContainer">
         <div className="Filter">
-          <h2>Categories</h2>
+          <h2>{t('Categories')}</h2>
           <div className="FiltersContainer">
-            <a>All</a>
-            <a>Bansai</a>
-            <a>House Plants</a>
-            <a>Indoor Living</a>
-            <a>Perennnials</a>
-            <a>Plant For Gift</a>
-            <a>Garden Tools</a>
+            <a href="#">{t('CategoriesAll')}</a>
+            <a href="#">{t('CategoriesBansai')}</a>
+            <a href="#">{t('CategoriesHousePlants')}</a>
+            <a href="#">{t('CategoriesIndoorLiving')}</a>
+            <a href="#">{t('CategoriesPerennnials')}</a>
+            <a href="#">{t('CategoriesPlantForGift')}</a>
+            <a href="#">{t('CategoriesGardenTools')}</a>
           </div>
         </div>
+
         <div className="Filter">
-          <h2>Color</h2>
+          <h2>{t('Color')}</h2>
           <div className="FiltersContainer">
-            <a>All</a>
-            <a>Gold</a>
-            <a>Green</a>
-            <a>White</a>
-            <a>Black</a>
+            <a>{t('ColorAll')}</a>
+            <a>{t('ColorGold')}</a>
+            <a>{t('ColorGreen')}</a>
+            <a>{t('ColorWhite')}</a>
+            <a>{t('ColorBlack')}</a>
           </div>
         </div>
+
         <div className="Filter">
-          <h2>Categories</h2>
+          <h2>{t('PriceFilter')}</h2>
           <div className="FiltersContainer">
-            <a>All</a>
-            <a>Bansai</a>
-            <a>House Plants</a>
-            <a>Indoor Living</a>
-            <a>Perennnials</a>
-            <a>Plant For Gift</a>
-            <a>Garden Tools</a>
+            <Slider
+              className="slider"
+              getAriaLabel={() => 'Price range'}
+              value={priceRange}
+              onChange={handleSliderChange}
+              valueLabelDisplay="on"
+              min={16}
+              max={350}
+              disableSwap
+              sx={{
+                '& .MuiSlider-thumb': {
+                  width: 16,
+                  height: 16,
+                  boxShadow: 'none',
+                  '&:focus, &:hover, &.Mui-focusVisible, &:active': {
+                    boxShadow: 'none',
+                  },
+                },
+                '& .MuiSlider-track': {
+                  height: 4,
+                },
+                '& .MuiSlider-rail': {
+                  height: 4,
+                },
+                '& .MuiSlider-valueLabel': {
+                  backgroundColor: '#abd373',
+                  color: 'white',
+                  fontSize: '10px',
+                  fontWeight: 'bold',
+                  width: '2px',
+                  height: '15px',
+                  top: -6,
+                },
+              }}
+            />
           </div>
         </div>
       </div>

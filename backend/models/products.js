@@ -1,12 +1,20 @@
 import mongoose from "mongoose";
 
+const translationSchema = new mongoose.Schema({
+ eng: {
+  type: String,
+ },
+ geo: {
+  type: String,
+ }
+})
+
 const ProductsSchema = new mongoose.Schema({
  name: {
-  type: String,
+  type: translationSchema,
  },
- price: {
-  type: String,
- },
+ price: String,
+ 
  rating: {
   type: Number,
  },
@@ -17,7 +25,7 @@ const ProductsSchema = new mongoose.Schema({
   type: String,
  },
  description: {
-  type: String,
+  type: translationSchema,
  },
 });
 

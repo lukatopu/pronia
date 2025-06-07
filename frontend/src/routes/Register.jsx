@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useLoader } from '../hooks/useLoader';
 import { registerUser } from '../api/api';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Register() {
   const { useFakeLoader } = useLoader();
+
+  const { i18n, t } = useTranslation();
 
   useEffect(() => useFakeLoader(), []);
 
@@ -40,16 +43,16 @@ function Register() {
 
   return (
     <div className="registerContainer">
-      <h4>Register</h4>
+      <h4>{t('Register')}</h4>
       <p className="error">{error}</p>
       <form onSubmit={handleSubmit}>
         <div className="nameInputContainer">
           <div className="firstNameContainer">
-            <label>First Name</label>
+            <label>{t('FirstName')}</label>
             <input
               type="text"
               name="firstName"
-              placeholder="First Name"
+              placeholder={t('FirstName')}
               value={formData.firstName}
               onChange={handleChange}
               required
@@ -57,11 +60,11 @@ function Register() {
           </div>
 
           <div className="lastNameContainer">
-            <label>Last Name</label>
+            <label>{t('LastName')}</label>
             <input
               type="text"
               name="lastName"
-              placeholder="Last Name"
+              placeholder={t('LastName')}
               value={formData.lastName}
               onChange={handleChange}
               required
@@ -70,11 +73,11 @@ function Register() {
         </div>
 
         <div className="emailContainer">
-          <label>Email Address*</label>
+          <label>{t('EmailAddress')}*</label>
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder={t('EmailAddress')}
             value={formData.email}
             onChange={handleChange}
             required
@@ -83,11 +86,11 @@ function Register() {
 
         <div className="passwordsContainer">
           <div className="passwordContainer">
-            <label>Password</label>
+            <label>{t('Password')}</label>
             <input
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder={t('Password')}
               value={formData.password}
               onChange={handleChange}
               required
@@ -95,11 +98,11 @@ function Register() {
           </div>
 
           <div className="confirmPasswordContainer">
-            <label>Confirm Password</label>
+            <label>{t('ConfirmPassword')}</label>
             <input
               type="password"
               name="confirmPassword"
-              placeholder="Confirm Password"
+              placeholder={t('ConfirmPassword')}
               value={formData.confirmPassword}
               onChange={handleChange}
               required

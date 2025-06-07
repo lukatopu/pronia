@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { loginUser } from '../api/api';
 import { useLoader } from '../hooks/useLoader';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Login() {
   const { useFakeLoader } = useLoader();
+
+  const { i18n, t } = useTranslation();
 
   useEffect(() => useFakeLoader(), []);
 
@@ -31,16 +34,16 @@ function Login() {
 
   return (
     <div className="loginContainer">
-      <h4>Login</h4>
+      <h4>{t('LoginL')}</h4>
       <p className="error">{error}</p>
       <form onSubmit={handleSubmit}>
         <div className="InputContainer">
-          <label>Email Address*</label>
+          <label>{t('EmailAddress')}*</label>
 
           <input
             type="email"
             name="email"
-            placeholder="Email Address"
+            placeholder={t('EmailAddress')}
             value={formData.email}
             onChange={handleChange}
             required
@@ -48,11 +51,11 @@ function Login() {
         </div>
 
         <div className="InputContainer">
-          <label>Password</label>
+          <label>{t('Password')}</label>
           <input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder={t('Password')}
             value={formData.password}
             onChange={handleChange}
             required
@@ -61,11 +64,11 @@ function Login() {
         <div className="loginAddOns">
           <div className="checkboxContainer">
             <input type="checkbox" />
-            <label>Remember Me</label>
+            <label>{t('RememberMe')}</label>
           </div>
-          <a href="/forgot-password">Forgot password?</a>
+          <a href="/forgot-password">{t('ForgotPassword')}?</a>
         </div>
-        <button type="submit">LOGIN</button>
+        <button type="submit">{t('LoginH')}</button>
       </form>
     </div>
   );

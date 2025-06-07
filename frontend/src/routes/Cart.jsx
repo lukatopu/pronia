@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLoader } from '../hooks/useLoader';
 import Counter from '../components/Counter';
+import { useTranslation } from 'react-i18next';
 
 function Cart({ cart }) {
   const { useFakeLoader } = useLoader();
+
+  const { i18n, t } = useTranslation();
 
   useEffect(() => useFakeLoader(), []);
   return (
@@ -15,12 +18,12 @@ function Cart({ cart }) {
         <table>
           <thead>
             <tr>
-              <th>Remove</th>
-              <th>Images</th>
-              <th>Product</th>
-              <th>Unit Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
+              <th>{t('Remove')}</th>
+              <th>{t('Images')}</th>
+              <th>{t('Product')}</th>
+              <th>{t('UnitPrice')}</th>
+              <th>{t('Quantity')}</th>
+              <th>{t('Total')}</th>
             </tr>
           </thead>
           <tbody>
@@ -38,7 +41,9 @@ function Cart({ cart }) {
                   </Link>
                 </td>
                 <td>
-                  <a>{product.name}</a>
+                  <a>
+                    {product.name?.[i18n.language] ? product.name[i18n.language] : product.name}
+                  </a>
                 </td>
                 <td>
                   <p>{product.price}</p>
@@ -47,7 +52,7 @@ function Cart({ cart }) {
                   <Counter />
                 </td>
                 <td>
-                  <p>TOTAL</p>
+                  <p>{t('Total')}</p>
                 </td>
               </tr>
             ))}

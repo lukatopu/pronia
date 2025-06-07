@@ -1,0 +1,14 @@
+@use '../abstracts' as *;
+
+.filter {
+ .slider {
+  color: $light-green;
+  height: 4px;
+  margin-top: 1vw;
+
+  ::before {
+   width: 5px;
+   height: 5px;
+  }
+ }
+}

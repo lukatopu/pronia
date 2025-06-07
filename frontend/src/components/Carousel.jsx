@@ -3,6 +3,7 @@ import plant1 from '../images/carouselImg/carouselPlant2.png';
 import plant2 from '../images/carouselImg/carouselPlant1.png';
 import { PiCaretLeftThin, PiCaretRightThin } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Carousel() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -10,6 +11,7 @@ function Carousel() {
   const [isHovering, setIsHovering] = useState(false);
   const images = [plant1, plant2];
   const intervalRef = useRef(null);
+  const { t } = useTranslation();
 
   const triggerAnimations = () => {
     setAnimate(false);
@@ -67,13 +69,13 @@ function Carousel() {
       </div>
 
       <div className="carouselDescriptionContainer">
-        <p className={`saleText ${animate ? 'animate' : ''}`}>65% OFF</p>
-        <h2 className={`plantName ${animate ? 'animate' : ''}`}>NEW PLANT</h2>
+        <p className={`saleText ${animate ? 'animate' : ''}`}>{t('65%')}</p>
+        <h2 className={`plantName ${animate ? 'animate' : ''}`}>{t('NewPlant')}</h2>
         <p className={`descriptionText ${animate ? 'animate' : ''}`}>
-          Pronia, With 100% Natural, Organic & Plant Shop.
+          {t('ProniaCarouselDescription')}
         </p>
         <button className={`discoverButton ${animate ? 'animate' : ''}`}>
-          <Link to="/shop">DISCOVER NOW</Link>
+          <Link to="/shop">{t('Discover')}</Link>
         </button>
       </div>
 

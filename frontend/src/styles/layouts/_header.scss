@@ -198,7 +198,6 @@ header {
         transition: 0.8s ease-in-out;
         display: flex;
         align-items: center;
-        padding: 0 350px;
 
         &.visible {
             top: 0;
@@ -207,8 +206,9 @@ header {
         .fixedHeaderContent {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             width: 100%;
+            gap: 70px;
 
             nav {
                 display: flex;
@@ -219,6 +219,7 @@ header {
                     text-transform: uppercase;
                     font-size: 14px;
                     transition: 400ms;
+                    white-space: nowrap;
 
                     &:hover {
                         color: $light-green;

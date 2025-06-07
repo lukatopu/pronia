@@ -1,52 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, matchPath } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function RouteBanner() {
   const [title, setTitle] = useState('');
   const [mainTitle, setMainTitle] = useState('');
+  const { t } = useTranslation();
 
   const location = useLocation();
 
   const titles = {
     '/shop': {
-      title: 'shop Default',
-      mainTitle: 'shop',
+      title: 'ShopBannerT',
+      mainTitle: 'ShopBannerM',
     },
     '/blog': {
-      title: 'Blog Grid View',
-      mainTitle: 'blog',
+      title: 'BlogBannerT',
+      mainTitle: 'BlogBannerM',
     },
     '/aboutUs': {
-      title: 'About Us',
-      mainTitle: 'about us',
+      title: 'AboutBannerT',
+      mainTitle: 'AboutBannerM',
     },
     '/contact': {
-      title: 'Contact Us',
-      mainTitle: 'contact',
+      title: 'ContactBannerT',
+      mainTitle: 'ContactBannerM',
     },
     '/pages': {
-      title: 'pages',
-      mainTitle: 'pages',
+      title: 'PagesBannerT',
+      mainTitle: 'PagesBannerM',
     },
     '/wishlist': {
-      title: 'Wishlist',
-      mainTitle: 'Wishlist Page',
+      title: 'WishlistBannerT',
+      mainTitle: 'WishlistBannerM',
     },
     '/product/:id': {
       title: 'Single Product variable',
       mainTitle: 'Single Product',
     },
     '/login': {
-      title: 'Login',
-      mainTitle: 'LOGIN PAGE',
+      title: 'LoginBannerT',
+      mainTitle: 'LoginBannerM',
     },
     '/register': {
-      title: 'Register',
-      mainTitle: 'REGISTER PAGE',
+      title: 'RegisterBannerT',
+      mainTitle: 'RegisterBannerM',
     },
     '/cart': {
-      title: 'Cart Page',
-      mainTitle: 'CART PAGE',
+      title: 'CartBannerT',
+      mainTitle: 'CartBannerM',
     },
     '/forgot-password': {
       title: 'forgot password',
@@ -60,21 +62,29 @@ function RouteBanner() {
 
   useEffect(() => {
     const path = location.pathname;
+    let matched = null;
 
-    if (titles[path]) {
-      setTitle(titles[path].title);
-      setMainTitle(titles[path].mainTitle);
-    } else if (matchPath('/product/:id', path)) {
-      setTitle(titles['/product/:id'].title);
-      setMainTitle(titles['/product/:id'].mainTitle);
+    for (const route in titles) {
+      if (matchPath({ path: route, end: true }, path)) {
+        matched = titles[route];
+        break;
+      }
     }
-  }, [location]);
+
+    if (matched) {
+      setTitle(t(matched.title));
+      setMainTitle(t(matched.mainTitle));
+    } else {
+      setTitle('');
+      setMainTitle('');
+    }
+  }, [location, t]);
 
   return (
     <div className="routeBanner">
       <h2>{mainTitle}</h2>
       <p>
-        <Link to="/">Home</Link> <span>-</span> <span>{title}</span>
+        <Link to="/">{t('Home')}</Link> <span>-</span> <span>{title}</span>
       </p>
     </div>
   );

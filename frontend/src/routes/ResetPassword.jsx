@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { resetPasswordUser } from '../api/api.js';
+import { useTranslation } from 'react-i18next';
 
 function ResetPassword() {
   const [formData, setformData] = useState({
@@ -9,6 +10,8 @@ function ResetPassword() {
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  const { i18n, t } = useTranslation();
 
   const { token } = useParams();
 
@@ -32,16 +35,16 @@ function ResetPassword() {
 
   return (
     <div className="loginContainer">
-      <h4>Reset Password</h4>
+      <h4>{t('ResetPassword')}</h4>
       <p className="error">{error}</p>
       <form onSubmit={handleSubmit}>
         <div className="InputContainer">
-          <label>Password</label>
+          <label>{t('Password')}</label>
 
           <input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder={t('Password')}
             value={formData.password}
             onChange={handleChange}
             required
@@ -49,19 +52,19 @@ function ResetPassword() {
         </div>
 
         <div className="InputContainer">
-          <label>Confirm Password</label>
+          <label>{t('ConfirmPassword')}</label>
 
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Confirm Password"
+            placeholder={t('ConfirmPassword')}
             value={formData.confirmPassword}
             onChange={handleChange}
             required
           />
         </div>
 
-        <button type="submit">Send Mail</button>
+        <button type="submit">{t('Reset')}</button>
       </form>
     </div>
   );

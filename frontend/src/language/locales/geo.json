@@ -1,0 +1,108 @@
+{
+    "Home": "მთავარი",
+    "Shop": "მაღაზია",
+    "Blog": "ბლოგი",
+    "AboutUs": "ჩვენს შესახებ",
+    "Pages": "გვერდები",
+    "Contact": "კონტაქტი",
+
+    "HeaderTopText": "მოგესალმებით ყველას! 25% ფასდაკლება ყველა პროდუქტზე",
+
+    "65%": "65% ფასდაკლება",
+    "NewPlant": "ახალი მცენარე",
+    "ProniaCarouselDescription": "პრონია, 100% ნატურალური, ორგანული & მცენარეული მაღაზია",
+    "Discover": "აღმოაჩინე ახლა",
+
+    "Shipping": "უფასო შიპინგი",
+    "ShippingTxt": "ლიმიტი $319 ერთ შეკვეთაზე",
+    "Payment": "უსაფრთხო გადახდა",
+    "PaymentTxt": "ჩვენი გადახდის კარიბჭით",
+    "Service": "საუკეთესო სერვისები",
+    "ServiceTxt": "მეგობრული და მხარდამჭერი სერვისები",
+    
+    "HomeBanner": "მთავარი",
+    "ShopBannerM": "მაღაზია",
+    "ShopBannerT": "მაღაზია",
+    "BlogBannerM": "ბლოგი",
+    "BlogBannerT": "ბლოგი",
+    "AboutBannerM": "ჩვენს შესახებ",
+    "AboutBannerT": "ჩვენს შესახებ",
+    "PagesBannerM": "გვერდები",
+    "PagesBannerT": "გვერდები",
+    "ContactBannerM": "კონტაქტი",
+    "ContactBannerT": "კონტაქტი",
+    "LoginBannerM": "ავტორიზაციის გვერდი",
+    "LoginBannerT": "ავტორიზაცია",
+    "RegisterBannerM": "რეგისტრაციის გვერდი",
+    "RegisterBannerT": "რეგისტრაცია",
+    "CartBannerM": "კალათა",
+    "CartrBannerT": "კალათა",
+    "WishlistBannerM": "სურვილების სია",
+    "WishlistBannerT": "სურვილების სია",
+
+    "MyAccount": "ჩემი ანგარიში",
+
+    "ProductsFound": "პროდუქტი ნაპოვნია",
+    "SortByDefault": "დალაგება ნაგულისხმევად",
+
+    "Categories": "კატეგორიები",
+    "CategoriesAll": "ყველა",
+    "CategoriesBansai": "ბანსაი",
+    "CategoriesHousePlants": "სახლის მცენარეები",
+    "CategoriesIndoorLiving": "შენობაში ცხოვრება",
+    "CategoriesPerennnials": "მრავალწლიანი მცენარეები",
+    "CategoriesPlantForGift": "საჩუქრად განკუთვნილი მცენარე",
+    "CategoriesGardenTools": "ბაღის ხელსაწყოები",
+
+    "Color": "ფერი",
+    "ColorAll": "ყველა",
+    "ColorGold": "ოქროსფერი",
+    "ColorGreen": "მწვანე",
+    "ColorWhite": "თეთრი",
+    "ColorBlack": "შავი",
+
+    "PriceFilter": "ფასის ფილტრი",
+
+    "Remove":"წაშლა",
+    "Images": "სურათები",
+    "Product": "პროდუქტი",
+    "UnitPrice": "ერთეულის ფასი",
+    "StockStatus": "მარაგის სტატუსი",
+    "AddToCart": "კალათაში დამატება",
+    "InStock": "მარაგშია",
+    "AlreadyInCart": "უკვე კალათაშია",
+    
+
+    "Quantity": "რაოდენობა",
+    "Total": "სულ",
+
+    "LoginL":"შესვლა",
+    "EmailAddress": "ელფოსტა",
+    "Password": "პაროლი",
+    "RememberMe": "დამიმახსოვრე",
+    "ForgotPassword": "დაგავიწყდა პაროლი",
+    "LoginH": "შესვლა",
+    "Register": "რეგისტრაცია",
+    "FirstName":"სახელი",
+    "LastName": "გვარი",
+    "ConfirmPassword": "პაროლის დადასტურება",
+    "SendMail": "ფოსტის გაგზავნა",
+    "ResetPassword":"პაროლის აღდგენა",
+    "Reset": "აღდგენა",
+
+    "ContactInfo":"საკონტაქტო ინფორმაცია",
+    "ContactDetail": "შეავსეთ ფორმა და ჩვენი გუნდი 24 საათის განმავლობაში დაგიკავშირდებათ.",
+    "ContactNumber": "123 456 789",
+    "ContactMail": "info@example.com",
+    "ContactAddress": "13, თქვენი მისამართი, აქ",
+    "ContactPhone": "ტელეფონი",
+    "ContactMessage": "მესიჯი",
+    "PostComment":"კომენტარის გამოქვეყნება",
+    "ContactEmail": "ელფოსტა"
+    
+
+
+
+
+    
+}

@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLoader } from '../hooks/useLoader';
+import { useTranslation } from 'react-i18next';
 
 function Wishlist({ wishlist }) {
   const { useFakeLoader } = useLoader();
+
+  const { i18n, t } = useTranslation();
 
   useEffect(() => useFakeLoader(), []);
   return (
@@ -14,12 +17,12 @@ function Wishlist({ wishlist }) {
         <table>
           <thead>
             <tr>
-              <th>Remove</th>
-              <th>Images</th>
-              <th>Product</th>
-              <th>Unit Price</th>
-              <th>Stock Status</th>
-              <th>Add To Cart</th>
+              <th>{t('Remove')}</th>
+              <th>{t('Images')}</th>
+              <th>{t('Product')}</th>
+              <th>{t('UnitPrice')}</th>
+              <th>{t('StockStatus')}</th>
+              <th>{t('AddToCart')}</th>
             </tr>
           </thead>
           <tbody>
@@ -37,16 +40,18 @@ function Wishlist({ wishlist }) {
                   </Link>
                 </td>
                 <td>
-                  <a>{product.name}</a>
+                  <a>
+                    {product.name?.[i18n.language] ? product.name[i18n.language] : product.name}
+                  </a>
                 </td>
                 <td>
                   <p>{product.price}</p>
                 </td>
                 <td>
-                  <p>In Stock</p>
+                  <p>{t('InStock')}</p>
                 </td>
                 <td>
-                  <button className="addToCartButton">ADD TO CART</button>
+                  <button className="addToCartButton">{t('AddToCart')}</button>
                 </td>
               </tr>
             ))}

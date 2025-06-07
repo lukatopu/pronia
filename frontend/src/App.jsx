@@ -29,17 +29,27 @@ function App() {
   useTitle();
   const location = useLocation();
 
-  const [wishlist, setWishlist] = useState('');
-  const [cart, setCart] = useState('');
+  const [wishlist, setWishlist] = useState([]);
+  const [cart, setCart] = useState([]);
 
   const addToWishlist = (product) => {
-    setWishlist((prevWishlist) => [...prevWishlist, product]);
-    console.log(wishlist);
+    setWishlist((prevWishlist) => {
+      const exists = prevWishlist.some((p) => p._id === product._id);
+      if (!exists) {
+        return [...prevWishlist, product];
+      }
+      return prevWishlist;
+    });
   };
 
   const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
-    console.log(cart);
+    setCart((prevCart) => {
+      const exists = prevCart.some((p) => p._id === product._id);
+      if (!exists) {
+        return [...prevCart, product];
+      }
+      return prevCart;
+    });
   };
 
   return (
@@ -56,7 +66,13 @@ function App() {
           />
           <Route
             path="/shop"
-            element={<Shop />}
+            element={
+              <Shop
+                addToWishlist={addToWishlist}
+                addToCart={addToCart}
+                cart={cart}
+              />
+            }
           />
           <Route
             path="/product/:id"
@@ -64,6 +80,7 @@ function App() {
               <SingleProduct
                 addToWishlist={addToWishlist}
                 addToCart={addToCart}
+                cart={cart}
               />
             }
           />
@@ -102,10 +119,6 @@ function App() {
           <Route
             path="/profile"
             element={<Profile />}
-          />
-          <Route
-            path="/singleProduct"
-            element={<SingleProduct />}
           />
           <Route
             path="/wishlist"

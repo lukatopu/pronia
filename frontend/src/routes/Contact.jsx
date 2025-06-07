@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useLoader } from '../hooks/useLoader';
 import { PiPhone, PiEnvelope, PiMapPin } from 'react-icons/pi';
 import backgroundImg from '../images/contactImg/contactBackground.jpg';
+import { useTranslation } from 'react-i18next';
 
 function Contact() {
   const { useFakeLoader } = useLoader();
 
   useEffect(() => useFakeLoader(), []);
+
+  const { i18n, t } = useTranslation();
 
   const [contactData, setContactData] = useState({
     fname: '',
@@ -32,7 +35,6 @@ function Contact() {
     }
 
     setContactData({ ...contactData, [name]: value });
-    console.log([contactData]);
   };
 
   const handleSubmit = (e) => {
@@ -59,27 +61,27 @@ function Contact() {
           }}
         >
           <div className="contactDetails">
-            <h1>Contact Info:</h1>
-            <p>Fill the form and our team will get back to you within 24 hours.</p>
+            <h1>{t('ContactInfo')}:</h1>
+            <p>{t('ContactDetail')}</p>
           </div>
           <div className="contactInfo">
             <div className="infoContainer">
               <div className="iconContainer">
                 <PiPhone />
               </div>
-              <p>123 456 789</p>
+              <p>{t('ContactNumber')}</p>
             </div>
             <div className="infoContainer">
               <div className="iconContainer">
                 <PiEnvelope />
               </div>
-              <p>info@example.com</p>
+              <p>{t('ContactMail')}</p>
             </div>
             <div className="infoContainer">
               <div className="iconContainer">
                 <PiMapPin />
               </div>
-              <p>13, Your Address, Here</p>
+              <p>{t('ContactAddress')}</p>
             </div>
           </div>
         </div>
@@ -90,7 +92,7 @@ function Contact() {
               <input
                 type="text"
                 name="fname"
-                placeholder="First Name*"
+                placeholder={t('FirstName')}
                 value={contactData.fname}
                 onChange={handleChange}
                 required
@@ -98,7 +100,7 @@ function Contact() {
               <input
                 type="text"
                 name="lname"
-                placeholder="Last Name*"
+                placeholder={t('LastName')}
                 value={contactData.lname}
                 onChange={handleChange}
                 required
@@ -108,7 +110,7 @@ function Contact() {
               <input
                 type="number"
                 name="number"
-                placeholder="Phone*"
+                placeholder={t('ContactPhone')}
                 value={contactData.number}
                 onChange={handleChange}
                 required
@@ -116,7 +118,7 @@ function Contact() {
               <input
                 type="text"
                 name="email"
-                placeholder="Email*"
+                placeholder={t('ContactEmail')}
                 value={contactData.email}
                 onChange={handleChange}
                 required
@@ -126,7 +128,7 @@ function Contact() {
             <div className="messageInputContainer">
               <textarea
                 name="message"
-                placeholder="Message"
+                placeholder={t('ContactMessage')}
                 value={contactData.message}
                 onChange={handleChange}
                 required
@@ -137,7 +139,7 @@ function Contact() {
                 type="submit"
                 className="commentButton"
               >
-                POST COMMENT
+                {t('PostComment')}
               </button>
             </div>
           </form>
