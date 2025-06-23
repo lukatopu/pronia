@@ -227,6 +227,50 @@ header {
                 }
             }
 
+            .userIconContainer {
+                position: relative;
+
+                .userIconDropdown {
+                    position: absolute;
+                    top: 150%;
+                    right: 100%;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+                    background-color: white;
+                    height: 100px;
+                    width: 164px;
+                    border-radius: 5px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px 0px;
+                    justify-content: space-between;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: 300ms;
+
+                    &.clicked {
+                        opacity: 1;
+                        visibility: visible;
+                        top: 100%;
+                    }
+
+                   
+
+                    button {
+                        width: 100%;
+                        height: 100%;
+                        background-color: transparent;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: 300ms;
+
+                        &:hover {
+                            background-color: $light-green;
+                            color: white;
+                        }
+                    }
+                }
+            }
+
             .fixedHeaderIcons {
                 display: flex;
                 gap: 15px;

@@ -57,7 +57,6 @@ function Header() {
   }, [triggerHeight]);
 
   const handleChangeLanguage = (e) => {
-    // window.location.reload();
     i18n.changeLanguage(e.target.value);
     localStorage.setItem('lang', e.target.value);
   };
@@ -154,9 +153,21 @@ function Header() {
           </nav>
           <div className="fixedHeaderIcons">
             <PiMagnifyingGlassThin onClick={handleSearch} />
-            <Link to="/login-register">
-              <PiUserThin />
-            </Link>
+            <div className="userIconContainer">
+              <PiUserThin
+                onClick={handleUserClick}
+                className="userIcon"
+              />
+              <div className={`userIconDropdown ${isUserClicked ? 'clicked' : ''}`}>
+                <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
+                <Link to="/login">
+                  <button onClick={handleDropdownClick}>{t('LoginL')}</button>
+                </Link>
+                <Link to="/register">
+                  <button onClick={handleDropdownClick}>{t('Register')}</button>
+                </Link>
+              </div>
+            </div>
             <Link to="wishlist">
               <PiHeartStraightThin />
             </Link>

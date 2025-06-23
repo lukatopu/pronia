@@ -18,6 +18,7 @@
     "Payment": "Safe Payment",
     "PaymentTxt": "With our payment gateway",
     "Service": "Best Services",
+    "ServiceTxt": "Friendly & Supper Services",
 
     "HomeBanner": "Home",
     "ShopBannerM": "SHOP",
@@ -96,5 +97,7 @@
     "ContactPhone": "Phone",
     "ContactMessage": "Message",
     "PostComment":"POST COMMENT",
-    "ContactEmail": "Email"
+    "ContactEmail": "Email",
+
+    "ShopNow": "SHOP NOW"
 }

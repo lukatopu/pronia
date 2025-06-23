@@ -13,7 +13,7 @@ function Cart({ cart }) {
   return (
     <div className="wishlistPage">
       {cart.length === 0 ? (
-        <p></p>
+        <p>NOTHING IN CART</p>
       ) : (
         <table>
           <thead>

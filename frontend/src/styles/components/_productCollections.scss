@@ -1,0 +1,101 @@
+.productCollectionsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+
+  .bigDivCollection,
+  .smallDivCollection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    p {
+      color: #2d2d2d;
+    }
+
+    h3 {
+      color: #2d2d2d;
+      font-size: 36px;
+      font-weight: 500;
+    }
+
+    .overlayDiv1,
+    .overlayDiv2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .overlayDiv1 {
+      width: 0%;
+      height: 100%;
+      visibility: visible;
+      opacity: 1;
+
+    }
+
+    .overlayDiv2 {
+      width: 100%;
+      height: 0%;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &:hover {
+      .overlayDiv1 {
+        width: 100%;
+        transition: 1.5s;
+        visibility: hidden;
+        opacity: 0;
+      }
+
+      .overlayDiv2 {
+        height: 100%;
+        transition: 1.5s;
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+  }
+
+  .bigDivCollection {
+    width: 780px;
+    height: 300px;
+    padding-left: 50px;
+  }
+
+  .cactusBackground {
+     background: url('../images/productCollectionImg/cactusCollection.jpg') no-repeat center/cover
+  }
+
+  .aloeBackground {
+     background: url('../images/productCollectionImg/aloe.jpg') no-repeat center/cover
+  }
+
+  .cactusBackground2 {
+     background: url('../images/productCollectionImg/cactusCollection2.jpg') no-repeat center/cover
+  }
+
+  .plantPortBackground {
+     background: url('../images/productCollectionImg/plantPort.jpg') no-repeat center/cover
+  }
+
+  .smallDivCollection {
+    width: 375px;
+    height: 300px;
+    align-items: center;
+  }
+
+  .firstCollectionWrapper,
+  .secondCollectionWrapper {
+    display: flex;
+    gap: 30px;
+  }
+}

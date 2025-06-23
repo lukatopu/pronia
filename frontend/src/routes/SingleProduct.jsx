@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { PiStarFill, PiHeartStraight } from 'react-icons/pi';
+import { PiStarFill, PiHeart, PiHeartFill } from 'react-icons/pi';
 import { BsArrowRepeat } from 'react-icons/bs';
 import Counter from '../components/Counter';
 import { getProducts } from '../api/api.js';
@@ -8,7 +8,7 @@ import { useLoader } from '../hooks/useLoader.jsx';
 import Services from '../components/Services.jsx';
 import { useTranslation } from 'react-i18next';
 
-function SingleProduct({ addToWishlist, addToCart, cart }) {
+function SingleProduct({ addToWishlist, addToCart, cart, wishlist }) {
   const [products, setProducts] = useState([]);
   const { id } = useParams();
   const { useDataLoader } = useLoader();
@@ -20,8 +20,8 @@ function SingleProduct({ addToWishlist, addToCart, cart }) {
 
   const product = products.find((p) => p._id === id || p.id === id);
 
-  // ✅ Check if this product is in the cart
   const isInCart = product && cart.some((item) => item._id === product._id);
+  const isInWishlist = product && wishlist.some((item) => item._id === product._id);
 
   const renderStars = (count) => {
     return Array.from({ length: count }, (_, i) => <PiStarFill key={i} />);
@@ -69,7 +69,7 @@ function SingleProduct({ addToWishlist, addToCart, cart }) {
             onClick={handleAddToWishlist}
             className="wishlistButton"
           >
-            <PiHeartStraight />
+            {isInWishlist ? <PiHeartFill /> : <PiHeart />}
           </button>
           <button className="compareButton">
             <BsArrowRepeat />

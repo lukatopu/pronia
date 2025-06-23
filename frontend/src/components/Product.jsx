@@ -1,9 +1,16 @@
 import React from 'react';
-import { PiStarFill, PiHeartStraightThin, PiEyeThin, PiShoppingCartThin, PiShoppingCartFill } from 'react-icons/pi';
+import {
+  PiStarFill,
+  PiHeart,
+  PiEye,
+  PiShoppingCart,
+  PiShoppingCartFill,
+  PiHeartFill,
+} from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-function Product({ product, addToWishlist, addToCart, cart }) {
+function Product({ product, addToWishlist, addToCart, cart = [], wishlist = [] }) {
   const { i18n } = useTranslation();
 
   const renderStars = (count) => {
@@ -23,6 +30,7 @@ function Product({ product, addToWishlist, addToCart, cart }) {
   };
 
   const isInCart = cart.some((item) => item._id === product._id);
+  const isInWishlist = wishlist.some((item) => item._id === product._id);
 
   return (
     <div className="product">
@@ -40,12 +48,16 @@ function Product({ product, addToWishlist, addToCart, cart }) {
           />
         </Link>
         <div className="buttonGroup">
-          <button onClick={handleAddToWishlist} className="productHoverButton">
-            <PiHeartStraightThin />
+          <button
+            disabled={isInWishlist}
+            onClick={handleAddToWishlist}
+            className="productHoverButton"
+          >
+            {isInWishlist ? <PiHeartFill style={{ color: '#000000' }} /> : <PiHeart />}
           </button>
           <Link>
             <button className="productHoverButton">
-              <PiEyeThin />
+              <PiEye />
             </button>
           </Link>
           <button
@@ -53,14 +65,12 @@ function Product({ product, addToWishlist, addToCart, cart }) {
             onClick={handleAddToCart}
             className="productHoverButton"
           >
-            {isInCart ? <PiShoppingCartFill/> : <PiShoppingCartThin />}
+            {isInCart ? <PiShoppingCartFill style={{ color: '#000000' }} /> : <PiShoppingCart />}
           </button>
         </div>
       </div>
       <div className="productTextContainer">
-        <Link to={`/product/${product._id}`}>
-          {product.name?.[i18n.language] || product.name}
-        </Link>
+        <Link to={`/product/${product._id}`}>{product.name?.[i18n.language] || product.name}</Link>
         <p>{product.price}</p>
         <div className="ratingContainer">{renderStars(product.rating)}</div>
       </div>

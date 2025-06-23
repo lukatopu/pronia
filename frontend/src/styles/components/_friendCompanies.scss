@@ -1,0 +1,24 @@
+.friendCompaniesContainer {
+ background: url('../images/backgroundImg/friendCompaniesBackground.jpg') no-repeat center/cover;
+ height: 250px;
+ max-width: 1140px;
+ border-radius: 10px;
+ margin-right: auto;
+ margin-left: auto;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 0 100px;
+ margin-top: 95px;
+ margin-bottom: 100px;
+
+ img {
+  opacity: 0.5;
+  transition: 300ms;
+
+  &:hover {
+   opacity: 1;
+  }
+ }
+
+}

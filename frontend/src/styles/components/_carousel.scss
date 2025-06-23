@@ -88,32 +88,6 @@
         animation: carouselTextAppear 1s 1s forwards;
       }
     }
-
-    button {
-      background-color: $light-green;
-      color: white;
-      width: 210px;
-      height: 65px;
-      line-height: 65px;
-      border-radius: 35px;
-      font-weight: bold;
-      margin-top: 2.2vw;
-      cursor: pointer;
-      transition: 300ms;
-      opacity: 0;
-
-      a {
-        color: white;
-      }
-
-      &.animate {
-        animation: carouselTextAppear 1s 1.5s forwards;
-      }
-
-      &:hover {
-        background-color: #525252;
-      }
-    }
   }
 
   .imageContainer {

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import plant1 from '../images/carouselImg/carouselPlant2.png';
 import plant2 from '../images/carouselImg/carouselPlant1.png';
 import { PiCaretLeftThin, PiCaretRightThin } from 'react-icons/pi';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import Button from './Button';
 
 function Carousel() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -74,9 +74,15 @@ function Carousel() {
         <p className={`descriptionText ${animate ? 'animate' : ''}`}>
           {t('ProniaCarouselDescription')}
         </p>
-        <button className={`discoverButton ${animate ? 'animate' : ''}`}>
-          <Link to="/shop">{t('Discover')}</Link>
-        </button>
+
+        <Button
+          className={`${animate ? 'animate' : ''}`}
+          name={t('Discover')}
+          width="210px"
+          height="65px"
+          opacity="0"
+          marginTop="40px"
+        />
       </div>
 
       <div className={`imageContainer ${animate ? 'animate' : ''}`}>

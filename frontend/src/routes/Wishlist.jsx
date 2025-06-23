@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom';
 import { useLoader } from '../hooks/useLoader';
 import { useTranslation } from 'react-i18next';
 
-function Wishlist({ wishlist }) {
+function Wishlist({ wishlist, cart, addToCart }) {
   const { useFakeLoader } = useLoader();
-
   const { i18n, t } = useTranslation();
 
-  useEffect(() => useFakeLoader(), []);
+  useEffect(() => {
+    useFakeLoader();
+  }, []);
+
   return (
     <div className="wishlistPage">
       {wishlist.length === 0 ? (
-        <p></p>
+        <p>{t('YourWishlistIsEmpty')}</p>
       ) : (
         <table>
           <thead>
@@ -26,35 +28,44 @@ function Wishlist({ wishlist }) {
             </tr>
           </thead>
           <tbody>
-            {wishlist.map((product) => (
-              <tr key={product._id}>
-                <td>
-                  <button>x</button>
-                </td>
-                <td>
-                  <Link to={`/product/${product._id}`}>
-                    <img
-                      className="wishlistProductImage"
-                      src={product.image}
-                    ></img>
-                  </Link>
-                </td>
-                <td>
-                  <a>
-                    {product.name?.[i18n.language] ? product.name[i18n.language] : product.name}
-                  </a>
-                </td>
-                <td>
-                  <p>{product.price}</p>
-                </td>
-                <td>
-                  <p>{t('InStock')}</p>
-                </td>
-                <td>
-                  <button className="addToCartButton">{t('AddToCart')}</button>
-                </td>
-              </tr>
-            ))}
+            {wishlist.map((product) => {
+              const isInCart = cart.some((item) => item._id === product._id);
+
+              return (
+                <tr key={product._id}>
+                  <td>
+                    <button>x</button>
+                  </td>
+                  <td>
+                    <Link to={`/product/${product._id}`}>
+                      <img
+                        className="wishlistProductImage"
+                        src={product.image}
+                        alt={product.name?.[i18n.language] || product.name}
+                      />
+                    </Link>
+                  </td>
+                  <td>
+                    <span>{product.name?.[i18n.language] ?? product.name}</span>
+                  </td>
+                  <td>
+                    <p>{product.price}</p>
+                  </td>
+                  <td>
+                    <p>{t('InStock')}</p>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => addToCart(product)}
+                      disabled={isInCart}
+                      className="addToCartButton"
+                    >
+                      {isInCart ? t('AlreadyInCart') : t('AddToCart')}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}

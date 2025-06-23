@@ -1,0 +1,29 @@
+@use '../abstracts/' as *;
+
+.buttonContainer {
+ button {
+  background-color: $light-green;
+  color: white;
+  line-height: 65px;
+  border-radius: 35px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 300ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+
+  a {
+   color: white;
+  }
+
+  &.animate {
+   animation: carouselTextAppear 1s 1.5s forwards;
+  }
+
+  &:hover {
+   background-color: #525252;
+  }
+ }
+}

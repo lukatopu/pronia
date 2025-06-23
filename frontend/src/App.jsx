@@ -62,8 +62,16 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home />}
+            element={
+              <Home
+                addToCart={addToCart}
+                addToWishlist={addToWishlist}
+                cart={cart}
+                wishlist={wishlist}
+              />
+            }
           />
+
           <Route
             path="/shop"
             element={
@@ -71,6 +79,7 @@ function App() {
                 addToWishlist={addToWishlist}
                 addToCart={addToCart}
                 cart={cart}
+                wishlist={wishlist}
               />
             }
           />
@@ -81,6 +90,7 @@ function App() {
                 addToWishlist={addToWishlist}
                 addToCart={addToCart}
                 cart={cart}
+                wishlist={wishlist}
               />
             }
           />
@@ -122,7 +132,13 @@ function App() {
           />
           <Route
             path="/wishlist"
-            element={<Wishlist wishlist={wishlist} />}
+            element={
+              <Wishlist
+                wishlist={wishlist}
+                cart={cart}
+                addToCart={addToCart}
+              />
+            }
           />
           <Route
             path="/notFound"

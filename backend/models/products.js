@@ -27,6 +27,9 @@ const ProductsSchema = new mongoose.Schema({
  description: {
   type: translationSchema,
  },
+ categorie: {
+  type: [String],
+ }
 });
 
 export default mongoose.model("Products", ProductsSchema);

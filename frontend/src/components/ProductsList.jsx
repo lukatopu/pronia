@@ -4,7 +4,7 @@ import { getProducts } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
 import ProductsSort from './ProductsSort.jsx';
 
-function ProductsList({ addToCart, addToWishlist, priceRange, cart, setIsProductAddedToCart, IsProductAddedToCart }) {
+function ProductsList({ addToCart, addToWishlist, priceRange, cart, wishlist }) {
   const [products, setProducts] = useState([]);
 
   const { useDataLoader } = useLoader();
@@ -40,9 +40,9 @@ function ProductsList({ addToCart, addToWishlist, priceRange, cart, setIsProduct
             addToCart={addToCart}
             addToWishlist={addToWishlist}
             cart={cart}
+            wishlist={wishlist}
             key={index}
             product={product}
-            
           />
         ))}
       </div>

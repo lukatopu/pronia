@@ -1,0 +1,87 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.homeProductsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 18vw;
+
+  .productCard {
+    animation: fadeIn 0.4s ease;
+  }
+}
+
+.homeProductsWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vw;
+
+  .productsSortContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vw;
+
+    .ourProductsContainer {
+      position: relative;
+
+      h1 {
+        color: #393939;
+      }
+
+      &::before {
+        background-color: #abd373;
+        width: 70px;
+        height: 2px;
+        position: absolute;
+        content: "";
+        top: 50%;
+        left: -35%;
+      }
+
+      &::after {
+        background-color: #abd373;
+        width: 70px;
+        height: 2px;
+        position: absolute;
+        content: "";
+        top: 50%;
+        right: -35%;
+      }
+    }
+
+    .sortButtonsContainer {
+      display: flex;
+      gap: 25px;
+
+      button {
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        font-size: 18px;
+        padding: 13px 28px;
+        color: #393939;
+        background-color: transparent;
+        cursor: pointer;
+        transition: 300ms;
+
+        &:hover {
+          border-color: #abd373;
+          color: #abd373;
+          border-style: dashed;
+        }
+
+        &.selected {
+          border-color: #abd373;
+          color: #abd373;
+          border-style: dashed;
+        }
+      }
+    }
+  }
+}

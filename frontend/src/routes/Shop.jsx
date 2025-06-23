@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Filter from '../components/Filter';
 import ProductsList from '../components/ProductsList';
 
-function Shop({ addToWishlist, addToCart, cart, isProductAddedToCart, setIsProductAddedToCart }) {
+function Shop({ addToWishlist, addToCart, cart, wishlist }) {
   const [priceRange, setPriceRange] = useState([16, 300]);
   return (
     <div className="shop">
@@ -15,8 +15,7 @@ function Shop({ addToWishlist, addToCart, cart, isProductAddedToCart, setIsProdu
         addToCart={addToCart}
         priceRange={priceRange}
         cart={cart}
-        isProductAddedToCart={isProductAddedToCart}
-        setIsProductAddedToCart={setIsProductAddedToCart}
+        wishlist={wishlist}
       />
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLoader } from '../hooks/useLoader';
 import { PiPhone, PiEnvelope, PiMapPin } from 'react-icons/pi';
-import backgroundImg from '../images/contactImg/contactBackground.jpg';
 import { useTranslation } from 'react-i18next';
 
 function Contact() {
@@ -52,14 +51,7 @@ function Contact() {
   return (
     <div className="contactContainer">
       <div className="contactWrapper">
-        <div
-          className="contactInfoContainer"
-          style={{
-            backgroundImage: `url(${backgroundImg})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-          }}
-        >
+        <div className="contactInfoContainer">
           <div className="contactDetails">
             <h1>{t('ContactInfo')}:</h1>
             <p>{t('ContactDetail')}</p>
