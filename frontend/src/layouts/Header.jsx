@@ -17,7 +17,8 @@ function Header() {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   const [triggerHeight, setTriggerHeight] = useState(0);
-  const [isUserClicked, setIsUserClicked] = useState(false);
+  const [isUserMainClicked, setIsUserMainClicked] = useState(false);
+  const [isUserFixedClicked, setIsUserFixedClicked] = useState(false);
   const headerRef = useRef(null);
 
   const { t, i18n } = useTranslation();
@@ -30,12 +31,19 @@ function Header() {
     setIsSearchClicked(false);
   };
 
-  const handleUserClick = () => {
-    setIsUserClicked((prev) => !prev);
+  const handleUserMainClick = () => {
+    setIsUserMainClicked((prev) => !prev);
+    setIsUserFixedClicked(false); // Optional: close fixed dropdown when main dropdown opens
+  };
+
+  const handleUserFixedClick = () => {
+    setIsUserFixedClicked((prev) => !prev);
+    setIsUserMainClicked(false); // Optional: close main dropdown when fixed dropdown opens
   };
 
   const handleDropdownClick = () => {
-    setIsUserClicked(false);
+    setIsUserMainClicked(false);
+    setIsUserFixedClicked(false);
   };
 
   useEffect(() => {
@@ -69,10 +77,7 @@ function Header() {
           <span>
             USD <PiCaretDownBold />
           </span>
-          <select
-            value={i18n.language}
-            onChange={handleChangeLanguage}
-          >
+          <select value={i18n.language} onChange={handleChangeLanguage}>
             <option value="eng">ENG</option>
             <option value="geo">GEO</option>
           </select>
@@ -88,20 +93,14 @@ function Header() {
         </div>
         <div>
           <a href="/">
-            <img
-              src={proniaLogo}
-              alt="Pronia Logo"
-            />
+            <img src={proniaLogo} alt="Pronia Logo" />
           </a>
         </div>
         <nav>
           <PiMagnifyingGlassThin onClick={handleSearch} />
           <div className="userIconContainer">
-            <PiUserThin
-              onClick={handleUserClick}
-              className="userIcon"
-            />
-            <div className={`userIconDropdown ${isUserClicked ? 'clicked' : ''}`}>
+            <PiUserThin onClick={handleUserMainClick} className="userIcon" />
+            <div className={`userIconDropdown ${isUserMainClicked ? 'clicked' : ''}`}>
               <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
               <Link to="/login">
                 <button onClick={handleDropdownClick}>{t('LoginL')}</button>
@@ -119,10 +118,7 @@ function Header() {
           </Link>
           <PiList className="burgerIcon" />
         </nav>
-        <SearchBlur
-          closeSearch={closeSearch}
-          isActive={isSearchClicked}
-        />
+        <SearchBlur closeSearch={closeSearch} isActive={isSearchClicked} />
       </div>
 
       <nav className="headerBottom">
@@ -137,11 +133,7 @@ function Header() {
       <div className={`fixedHeader ${isFixed ? 'visible' : ''}`}>
         <div className="fixedHeaderContent">
           <a href="/">
-            <img
-              src={proniaLogo}
-              alt="Pronia Logo"
-              className="fixed-logo"
-            />
+            <img src={proniaLogo} alt="Pronia Logo" className="fixed-logo" />
           </a>
           <nav className="fixedHeaderNav">
             <Link to="/">{t('Home')}</Link>
@@ -154,11 +146,8 @@ function Header() {
           <div className="fixedHeaderIcons">
             <PiMagnifyingGlassThin onClick={handleSearch} />
             <div className="userIconContainer">
-              <PiUserThin
-                onClick={handleUserClick}
-                className="userIcon"
-              />
-              <div className={`userIconDropdown ${isUserClicked ? 'clicked' : ''}`}>
+              <PiUserThin onClick={handleUserFixedClick} className="userIcon" />
+              <div className={`userIconDropdown ${isUserFixedClicked ? 'clicked' : ''}`}>
                 <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
                 <Link to="/login">
                   <button onClick={handleDropdownClick}>{t('LoginL')}</button>
@@ -168,10 +157,10 @@ function Header() {
                 </Link>
               </div>
             </div>
-            <Link to="wishlist">
+            <Link to="/wishlist">
               <PiHeartStraightThin />
             </Link>
-            <Link to="cart">
+            <Link to="/cart">
               <PiShoppingBagThin />
             </Link>
           </div>

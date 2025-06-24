@@ -8,6 +8,9 @@ import { rateLimit } from 'express-rate-limit'
 import helmet from "helmet";
 import compression from 'compression';
 import cookieParser from 'cookie-parser'
+import { fileURLToPath } from 'url';
+import { URL } from 'url'
+import path from 'path'
 
 dotenv.config()
 const app = express()
@@ -40,6 +43,16 @@ app.use(compression())
 
 app.use('/api/products', ProductsRouter)
 app.use('/api/users', UsersRouter)
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 
 app.listen(PORT, () => {
  console.log(`server listening on port ${PORT}`)

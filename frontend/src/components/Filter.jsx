@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PiMagnifyingGlassBold } from 'react-icons/pi';
 import { useTranslation } from 'react-i18next';
 import Slider from '@mui/material/Slider';
+import AloeCollection from './AloeCollection';
 
-function Filter({ priceRange, setPriceRange }) {
+function Filter({ priceRange, setPriceRange, searchTerm, setSearchTerm, selectedTags, setSelectedTags }) {
   const { t } = useTranslation();
 
   const handleSliderChange = (e, newValue) => {
     setPriceRange(newValue);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleTagClick = (tag) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
   };
 
   return (
@@ -15,7 +26,9 @@ function Filter({ priceRange, setPriceRange }) {
       <div className="searchContainer">
         <input
           type="text"
-          placeholder="Search"
+          placeholder={t('Search') || 'Search'}
+          value={searchTerm}
+          onChange={handleSearchChange}
         />
         <PiMagnifyingGlassBold className="filterSearchIcon" />
       </div>
@@ -85,7 +98,42 @@ function Filter({ priceRange, setPriceRange }) {
             />
           </div>
         </div>
+
+        <div className="Filter">
+          <h2>{t('Popular Tags')}</h2>
+          <div className="tagsFilterContainer">
+            <div className="tagsContainer">
+              <div
+                onClick={() => handleTagClick('fashion')}
+                className={selectedTags.includes('fashion') ? 'activeTag' : ''}
+              >
+                Fashion
+              </div>
+              <div
+                onClick={() => handleTagClick('organic')}
+                className={selectedTags.includes('organic') ? 'activeTag' : ''}
+              >
+                Organic
+              </div>
+            </div>
+            <div className="tagsContainer">
+              <div
+                onClick={() => handleTagClick('old fashion')}
+                className={selectedTags.includes('old fashion') ? 'activeTag' : ''}
+              >
+                Old Fashion
+              </div>
+              <div
+                onClick={() => handleTagClick('men')}
+                className={selectedTags.includes('men') ? 'activeTag' : ''}
+              >
+                Men
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <AloeCollection />
     </div>
   );
 }

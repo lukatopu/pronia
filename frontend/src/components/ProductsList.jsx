@@ -4,9 +4,8 @@ import { getProducts } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
 import ProductsSort from './ProductsSort.jsx';
 
-function ProductsList({ addToCart, addToWishlist, priceRange, cart, wishlist }) {
+function ProductsList({ addToCart, addToWishlist, priceRange, searchTerm, selectedTags, cart, wishlist }) {
   const [products, setProducts] = useState([]);
-
   const { useDataLoader } = useLoader();
 
   useEffect(() => {
@@ -14,34 +13,46 @@ function ProductsList({ addToCart, addToWishlist, priceRange, cart, wishlist }) 
   }, []);
 
   const filteredProducts = products.filter((product) => {
-    let price;
-
+    let price;  
     if (typeof product.price === 'string') {
-      let numericString = '';
-      for (const char of product.price) {
-        if ((char >= '0' && char <= '9') || char === '.') {
-          numericString += char;
-        }
-      }
-      price = parseFloat(numericString) || 0;
+      price = parseFloat(product.price.replace(/[^0-9.]/g, '')) || 0;
     } else {
       price = product.price;
     }
+    if (price < priceRange[0] || price > priceRange[1]) return false;
 
-    return price >= priceRange[0] && price <= priceRange[1];
+    const nameEng = product.name?.eng || '';
+    const nameGeo = product.name?.geo || '';
+    const lowerSearch = searchTerm.toLowerCase();
+    if (
+      !nameEng.toLowerCase().includes(lowerSearch) &&
+      !nameGeo.toLowerCase().includes(lowerSearch)
+    ) {
+      return false;
+    }
+
+    if (selectedTags.length > 0) {
+      const categories = product.categorie || [];
+      const hasMatchingTag = selectedTags.some((tag) =>
+        categories.includes(tag)
+      );
+      if (!hasMatchingTag) return false;
+    }
+
+    return true;
   });
 
   return (
     <div className="productsWrapper">
       <ProductsSort />
       <div className="productsContainer">
-        {filteredProducts?.map((product, index) => (
+        {filteredProducts.map((product, index) => (
           <Product
             addToCart={addToCart}
             addToWishlist={addToWishlist}
             cart={cart}
             wishlist={wishlist}
-            key={index}
+            key={product._id || index}
             product={product}
           />
         ))}

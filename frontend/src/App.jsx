@@ -54,7 +54,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header/>
       <Main>
         {location.pathname !== '/' && <RouteBanner />}
 
