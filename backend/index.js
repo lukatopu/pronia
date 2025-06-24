@@ -35,7 +35,17 @@ app.use(cors({
 }));
 
 
-app.use(helmet())
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'", "*"],
+      mediaSrc: ["'self'", "*"],
+      imgSrc: ["'self'", "*", "data:"],  // note: no quotes around data: here
+      connectSrc: ["'self'", "*"],
+      scriptSrc: ["'self'", "*"],
+    } 
+  }
+}));
 app.use(express.json())
 app.use(cookieParser());
 app.use(compression())
