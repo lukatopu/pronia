@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Users from '../models/users.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import mailSender from '../utils/mailSender.js';
 
 export const loginUser = async (req, res) => {

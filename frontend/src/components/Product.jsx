@@ -38,7 +38,7 @@ function Product({ product, addToWishlist, addToCart, cart = [], wishlist = [] }
         <Link to={`/product/${product._id}`}>
           <img
             className="mainImage"
-            src={product.image}
+            src={`/productImg/product${product.image}.jpg`}
             alt={product.name?.[i18n.language] || product.name}
           />
           <img

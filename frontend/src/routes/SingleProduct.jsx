@@ -77,6 +77,7 @@ function SingleProduct({ addToWishlist, addToCart, cart, wishlist }) {
         </div>
         <Services small={true} />
       </div>
+      <div></div>
     </div>
   );
 }
