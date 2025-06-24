@@ -43,7 +43,7 @@ function Product({ product, addToWishlist, addToCart, cart = [], wishlist = [] }
           />
           <img
             className="hoverImage"
-            src={product.hoverImage}
+            src={`/productImg/product${product.image}.jpg`}
             alt={product.name?.[i18n.language] || product.name}
           />
         </Link>
