@@ -21,9 +21,10 @@ import './styles/main.scss';
 import Loading from './components/Loading';
 import ForgotPassword from './routes/ForgotPassword';
 import ResetPassword from './routes/ResetPassword';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Register from './routes/Register';
 import Login from './routes/Login';
+import { getCart } from './api/api.js';
 
 function App() {
   useTitle();
@@ -31,6 +32,19 @@ function App() {
 
   const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
+
+  // Fetch cart from backend on component mount
+  useEffect(() => {
+    const fetchCartData = async () => {
+      try {
+        const response = await getCart();
+        setCart(response.data || []);
+      } catch (error) {
+        console.error('Failed to fetch cart:', error);
+      }
+    };
+    fetchCartData();
+  }, []);
 
   const addToWishlist = (product) => {
     setWishlist((prevWishlist) => {
@@ -42,19 +56,19 @@ function App() {
     });
   };
 
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const exists = prevCart.some((p) => p._id === product._id);
-      if (!exists) {
-        return [...prevCart, product];
-      }
-      return prevCart;
-    });
+  // Function to refresh cart from backend
+  const fetchCart = async () => {
+    try {
+      const response = await getCart();
+      setCart(response.data || []);
+    } catch (error) {
+      console.error('Failed to fetch cart:', error);
+    }
   };
 
   return (
     <>
-      <Header/>
+      <Header cart={cart} />
       <Main>
         {location.pathname !== '/' && <RouteBanner />}
 
@@ -64,22 +78,21 @@ function App() {
             path="/"
             element={
               <Home
-                addToCart={addToCart}
                 addToWishlist={addToWishlist}
                 cart={cart}
                 wishlist={wishlist}
+                fetchCart={fetchCart}
               />
             }
           />
-
           <Route
             path="/shop"
             element={
               <Shop
                 addToWishlist={addToWishlist}
-                addToCart={addToCart}
                 cart={cart}
                 wishlist={wishlist}
+                fetchCart={fetchCart}
               />
             }
           />
@@ -88,9 +101,9 @@ function App() {
             element={
               <SingleProduct
                 addToWishlist={addToWishlist}
-                addToCart={addToCart}
                 cart={cart}
                 wishlist={wishlist}
+                fetchCart={fetchCart}
               />
             }
           />
@@ -104,11 +117,11 @@ function App() {
           />
           <Route
             path="/cart"
-            element={<Cart cart={cart} />}
+            element={<Cart cart={cart} fetchCart={fetchCart} />}
           />
           <Route
             path="/checkout"
-            element={<Checkout />}
+            element={<Checkout cart={cart} />}
           />
           <Route
             path="/contact"
@@ -136,7 +149,7 @@ function App() {
               <Wishlist
                 wishlist={wishlist}
                 cart={cart}
-                addToCart={addToCart}
+                fetchCart={fetchCart}
               />
             }
           />

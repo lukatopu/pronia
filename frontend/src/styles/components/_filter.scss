@@ -40,9 +40,12 @@
     flex-direction: column;
     gap: 20px;
     margin-top: 10px;
+
     .tagsContainer {
       display: flex;
       gap: 10px;
+
+
 
       div {
         border: 1px solid #dee2e6;
@@ -55,6 +58,10 @@
         &:hover {
           background-color: $light-green;
           color: white;
+        }
+
+        &.activeTag {
+          background-color: $light-green;
         }
       }
 

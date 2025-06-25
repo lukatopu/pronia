@@ -10,6 +10,15 @@ table {
       border: 1px solid #dee2e6;
       text-align: center;
       height: 161px;
+
+      a {
+        color: black;
+        transition: 300ms;
+
+        &:hover {
+          color: $light-green;
+        }
+      }
     }
 
     td:nth-child(1) {

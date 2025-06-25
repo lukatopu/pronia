@@ -29,7 +29,10 @@ const ProductsSchema = new mongoose.Schema({
  },
  categorie: {
   type: [String],
- }
+ },
+ color: {
+  type: String,
+ },
 });
 
-export default mongoose.model("Products", ProductsSchema);
+export default mongoose.model('Product', ProductsSchema);

@@ -19,12 +19,12 @@ const PORT = process.env.PORT || 3000
 
 connectDB(process.env.CONNECTION_STRING)
 
-const limiter = rateLimit({
- windowMs: 5 * 60 * 1000,
- max: 100,
- message: "Too many requests from this IP, please try again later"
-})
-app.use(limiter)
+// const limiter = rateLimit({
+//  windowMs: 5 * 60 * 1000,
+//  max: 1000,
+//  message: "Too many requests from this IP, please try again later"
+// })
+// app.use(limiter)
 
 
 app.use(cors({

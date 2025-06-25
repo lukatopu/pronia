@@ -12,13 +12,16 @@ import proniaLogo from '../images/proniaLogo.png';
 import SearchBlur from '../components/SearchBlur';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import CartModal from '../components/CartModal';
 
-function Header() {
+function Header({ cart }) {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   const [triggerHeight, setTriggerHeight] = useState(0);
   const [isUserMainClicked, setIsUserMainClicked] = useState(false);
   const [isUserFixedClicked, setIsUserFixedClicked] = useState(false);
+  const [isCartClicked, setIsCartClicked] = useState(false)
+  const [isCartOverlayHidden, setIsCartOverlayHidden] = useState(true)
   const headerRef = useRef(null);
 
   const { t, i18n } = useTranslation();
@@ -31,14 +34,27 @@ function Header() {
     setIsSearchClicked(false);
   };
 
+  const handleCartModal = () => {
+    setIsCartClicked(!isCartClicked)
+  }
+
+  const handleCartOverlay = () => {
+    setIsCartOverlayHidden(!isCartOverlayHidden)
+  }
+
+  const handleCart =() => {
+    handleCartModal()
+    handleCartOverlay()
+  }
+
   const handleUserMainClick = () => {
     setIsUserMainClicked((prev) => !prev);
-    setIsUserFixedClicked(false); // Optional: close fixed dropdown when main dropdown opens
+    setIsUserFixedClicked(false);
   };
 
   const handleUserFixedClick = () => {
     setIsUserFixedClicked((prev) => !prev);
-    setIsUserMainClicked(false); // Optional: close main dropdown when fixed dropdown opens
+    setIsUserMainClicked(false);
   };
 
   const handleDropdownClick = () => {
@@ -113,9 +129,7 @@ function Header() {
           <Link to="/wishlist">
             <PiHeartStraightThin className="heartIcon" />
           </Link>
-          <Link to="/cart">
-            <PiShoppingBagThin />
-          </Link>
+          <PiShoppingBagThin onClick={handleCart} />
           <PiList className="burgerIcon" />
         </nav>
         <SearchBlur closeSearch={closeSearch} isActive={isSearchClicked} />
@@ -160,12 +174,17 @@ function Header() {
             <Link to="/wishlist">
               <PiHeartStraightThin />
             </Link>
-            <Link to="/cart">
-              <PiShoppingBagThin />
-            </Link>
+            <PiShoppingBagThin onClick={handleCart} />
           </div>
         </div>
       </div>
+      <CartModal
+        handleCartOverlay={handleCartOverlay}
+        isCartOverlayHidden={isCartOverlayHidden}
+        cart={cart}
+        isCartClicked={isCartClicked}
+        onClose={() => setIsCartClicked(false)}
+      />
     </header>
   );
 }

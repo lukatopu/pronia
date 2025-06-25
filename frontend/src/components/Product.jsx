@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   PiStarFill,
   PiHeart,
@@ -9,9 +9,11 @@ import {
 } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { addToCart } from '../api/api';
 
-function Product({ product, addToWishlist, addToCart, cart = [], wishlist = [] }) {
-  const { i18n } = useTranslation();
+function Product({ product, addToWishlist, cart = [], wishlist = [], fetchCart }) {
+  const { i18n, t } = useTranslation();
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
 
   const renderStars = (count) => {
     return Array.from({ length: count }, (_, i) => <PiStarFill key={i} />);
@@ -23,13 +25,18 @@ function Product({ product, addToWishlist, addToCart, cart = [], wishlist = [] }
     }
   };
 
-  const handleAddToCart = () => {
-    if (product && !isInCart) {
-      addToCart(product);
+  const handleAddToCart = async () => {
+    if (!product || isInCart || isAddingToCart) return;
+
+    try {
+      await addToCart(product._id, 1); // Default quantity of 1 for Product component
+      await fetchCart();
+    } catch (error) {
+      console.error('Failed to add to cart:', error);
     }
   };
 
-  const isInCart = cart.some((item) => item._id === product._id);
+  const isInCart = cart.some((item) => item.productId?._id === product._id);
   const isInWishlist = wishlist.some((item) => item._id === product._id);
 
   return (
@@ -43,7 +50,7 @@ function Product({ product, addToWishlist, addToCart, cart = [], wishlist = [] }
           />
           <img
             className="hoverImage"
-            src={`/productImg/product${product.image}.jpg`}
+            src={`/productImg/product${product.hoverImage}.jpg`}
             alt={product.name?.[i18n.language] || product.name}
           />
         </Link>
@@ -61,11 +68,12 @@ function Product({ product, addToWishlist, addToCart, cart = [], wishlist = [] }
             </button>
           </Link>
           <button
-            disabled={isInCart}
+            disabled={isInCart || isAddingToCart}
             onClick={handleAddToCart}
             className="productHoverButton"
           >
-            {isInCart ? <PiShoppingCartFill style={{ color: '#000000' }} /> : <PiShoppingCart />}
+            {isAddingToCart ? t('Adding...') :
+              isInCart ? <PiShoppingCartFill style={{ color: '#000000' }} /> : <PiShoppingCart />}
           </button>
         </div>
       </div>

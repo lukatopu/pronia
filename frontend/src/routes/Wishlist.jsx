@@ -40,7 +40,7 @@ function Wishlist({ wishlist, cart, addToCart }) {
                     <Link to={`/product/${product._id}`}>
                       <img
                         className="wishlistProductImage"
-                        src={product.image}
+                        src={`/productImg/product${product.image}.jpg`}
                         alt={product.name?.[i18n.language] || product.name}
                       />
                     </Link>

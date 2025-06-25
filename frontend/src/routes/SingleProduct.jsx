@@ -3,13 +3,15 @@ import { useParams } from 'react-router-dom';
 import { PiStarFill, PiHeart, PiHeartFill } from 'react-icons/pi';
 import { BsArrowRepeat } from 'react-icons/bs';
 import Counter from '../components/Counter';
-import { getProducts } from '../api/api.js';
+import { getProducts, addToCart } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
 import Services from '../components/Services.jsx';
 import { useTranslation } from 'react-i18next';
 
-function SingleProduct({ addToWishlist, addToCart, cart, wishlist }) {
+function SingleProduct({ addToWishlist, cart, wishlist, fetchCart }) {
   const [products, setProducts] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
   const { id } = useParams();
   const { useDataLoader } = useLoader();
   const { i18n, t } = useTranslation();
@@ -20,7 +22,7 @@ function SingleProduct({ addToWishlist, addToCart, cart, wishlist }) {
 
   const product = products.find((p) => p._id === id || p.id === id);
 
-  const isInCart = product && cart.some((item) => item._id === product._id);
+  const isInCart = product && cart.some((item) => item.productId?._id === product._id);
   const isInWishlist = product && wishlist.some((item) => item._id === product._id);
 
   const renderStars = (count) => {
@@ -33,9 +35,17 @@ function SingleProduct({ addToWishlist, addToCart, cart, wishlist }) {
     }
   };
 
-  const handleAddToCart = () => {
-    if (product && !isInCart) {
-      addToCart(product);
+  const handleAddToCart = async () => {
+    if (!product || isAddingToCart) return;
+    
+    try {
+      setIsAddingToCart(true);
+      await addToCart(product._id, quantity);
+      await fetchCart();
+    } catch (error) {
+      console.error('Failed to add to cart:', error);
+    } finally {
+      setIsAddingToCart(false);
     }
   };
 
@@ -45,25 +55,31 @@ function SingleProduct({ addToWishlist, addToCart, cart, wishlist }) {
     <div className="singleProductPage">
       <div className="singleProductImage">
         <img
-          src={product.image}
+          src={`/productImg/product${product.image}.jpg`}
           alt={product.name?.[i18n.language] || product.name}
         />
       </div>
       <div className="singleProductDetails">
         <h1>{product.name?.[i18n.language] || product.name}</h1>
-        <p className="price">{product.price}</p>
+        <p className="price">${product.price}</p>
         <div className="ratingContainer">{renderStars(product.rating)}</div>
         <div className="productDescription">
           <p>{product.description}</p>
         </div>
         <div className="buttonsContainer">
-          <Counter />
+          <Counter 
+            value={quantity} 
+            onChange={(newQuantity) => setQuantity(Math.max(1, newQuantity))} 
+            min={1}
+            max={99}
+          />
           <button
             onClick={handleAddToCart}
             className="addToCartButton"
-            disabled={isInCart}
+            disabled={isInCart || isAddingToCart}
           >
-            {isInCart ? t('AlreadyInCart') : t('AddToCart')}
+            {isAddingToCart ? t('Adding...') : 
+             isInCart ? t('AlreadyInCart') : t('AddToCart')}
           </button>
           <button
             onClick={handleAddToWishlist}
@@ -77,7 +93,6 @@ function SingleProduct({ addToWishlist, addToCart, cart, wishlist }) {
         </div>
         <Services small={true} />
       </div>
-      <div></div>
     </div>
   );
 }
