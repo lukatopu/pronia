@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Filter from '../components/Filter';
 import ProductsList from '../components/ProductsList';
 
-function Shop({fetchCart, addToWishlist, addToCart, cart, wishlist }) {
+function Shop({ fetchCart, addToWishlist, addToCart, cart, wishlist }) {
   const [priceRange, setPriceRange] = useState([16, 300]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
@@ -30,6 +30,5 @@ function Shop({fetchCart, addToWishlist, addToCart, cart, wishlist }) {
     </div>
   );
 }
-
 
 export default Shop;

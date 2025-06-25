@@ -72,8 +72,13 @@ function Product({ product, addToWishlist, cart = [], wishlist = [], fetchCart }
             onClick={handleAddToCart}
             className="productHoverButton"
           >
-            {isAddingToCart ? t('Adding...') :
-              isInCart ? <PiShoppingCartFill style={{ color: '#000000' }} /> : <PiShoppingCart />}
+            {isAddingToCart ? (
+              t('Adding...')
+            ) : isInCart ? (
+              <PiShoppingCartFill style={{ color: '#000000' }} />
+            ) : (
+              <PiShoppingCart />
+            )}
           </button>
         </div>
       </div>

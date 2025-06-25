@@ -74,13 +74,10 @@ export const addToCart = async (productId, quantity) => {
 // Remove from cart
 export const removeFromCart = async (productId) => {
   try {
-    const response = await axios.delete(
-      'http://localhost:3000/api/users/cart',
-      { 
-        data: { productId },
-        withCredentials: true,
-      }
-    );
+    const response = await axios.delete('http://localhost:3000/api/users/cart', {
+      data: { productId },
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
     throw new Error(err.response?.data?.err || 'Failed to remove from cart');
@@ -90,24 +87,20 @@ export const removeFromCart = async (productId) => {
 // Get cart
 export const getCart = async () => {
   try {
-    const response = await axios.get(
-      'http://localhost:3000/api/users/cart',
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.get('http://localhost:3000/api/users/cart', {
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
     throw new Error(err.response?.data?.err || 'Failed to get cart');
   }
 };
 
-
-
 // Update cart item quantity
 export const updateCartItem = async (productId, quantity) => {
   try {
-    const response = await axios.put(  // Change from POST to PUT
+    const response = await axios.put(
+      // Change from POST to PUT
       'http://localhost:3000/api/users/cart/update',
       { productId, quantity },
       {

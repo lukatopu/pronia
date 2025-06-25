@@ -20,8 +20,8 @@ function Header({ cart }) {
   const [triggerHeight, setTriggerHeight] = useState(0);
   const [isUserMainClicked, setIsUserMainClicked] = useState(false);
   const [isUserFixedClicked, setIsUserFixedClicked] = useState(false);
-  const [isCartClicked, setIsCartClicked] = useState(false)
-  const [isCartOverlayHidden, setIsCartOverlayHidden] = useState(true)
+  const [isCartClicked, setIsCartClicked] = useState(false);
+  const [isCartOverlayHidden, setIsCartOverlayHidden] = useState(true);
   const headerRef = useRef(null);
 
   const { t, i18n } = useTranslation();
@@ -35,17 +35,17 @@ function Header({ cart }) {
   };
 
   const handleCartModal = () => {
-    setIsCartClicked(!isCartClicked)
-  }
+    setIsCartClicked(!isCartClicked);
+  };
 
   const handleCartOverlay = () => {
-    setIsCartOverlayHidden(!isCartOverlayHidden)
-  }
+    setIsCartOverlayHidden(!isCartOverlayHidden);
+  };
 
-  const handleCart =() => {
-    handleCartModal()
-    handleCartOverlay()
-  }
+  const handleCart = () => {
+    handleCartModal();
+    handleCartOverlay();
+  };
 
   const handleUserMainClick = () => {
     setIsUserMainClicked((prev) => !prev);
@@ -93,7 +93,10 @@ function Header({ cart }) {
           <span>
             USD <PiCaretDownBold />
           </span>
-          <select value={i18n.language} onChange={handleChangeLanguage}>
+          <select
+            value={i18n.language}
+            onChange={handleChangeLanguage}
+          >
             <option value="eng">ENG</option>
             <option value="geo">GEO</option>
           </select>
@@ -109,13 +112,19 @@ function Header({ cart }) {
         </div>
         <div>
           <a href="/">
-            <img src={proniaLogo} alt="Pronia Logo" />
+            <img
+              src={proniaLogo}
+              alt="Pronia Logo"
+            />
           </a>
         </div>
         <nav>
           <PiMagnifyingGlassThin onClick={handleSearch} />
           <div className="userIconContainer">
-            <PiUserThin onClick={handleUserMainClick} className="userIcon" />
+            <PiUserThin
+              onClick={handleUserMainClick}
+              className="userIcon"
+            />
             <div className={`userIconDropdown ${isUserMainClicked ? 'clicked' : ''}`}>
               <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
               <Link to="/login">
@@ -132,7 +141,10 @@ function Header({ cart }) {
           <PiShoppingBagThin onClick={handleCart} />
           <PiList className="burgerIcon" />
         </nav>
-        <SearchBlur closeSearch={closeSearch} isActive={isSearchClicked} />
+        <SearchBlur
+          closeSearch={closeSearch}
+          isActive={isSearchClicked}
+        />
       </div>
 
       <nav className="headerBottom">
@@ -147,7 +159,11 @@ function Header({ cart }) {
       <div className={`fixedHeader ${isFixed ? 'visible' : ''}`}>
         <div className="fixedHeaderContent">
           <a href="/">
-            <img src={proniaLogo} alt="Pronia Logo" className="fixed-logo" />
+            <img
+              src={proniaLogo}
+              alt="Pronia Logo"
+              className="fixed-logo"
+            />
           </a>
           <nav className="fixedHeaderNav">
             <Link to="/">{t('Home')}</Link>
@@ -160,7 +176,10 @@ function Header({ cart }) {
           <div className="fixedHeaderIcons">
             <PiMagnifyingGlassThin onClick={handleSearch} />
             <div className="userIconContainer">
-              <PiUserThin onClick={handleUserFixedClick} className="userIcon" />
+              <PiUserThin
+                onClick={handleUserFixedClick}
+                className="userIcon"
+              />
               <div className={`userIconDropdown ${isUserFixedClicked ? 'clicked' : ''}`}>
                 <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
                 <Link to="/login">

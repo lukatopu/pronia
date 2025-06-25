@@ -4,7 +4,16 @@ import { getProducts } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
 import ProductsSort from './ProductsSort.jsx';
 
-function ProductsList({fetchCart, addToCart, addToWishlist, priceRange, searchTerm, selectedTags, cart, wishlist }) {
+function ProductsList({
+  fetchCart,
+  addToCart,
+  addToWishlist,
+  priceRange,
+  searchTerm,
+  selectedTags,
+  cart,
+  wishlist,
+}) {
   const [products, setProducts] = useState([]);
   const { useDataLoader } = useLoader();
 
@@ -13,7 +22,7 @@ function ProductsList({fetchCart, addToCart, addToWishlist, priceRange, searchTe
   }, []);
 
   const filteredProducts = products.filter((product) => {
-    let price;  
+    let price;
     if (typeof product.price === 'string') {
       price = parseFloat(product.price.replace(/[^0-9.]/g, '')) || 0;
     } else {
@@ -33,9 +42,7 @@ function ProductsList({fetchCart, addToCart, addToWishlist, priceRange, searchTe
 
     if (selectedTags.length > 0) {
       const categories = product.categorie || [];
-      const hasMatchingTag = selectedTags.some((tag) =>
-        categories.includes(tag)
-      );
+      const hasMatchingTag = selectedTags.some((tag) => categories.includes(tag));
       if (!hasMatchingTag) return false;
     }
 

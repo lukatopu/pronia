@@ -13,7 +13,7 @@ function Cart({ cart, fetchCart }) {
   useEffect(() => useFakeLoader(), []);
   useEffect(() => setCartItems(cart), [cart]);
 
-    const handleRemoveFromCart = async (productId) => {
+  const handleRemoveFromCart = async (productId) => {
     try {
       await removeFromCart(productId);
       await fetchCart();
@@ -24,11 +24,9 @@ function Cart({ cart, fetchCart }) {
 
   const handleQuantityChange = async (productId, newQuantity) => {
     try {
-      setCartItems(prevItems =>
-        prevItems.map(item =>
-          item.productId._id === productId
-            ? { ...item, quantity: newQuantity }
-            : item
+      setCartItems((prevItems) =>
+        prevItems.map((item) =>
+          item.productId._id === productId ? { ...item, quantity: newQuantity } : item
         )
       );
       await updateCartItem(productId, newQuantity);

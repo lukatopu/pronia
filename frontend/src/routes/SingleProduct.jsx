@@ -37,7 +37,7 @@ function SingleProduct({ addToWishlist, cart, wishlist, fetchCart }) {
 
   const handleAddToCart = async () => {
     if (!product || isAddingToCart) return;
-    
+
     try {
       setIsAddingToCart(true);
       await addToCart(product._id, quantity);
@@ -67,9 +67,9 @@ function SingleProduct({ addToWishlist, cart, wishlist, fetchCart }) {
           <p>{product.description}</p>
         </div>
         <div className="buttonsContainer">
-          <Counter 
-            value={quantity} 
-            onChange={(newQuantity) => setQuantity(Math.max(1, newQuantity))} 
+          <Counter
+            value={quantity}
+            onChange={(newQuantity) => setQuantity(Math.max(1, newQuantity))}
             min={1}
             max={99}
           />
@@ -78,8 +78,7 @@ function SingleProduct({ addToWishlist, cart, wishlist, fetchCart }) {
             className="addToCartButton"
             disabled={isInCart || isAddingToCart}
           >
-            {isAddingToCart ? t('Adding...') : 
-             isInCart ? t('AlreadyInCart') : t('AddToCart')}
+            {isAddingToCart ? t('Adding...') : isInCart ? t('AlreadyInCart') : t('AddToCart')}
           </button>
           <button
             onClick={handleAddToWishlist}

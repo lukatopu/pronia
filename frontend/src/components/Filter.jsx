@@ -4,7 +4,14 @@ import { useTranslation } from 'react-i18next';
 import Slider from '@mui/material/Slider';
 import AloeCollection from './AloeCollection';
 
-function Filter({ priceRange, setPriceRange, searchTerm, setSearchTerm, selectedTags, setSelectedTags }) {
+function Filter({
+  priceRange,
+  setPriceRange,
+  searchTerm,
+  setSearchTerm,
+  selectedTags,
+  setSelectedTags,
+}) {
   const { t } = useTranslation();
 
   const handleSliderChange = (e, newValue) => {
