@@ -17,10 +17,15 @@
     border: 1px solid #dee2e6;
     border-radius: 5px;
     padding: 10px 30px;
+    white-space: nowrap;
 
     .foundProducts {
       color: $light-green;
     }
+  }
+
+  .productsAmount {
+    width: 230px;
   }
 
   .sortBy {

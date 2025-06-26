@@ -6,7 +6,7 @@ export const useLoader = () => useContext(LoaderContext);
 
 export const LoaderProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-  const loadingDelay = 1000;
+  const loadingDelay = 500;
 
   // hook: useDataLoader (for routes that fetch data)
   const useDataLoader = async (fetchReq) => {
