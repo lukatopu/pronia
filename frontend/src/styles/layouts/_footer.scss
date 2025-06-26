@@ -10,7 +10,6 @@ footer {
   gap: 50px;
   margin-top: 100px;
 
-
   .footerDiv,
   .usefulLinksContainer,
   .accountHelpContainer,
@@ -27,10 +26,19 @@ footer {
     a {
       color: #000000;
       transition: 300ms;
+
       &:hover {
         color: $light-green;
       }
     }
+  }
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    flex-wrap: wrap;
   }
 
   .usefulLinksContainer,
@@ -57,8 +65,6 @@ footer {
       line-height: 27px;
     }
 
-
-
     .buttonsContainer {
       display: flex;
       gap: 15px;
@@ -76,7 +82,6 @@ footer {
           background-color: transparent;
           cursor: pointer;
           transition: 300ms;
-
 
           &:hover {
             background-color: $light-green;
@@ -120,13 +125,10 @@ footer {
           }
         }
       }
-
-
     }
   }
 
   .questionsContainer {
-
     .cardsImg {
       margin-top: 40px;
     }
@@ -146,10 +148,59 @@ footer {
       color: #000000;
       transition: 300ms;
 
-
       &:hover {
         color: $light-green;
       }
     }
   }
+
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    height: 600px;
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .footerDiv {
+      margin-bottom: 30px;
+      width: 650px;
+    }
+  }
+
+
+@media (max-width: 770px) {
+  height: 1200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+
+  .footerDiv {
+    width: 100%;
+    max-width: 650px;
+    margin-bottom: 30px;
+    text-align: center;
+
+    .buttonsContainer {
+      justify-content: center;
+    }
+  }
+
+  .nav {
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  // center vertically inside nav (if nav grows)
+    align-items: center;      // center horizontally (this aligns the columns)
+    gap: 20px;
+  }
+}
+
+
 }

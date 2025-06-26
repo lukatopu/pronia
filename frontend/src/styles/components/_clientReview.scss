@@ -23,6 +23,7 @@
    text-align: center;
    line-height: 30px;
    margin-bottom: 40px;
+   width: 80%;
   }
 
   .clientReviewTitle {
@@ -154,4 +155,93 @@
    }
   }
  }
+
+
+@media (max-width: 1200px) {
+  .sliderContainer {
+    .sliderTrackWrapper {
+      width: 900px;
+    }
+
+    .sliderTrack {
+      width: 100%;
+
+      .clientReviewContainer {
+        flex: 0 0 435px;
+        height: 360px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 990px) {
+  .sliderContainer {
+    .sliderTrackWrapper {
+      width: 660px;
+    }
+
+    .sliderTrack {
+      width: 100%;
+
+      .clientReviewContainer {
+        flex: 0 0 315px;
+        height: 360px;
+      }
+    }
+  }
+}
+
+@media (max-width: 770px) {
+  .sliderContainer {
+    .sliderTrackWrapper {
+      width: 480px;
+    }
+
+    .sliderTrack {
+      width: 100%;
+      .clientReviewContainer {
+        flex: 0 0 480px;
+        height: 360px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 650px) {
+  .sliderContainer {
+    .sliderTrackWrapper {
+      width: 480px;
+    }
+
+    .sliderTrack {
+      width: 100%;
+
+      .clientReviewContainer {
+        flex: 0 0 480px;
+        height: 360px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 540px) {
+  .sliderContainer {
+    .sliderTrackWrapper {
+      width: 350px;
+    }
+
+    .sliderTrack {
+      width: 100%;
+
+      .clientReviewContainer {
+        flex: 0 0 350px;
+        height: 360px;
+      }
+    }
+  }
+}
+
 }

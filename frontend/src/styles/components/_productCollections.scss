@@ -116,6 +116,10 @@
     flex-direction: column;
     margin-top: 50px;
 
+    .bigDivCollection {
+      width: 95vw;
+    }
+
     .smallDivCollection {
       display: none;
     }
@@ -123,6 +127,34 @@
 
   .secondCollectionWrapper {
     flex-direction: column;
+
+    .bigDivCollection {
+      width: 95vw;
+    }
+
+    .smallDivCollection {
+      display: none;
+    }
+  }
+}
+
+
+@media (max-width: 960px) {
+  .firstCollectionWrapper {
+    flex-direction: column;
+    margin-top: 50px;
+
+
+
+    .smallDivCollection {
+      display: none;
+    }
+  }
+
+  .secondCollectionWrapper {
+    flex-direction: column;
+
+
 
     .smallDivCollection {
       display: none;

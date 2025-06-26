@@ -2,6 +2,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -83,5 +84,18 @@
         }
       }
     }
+  }
+
+
+}
+
+
+@media (max-width: 540px) {
+  .homeProductsWrapper .productsSortContainer .ourProductsContainer h1 {
+    font-size: 28px;
+  }
+  
+  .homeProductsWrapper .productsSortContainer .sortButtonsContainer button {
+    padding: 9px 15px;
   }
 }

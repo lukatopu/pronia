@@ -85,51 +85,52 @@ function Footer() {
           </div>
         </div>
       </div>
-
-      <div className="usefulLinksContainer">
-        <h1>Useful Links</h1>
-        <div>
-          <a href="/aboutUs">About Pronia</a>
-          <a href="/shop">How to shop</a>
-          <a href="#">FAQ</a>
-          <a href="/contact">Contact us</a>
-          <a href="/logIn">Log in</a>
-        </div>
-      </div>
-
-      <div className="accountHelpContainer">
-        <h1>My Account</h1>
-        <div>
-          <a href="/register">Sign Up</a>
-          <a href="/cart">View Cart</a>
-          <a href="/wishlist">My Wishlist</a>
-          <a href="#">Track My Order</a>
-          <a href="#">Help</a>
-        </div>
-      </div>
-
-      <div className="ourServiceContainer">
-        <h1>Our Service</h1>
-        <div>
-          <a href="#">Payment Methods</a>
-          <a href="#">Money Guarantee!</a>
-          <a href="#">Returns</a>
-          <a href="#">Shipping</a>
-          <a href="#">Privacy Policy</a>
-        </div>
-      </div>
-
-      <div className="questionsContainer">
-        <h1>Got Question? Call Us</h1>
-        <div>
-          <a href="tel://123-456-789">123 456 789</a>
-          <p>Your Address Goes Here</p>
+      <div className='nav'>
+        <div className="usefulLinksContainer">
+          <h1>Useful Links</h1>
           <div>
-            <img
-              className="cardsImg"
-              src={cardsImg}
-              alt="Payment Methods"
-            />
+            <a href="/aboutUs">About Pronia</a>
+            <a href="/shop">How to shop</a>
+            <a href="#">FAQ</a>
+            <a href="/contact">Contact us</a>
+            <a href="/logIn">Log in</a>
+          </div>
+        </div>
+
+        <div className="accountHelpContainer">
+          <h1>My Account</h1>
+          <div>
+            <a href="/register">Sign Up</a>
+            <a href="/cart">View Cart</a>
+            <a href="/wishlist">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+          </div>
+        </div>
+
+        <div className="ourServiceContainer">
+          <h1>Our Service</h1>
+          <div>
+            <a href="#">Payment Methods</a>
+            <a href="#">Money Guarantee!</a>
+            <a href="#">Returns</a>
+            <a href="#">Shipping</a>
+            <a href="#">Privacy Policy</a>
+          </div>
+        </div>
+
+        <div className="questionsContainer">
+          <h1>Got Question? Call Us</h1>
+          <div>
+            <a href="tel://123-456-789">123 456 789</a>
+            <p>Your Address Goes Here</p>
+            <div>
+              <img
+                className="cardsImg"
+                src={cardsImg}
+                alt="Payment Methods"
+              />
+            </div>
           </div>
         </div>
       </div>

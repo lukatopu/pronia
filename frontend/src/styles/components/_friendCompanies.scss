@@ -1,24 +1,46 @@
 .friendCompaniesContainer {
- background: url('../images/backgroundImg/friendCompaniesBackground.jpg') no-repeat center/cover;
- height: 250px;
- max-width: 1140px;
- border-radius: 10px;
- margin-right: auto;
- margin-left: auto;
- display: flex;
- align-items: center;
- justify-content: space-between;
- padding: 0 100px;
- margin-top: 95px;
- margin-bottom: 100px;
+  background: url('../images/backgroundImg/friendCompaniesBackground.jpg') no-repeat center/cover;
+  height: 250px;
+  max-width: 85vw;
+  border-radius: 10px;
+  margin: 95px auto 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 100px;
 
- img {
-  opacity: 0.5;
-  transition: 300ms;
+  img {
+    opacity: 0.5;
+    transition: 300ms;
 
-  &:hover {
-   opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
   }
- }
 
+  @media (max-width: 1200px) {
+    img:nth-child(4) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 860px) {
+    img:nth-child(5) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 680px) {
+    img:nth-child(2) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    justify-content: center;
+
+    img:nth-child(3) {
+      display: none;
+    }
+  }
 }
