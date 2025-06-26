@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { forgotPasswordUser } from '../api/api.js';
 import { useTranslation } from 'react-i18next';
 
@@ -25,7 +24,8 @@ function ForgotPassword() {
         alert('Email has been sent');
       }
     } catch (err) {
-      const errorMessage = err.response?.data?.msg || err.response?.data?.err || 'Email is not signed up';
+      const errorMessage =
+        err.response?.data?.msg || err.response?.data?.err || 'Email is not signed up';
       console.log(errorMessage);
       setError(errorMessage);
     }

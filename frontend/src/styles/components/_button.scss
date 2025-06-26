@@ -1,6 +1,8 @@
 @use '../abstracts/' as *;
 
 .buttonContainer {
+ display: flex;
+ justify-content: center;
  button {
   background-color: $light-green;
   color: white;

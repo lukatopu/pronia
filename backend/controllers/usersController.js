@@ -28,6 +28,13 @@ export const loginUser = async (req, res) => {
     }
 };
 
+
+export const logoutUser = (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ msg: 'Logged out successfully' });
+};
+
+
 export const registerUser = async (req, res) => {
     try {
         const { firstName, lastName, email, password } = req.body;
@@ -216,71 +223,158 @@ export const updateCartItem = async (req, res) => {
 
 
 export const clearCart = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const user = await Users.findById(userId);
-    if (!user) return res.status(404).json({ err: 'User not found' });
+    try {
+        const userId = req.user.id;
+        const user = await Users.findById(userId);
+        if (!user) return res.status(404).json({ err: 'User not found' });
 
-    user.cart = [];
-    await user.save();
+        user.cart = [];
+        await user.save();
 
-    res.status(200).json({ msg: 'Cart cleared successfully' });
-  } catch (err) {
-    res.status(500).json({ err: err.message });
-  }
+        res.status(200).json({ msg: 'Cart cleared successfully' });
+    } catch (err) {
+        res.status(500).json({ err: err.message });
+    }
 };
 
 
 
 // Add product to wishlist
 export const addToWishlist = async (req, res) => {
-  try {
-    const { productId } = req.body;
-    const userId = req.user.id;
+    try {
+        const { productId } = req.body;
+        const userId = req.user.id;
 
-    const user = await Users.findById(userId);
-    if (!user) return res.status(404).json({ err: 'User not found' });
+        const user = await Users.findById(userId);
+        if (!user) return res.status(404).json({ err: 'User not found' });
 
-    if (!user.wishlist.includes(productId)) {
-      user.wishlist.push(productId);
-      await user.save();
+        if (!user.wishlist.includes(productId)) {
+            user.wishlist.push(productId);
+            await user.save();
+        }
+
+        const populatedUser = await Users.findById(userId).populate('wishlist');
+        res.status(200).json({ data: populatedUser.wishlist });
+    } catch (err) {
+        res.status(500).json({ err: err.message });
     }
-
-    const populatedUser = await Users.findById(userId).populate('wishlist');
-    res.status(200).json({ data: populatedUser.wishlist });
-  } catch (err) {
-    res.status(500).json({ err: err.message });
-  }
 };
 
 // Remove product from wishlist
 export const removeFromWishlist = async (req, res) => {
+    try {
+        const { productId } = req.body;
+        const userId = req.user.id;
+
+        const user = await Users.findById(userId);
+        if (!user) return res.status(404).json({ err: 'User not found' });
+
+        user.wishlist = user.wishlist.filter(id => id.toString() !== productId);
+        await user.save();
+
+        const populatedUser = await Users.findById(userId).populate('wishlist');
+        res.status(200).json({ data: populatedUser.wishlist });
+    } catch (err) {
+        res.status(500).json({ err: err.message });
+    }
+};
+
+// Get wishlist
+export const getWishlist = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const user = await Users.findById(userId).populate('wishlist');
+        if (!user) return res.status(404).json({ err: 'User not found' });
+
+        res.status(200).json({ data: user.wishlist });
+    } catch (err) {
+        res.status(500).json({ err: err.message });
+    }
+};
+
+
+
+
+export const updateUserProfile = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { firstName, lastName, email, currentPassword, newPassword } = req.body;
+
+        const user = await Users.findById(userId);
+        if (!user) return res.status(404).json({ err: 'User not found' });
+
+        if (firstName) user.firstName = firstName;
+        if (lastName) user.lastName = lastName;
+        if (email) user.email = email;
+
+        if (currentPassword && newPassword) {
+            const isValid = await bcrypt.compare(currentPassword + process.env.BCRYPT_PEPPER, user.password);
+            if (!isValid) {
+                return res.status(401).json({ err: 'Current password is incorrect' });
+            }
+            const hashed = await bcrypt.hash(newPassword + process.env.BCRYPT_PEPPER, 11);
+            user.password = hashed;
+        }
+
+        await user.save();
+        res.status(200).json({ data: 'Profile updated successfully' });
+    } catch (err) {
+        res.status(500).json({ err: err.message });
+    }
+};
+
+
+
+
+export const placeOrder = async (req, res) => {
   try {
-    const { productId } = req.body;
     const userId = req.user.id;
+    const user = await Users.findById(userId).populate('cart.productId');
 
-    const user = await Users.findById(userId);
-    if (!user) return res.status(404).json({ err: 'User not found' });
+    if (!user || user.cart.length === 0) {
+      return res.status(400).json({ err: 'Cart is empty or user not found' });
+    }
 
-    user.wishlist = user.wishlist.filter(id => id.toString() !== productId);
+    const subtotal = user.cart.reduce((total, item) => {
+      const price = typeof item.productId.price === 'string'
+        ? parseFloat(item.productId.price)
+        : item.productId.price;
+      return total + price * item.quantity;
+    }, 0);
+    
+    const shipping = user.cart.length === 0 ? 0 : 5.99;
+    const totalAmount = subtotal + shipping;
+    const totalItems = user.cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    const order = {
+      id: Date.now().toString(),
+      date: new Date().toLocaleString(),
+      status: 'Processing',
+      total: `$${totalAmount.toFixed(2)} for ${totalItems} items`
+    };
+
+    user.orders = [order, ...user.orders]; // prepend order
+    user.cart = []; // clear cart after order
+
     await user.save();
-
-    const populatedUser = await Users.findById(userId).populate('wishlist');
-    res.status(200).json({ data: populatedUser.wishlist });
+    res.status(200).json({ msg: 'Order placed successfully', order });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
 };
 
-// Get wishlist
-export const getWishlist = async (req, res) => {
+
+export const getOrders = async (req, res) => {
   try {
     const userId = req.user.id;
+    const user = await Users.findById(userId);
 
-    const user = await Users.findById(userId).populate('wishlist');
-    if (!user) return res.status(404).json({ err: 'User not found' });
+    if (!user) {
+      return res.status(404).json({ err: 'User not found' });
+    }
 
-    res.status(200).json({ data: user.wishlist });
+    res.status(200).json({ data: user.orders });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }

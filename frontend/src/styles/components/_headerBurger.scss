@@ -1,0 +1,211 @@
+@use '../abstracts' as *;
+
+.headerBurgerContainer {
+ position: fixed;
+ top: 0;
+ left: 0;
+ background-color: #333333;
+ width: 400px;
+ height: 100vh;
+ z-index: 10000;
+ display: flex;
+ flex-direction: column;
+ padding: 100px 40px;
+ gap: 30px;
+ color: white;
+ transform: translateX(-100%);
+ transition: 300ms;
+
+ &.open {
+  transform: translateX(0);
+ }
+
+ .closeBurger {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+ .contactContainer {
+  display: flex;
+  align-items: center;
+  padding: 0;
+
+  .contactNumber {
+   display: flex;
+   gap: 15px;
+   font-size: 18px;
+   align-items: center;
+   color: white;
+
+   .phoneIconContainer {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $light-green;
+    color: white;
+    border-radius: 10px;
+
+    .phoneIcon {
+     font-size: 24px;
+    }
+   }
+
+   p {
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 400ms;
+
+    &:hover {
+     color: $light-green;
+    }
+   }
+  }
+ }
+
+ .addOnsContainer {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  .customDropdown {
+   position: relative;
+
+   .dropdownToggle {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+   }
+
+   .dropdownMenu {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    padding: 5px 0;
+    flex-direction: column;
+    z-index: 1000;
+    min-width: 80px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20%);
+    transition: opacity 300ms ease, transform 300ms ease, visibility 300ms;
+
+    &.open {
+     opacity: 1;
+     visibility: visible;
+     transform: translateY(0);
+    }
+
+    li {
+     list-style: none;
+     padding: 8px 15px;
+     color: black;
+     cursor: pointer;
+     transition: background-color 300ms, color 300ms;
+
+     &:hover {
+      background-color: $light-green;
+      color: white;
+     }
+    }
+   }
+  }
+
+  .userIconContainer {
+   position: relative;
+
+   .userIcon {
+    color: white;
+    cursor: pointer;
+   }
+
+   .userIconDropdown {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    height: auto;
+    width: 160px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: 300ms;
+
+    &.clicked {
+     opacity: 1;
+     visibility: visible;
+    }
+
+    button {
+     background: transparent;
+     border: none;
+     font-size: 14px;
+     cursor: pointer;
+     padding: 10px 15px;
+     text-align: left;
+     transition: background-color 300ms, color 300ms;
+
+     &:hover {
+      background-color: $light-green;
+      color: white;
+     }
+    }
+   }
+  }
+
+  .heartIcon {
+   font-size: 20px;
+   color: white;
+   cursor: pointer;
+   transition: 300ms;
+
+   &:hover {
+    color: $light-green;
+   }
+  }
+ }
+
+ .routesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+
+  .headerBottom {
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
+   height: 100%;
+   align-items: flex-start;
+
+   a {
+    color: white;
+    font-size: 15px;
+    text-transform: uppercase;
+    transition: 300ms;
+
+    &:hover {
+     color: $light-green;
+    }
+   }
+  }
+ }
+}

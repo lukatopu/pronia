@@ -24,8 +24,18 @@ const UsersSchema = new mongoose.Schema({
     }
   ],
   wishlist: [
-  { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }
+    { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }
+  ],
+  orders: [
+  {
+    id: { type: String },
+    date: { type: String },
+    status: { type: String },
+    total: { type: String }
+  }
 ]
+
+
 
 });
 

@@ -12,8 +12,7 @@ function Filter({
   selectedTags,
   setSelectedTags,
   selectedCategories,
-  setSelectedCategories
-
+  setSelectedCategories,
 }) {
   const { t } = useTranslation();
 
@@ -43,7 +42,7 @@ function Filter({
         <PiMagnifyingGlassBold className="filterSearchIcon" />
       </div>
 
-      <div className="filtersContainer"> 
+      <div className="filtersContainer">
         <div className="Filter">
           <h2>{t('Categories')}</h2>
           <div className="FiltersContainer">

@@ -13,6 +13,7 @@ import SearchBlur from '../components/SearchBlur';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import CartModal from '../components/CartModal';
+import HeaderBurger from '../components/HeaderBurger';
 
 function Header({ cart }) {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
@@ -22,6 +23,8 @@ function Header({ cart }) {
   const [isUserFixedClicked, setIsUserFixedClicked] = useState(false);
   const [isCartClicked, setIsCartClicked] = useState(false);
   const [isCartOverlayHidden, setIsCartOverlayHidden] = useState(true);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const headerRef = useRef(null);
 
   const { t, i18n } = useTranslation();
@@ -80,9 +83,10 @@ function Header({ cart }) {
     };
   }, [triggerHeight]);
 
-  const handleChangeLanguage = (e) => {
-    i18n.changeLanguage(e.target.value);
-    localStorage.setItem('lang', e.target.value);
+  const handleChangeLanguageCustom = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem('lang', lang);
+    setDropdownOpen(false);
   };
 
   return (
@@ -93,13 +97,18 @@ function Header({ cart }) {
           <span>
             USD <PiCaretDownBold />
           </span>
-          <select
-            value={i18n.language}
-            onChange={handleChangeLanguage}
-          >
-            <option value="eng">ENG</option>
-            <option value="geo">GEO</option>
-          </select>
+          <div className="customDropdown">
+            <button
+              className="dropdownToggle"
+              onClick={() => setDropdownOpen((prev) => !prev)}
+            >
+              {i18n.language.toUpperCase()} <PiCaretDownBold />
+            </button>
+            <ul className={`dropdownMenu ${dropdownOpen ? 'open' : ''}`}>
+              <li onClick={() => handleChangeLanguageCustom('eng')}>ENG</li>
+              <li onClick={() => handleChangeLanguageCustom('geo')}>GEO</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -126,7 +135,9 @@ function Header({ cart }) {
               className="userIcon"
             />
             <div className={`userIconDropdown ${isUserMainClicked ? 'clicked' : ''}`}>
-              <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
+              <Link to="/profile">
+                <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
+              </Link>
               <Link to="/login">
                 <button onClick={handleDropdownClick}>{t('LoginL')}</button>
               </Link>
@@ -135,11 +146,17 @@ function Header({ cart }) {
               </Link>
             </div>
           </div>
-          <Link to="/wishlist">
-            <PiHeartStraightThin className="heartIcon" />
+          <Link
+            className="heartIcon"
+            to="/wishlist"
+          >
+            <PiHeartStraightThin />
           </Link>
           <PiShoppingBagThin onClick={handleCart} />
-          <PiList className="burgerIcon" />
+          <PiList
+            className="burgerIcon"
+            onClick={() => setIsBurgerOpen(true)}
+          />
         </nav>
         <SearchBlur
           closeSearch={closeSearch}
@@ -181,7 +198,9 @@ function Header({ cart }) {
                 className="userIcon"
               />
               <div className={`userIconDropdown ${isUserFixedClicked ? 'clicked' : ''}`}>
-                <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
+                <Link to="/profile">
+                  <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
+                </Link>
                 <Link to="/login">
                   <button onClick={handleDropdownClick}>{t('LoginL')}</button>
                 </Link>
@@ -203,6 +222,17 @@ function Header({ cart }) {
         cart={cart}
         isCartClicked={isCartClicked}
         onClose={() => setIsCartClicked(false)}
+      />
+
+      <HeaderBurger
+        isOpen={isBurgerOpen}
+        onClose={() => setIsBurgerOpen(false)}
+        dropdownOpen={dropdownOpen}
+        isUserMainClicked={isUserMainClicked}
+        handleDropdownClick={handleDropdownClick}
+        setDropdownOpen={setDropdownOpen}
+        handleChangeLanguageCustom={handleChangeLanguageCustom}
+        handleUserMainClick={handleUserMainClick}
       />
     </header>
   );

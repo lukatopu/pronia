@@ -27,8 +27,7 @@ function Product({
   const isInCart = cart.some((item) => item.productId?._id === product._id);
   const isInWishlist = wishlist.some((item) => item._id === product._id);
 
-  const renderStars = (count) =>
-    Array.from({ length: count }, (_, i) => <PiStarFill key={i} />);
+  const renderStars = (count) => Array.from({ length: count }, (_, i) => <PiStarFill key={i} />);
 
   const handleAddToWishlist = () => {
     if (!product) return;
@@ -77,11 +76,7 @@ function Product({
               onClick={handleAddToWishlist}
               className="productHoverButton"
             >
-              {isInWishlist ? (
-                <PiHeartFill style={{ color: '#000000' }} />
-              ) : (
-                <PiHeart />
-              )}
+              {isInWishlist ? <PiHeartFill style={{ color: '#000000' }} /> : <PiHeart />}
             </button>
 
             <Link to={`/product/${product._id}`}>
@@ -95,20 +90,14 @@ function Product({
               onClick={handleAddToCart}
               className="productHoverButton"
             >
-              {isInCart ? (
-                <PiShoppingCartFill style={{ color: '#000000' }} />
-              ) : (
-                <PiShoppingCart />
-              )}
+              {isInCart ? <PiShoppingCartFill style={{ color: '#000000' }} /> : <PiShoppingCart />}
             </button>
           </div>
         )}
       </div>
 
       <div className="productTextContainer">
-        <Link to={`/product/${product._id}`}>
-          {product.name?.[i18n.language] || product.name}
-        </Link>
+        <Link to={`/product/${product._id}`}>{product.name?.[i18n.language] || product.name}</Link>
         <p>{product.price}</p>
         <div className="ratingContainer">{renderStars(product.rating)}</div>
 
@@ -120,11 +109,7 @@ function Product({
                 onClick={handleAddToWishlist}
                 className="listButton"
               >
-                {isInWishlist ? (
-                  <PiHeartFill style={{ color: '#000000' }} />
-                ) : (
-                  <PiHeart />
-                )}
+                {isInWishlist ? <PiHeartFill style={{ color: '#000000' }} /> : <PiHeart />}
               </button>
 
               <Link to={`/product/${product._id}`}>

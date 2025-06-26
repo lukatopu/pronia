@@ -24,7 +24,12 @@ import ResetPassword from './routes/ResetPassword';
 import { useState, useEffect } from 'react';
 import Register from './routes/Register';
 import Login from './routes/Login';
-import { getCart, getWishlist, addToWishlist as apiAddToWishlist, removeFromWishlist as apiRemoveFromWishlist } from './api/api.js';
+import {
+  getCart,
+  getWishlist,
+  addToWishlist as apiAddToWishlist,
+  removeFromWishlist as apiRemoveFromWishlist,
+} from './api/api.js';
 import ScrollToTopButton from './components/ScrollToTopButton.jsx';
 
 function App() {
@@ -126,8 +131,14 @@ function App() {
               />
             }
           />
-          <Route path="/aboutUs" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route
+            path="/aboutUs"
+            element={<About />}
+          />
+          <Route
+            path="/blog"
+            element={<Blog />}
+          />
           <Route
             path="/cart"
             element={
@@ -137,12 +148,35 @@ function App() {
               />
             }
           />
-          <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/compare" element={<Compare />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/checkout"
+            element={
+              <Checkout
+                cart={cart}
+                setCart={setCart}
+              />
+            }
+          />
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
+          <Route
+            path="/compare"
+            element={<Compare />}
+          />
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+          <Route
+            path="/register"
+            element={<Register />}
+          />
+          <Route
+            path="/profile"
+            element={<Profile />}
+          />
           <Route
             path="/wishlist"
             element={
@@ -155,14 +189,26 @@ function App() {
               />
             }
           />
-          <Route path="/notFound" element={<NotFound />} />
-          <Route path="/pages" element={<Pages />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route
+            path="/notFound"
+            element={<NotFound />}
+          />
+          <Route
+            path="/pages"
+            element={<Pages />}
+          />
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword />}
+          />
+          <Route
+            path="/reset-password/:token"
+            element={<ResetPassword />}
+          />
         </Routes>
       </Main>
       <Footer />
-      <ScrollToTopButton/>
+      <ScrollToTopButton />
     </>
   );
 }

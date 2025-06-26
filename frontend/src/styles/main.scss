@@ -20,6 +20,7 @@
 @use './routes/cart';
 @use './routes/checkout';
 @use './routes/about';
+@use './routes/profile';
 
 
 @use './components/loading';
@@ -43,3 +44,4 @@
 @use './components/aloeCollection';
 @use './components/cartModal';
 @use './components/scrollToTopButton';
+@use './components/headerBurger';

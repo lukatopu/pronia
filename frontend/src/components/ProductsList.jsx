@@ -13,7 +13,7 @@ function ProductsList({
   selectedTags,
   cart,
   wishlist,
-  removeFromWishlist
+  removeFromWishlist,
 }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -21,19 +21,21 @@ function ProductsList({
   const { useDataLoader } = useLoader();
 
   useEffect(() => {
-    useDataLoader(() => getProducts().then((data) => {
-      setProducts(data);
-      setFilteredProducts(data);
-    }));
+    useDataLoader(() =>
+      getProducts().then((data) => {
+        setProducts(data);
+        setFilteredProducts(data);
+      })
+    );
   }, []);
 
   const parsePrice = (price) => {
     if (typeof price === 'number') return price;
     if (typeof price !== 'string') return 0;
-    
+
     let numericString = '';
     let hasDecimal = false;
-    
+
     for (const char of price) {
       if (char >= '0' && char <= '9') {
         numericString += char;
@@ -42,12 +44,12 @@ function ProductsList({
         hasDecimal = true;
       }
     }
-    
+
     return parseFloat(numericString) || 0;
   };
 
   const sortProducts = (products, sortOption) => {
-    let sorted = [...products];
+    const sorted = [...products];
     switch (sortOption) {
       case 'price-high-low':
         sorted.sort((a, b) => {
@@ -75,12 +77,6 @@ function ProductsList({
     return sorted;
   };
 
-  const handleSortChange = (sortOption) => {
-    const filtered = filterProducts(products);
-    const sorted = sortProducts(filtered, sortOption);
-    setFilteredProducts(sorted);
-  };
-
   const filterProducts = (products) => {
     return products.filter((product) => {
       const price = parsePrice(product.price);
@@ -105,6 +101,15 @@ function ProductsList({
       return true;
     });
   };
+  
+
+  const handleSortChange = (sortOption) => {
+    const filtered = filterProducts(products);
+    const sorted = sortProducts(filtered, sortOption);
+    setFilteredProducts(sorted);
+  };
+
+  
 
   useEffect(() => {
     const filtered = filterProducts(products);
@@ -113,9 +118,9 @@ function ProductsList({
 
   return (
     <div className="productsWrapper">
-      <ProductsSort 
-        onSortChange={handleSortChange} 
-        onViewChange={setIsGridView} 
+      <ProductsSort
+        onSortChange={handleSortChange}
+        onViewChange={setIsGridView}
       />
       <div className={`productsContainer ${isGridView ? 'grid-view' : 'list-view'}`}>
         {filteredProducts.map((product, index) => (

@@ -38,7 +38,6 @@
       height: 100%;
       visibility: visible;
       opacity: 1;
-
     }
 
     .overlayDiv2 {
@@ -72,16 +71,15 @@
   }
 
   .cactusBackground {
-     background: url('../images/productCollectionImg/cactusCollection.jpg') no-repeat center/cover
+    background: url('../images/productCollectionImg/cactusCollection.jpg') no-repeat center/cover;
   }
 
-
   .cactusBackground2 {
-     background: url('../images/productCollectionImg/cactusCollection2.jpg') no-repeat center/cover
+    background: url('../images/productCollectionImg/cactusCollection2.jpg') no-repeat center/cover;
   }
 
   .plantPortBackground {
-     background: url('../images/productCollectionImg/plantPort.jpg') no-repeat center/cover
+    background: url('../images/productCollectionImg/plantPort.jpg') no-repeat center/cover;
   }
 
   .smallDivCollection {
@@ -94,5 +92,40 @@
   .secondCollectionWrapper {
     display: flex;
     gap: 30px;
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .productCollectionsWrapper {
+    .bigDivCollection {
+      width: 600px;
+      height: 240px;
+    }
+
+    .smallDivCollection {
+      width: 300px;
+      height: 240px;
+    }
+  }
+}
+
+
+@media (max-width: 960px) {
+  .firstCollectionWrapper {
+    flex-direction: column;
+    margin-top: 50px;
+
+    .smallDivCollection {
+      display: none;
+    }
+  }
+
+  .secondCollectionWrapper {
+    flex-direction: column;
+
+    .smallDivCollection {
+      display: none;
+    }
   }
 }

@@ -92,27 +92,28 @@ function Cart({ cart, fetchCart }) {
                     />
                   </td>
                   <td>
-                    <p>${(parseFloat(item.productId.price) * parseInt(item.quantity)).toFixed(2)}</p>
+                    <p>
+                      ${(parseFloat(item.productId.price) * parseInt(item.quantity)).toFixed(2)}
+                    </p>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-
         </>
       )}
-      <div className='cartTotal'>
+      <div className="cartTotal">
         <h1>Cart Totals</h1>
-        <div className='subTotalContainer'>
+        <div className="subTotalContainer">
           <p>Subtotal</p>
           <p>${calculateTotal().toFixed(2)}</p>
         </div>
-        <div className='totalContainer'>
+        <div className="totalContainer">
           <p>Total</p>
           <p>${calculateTotal().toFixed(2)}</p>
         </div>
         <a href="/checkout">
-        <button className='proceedCheckoutButton'>Proceed To Checkout</button>
+          <button className="proceedCheckoutButton">Proceed To Checkout</button>
         </a>
       </div>
     </div>

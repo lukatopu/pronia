@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 function Login() {
   const { useFakeLoader } = useLoader();
 
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => useFakeLoader(), []);
 

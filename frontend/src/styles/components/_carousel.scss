@@ -11,6 +11,7 @@
   overflow-y: hidden;
 
   &:hover {
+
     .caretLeftContainer,
     .caretRightContainer {
       opacity: 1;
@@ -204,6 +205,7 @@
       display: flex;
       order: 3;
       margin-top: 40px;
+      margin-bottom: 40px;
     }
   }
 }

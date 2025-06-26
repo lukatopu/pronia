@@ -5,6 +5,8 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #abd373 white;
 }
 
 a {
@@ -38,4 +40,17 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+
+*::-webkit-scrollbar {
+  width: 8px;
+  background: white; /* scrollbar track color */
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #abd373; /* green */
+  border-radius: 8px;
+  border: 2px solid white; /* padding around thumb */
 }

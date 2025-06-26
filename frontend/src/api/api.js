@@ -54,7 +54,6 @@ export const resetPasswordUser = (data, token) => {
   });
 };
 
-
 export const addToCart = async (productId, quantity) => {
   try {
     const response = await axios.post(
@@ -71,7 +70,6 @@ export const addToCart = async (productId, quantity) => {
   }
 };
 
-
 export const removeFromCart = async (productId) => {
   try {
     const response = await axios.delete('http://localhost:3000/api/users/cart/remove', {
@@ -84,7 +82,6 @@ export const removeFromCart = async (productId) => {
   }
 };
 
-
 export const getCart = async () => {
   try {
     const response = await axios.get('http://localhost:3000/api/users/cart', {
@@ -95,7 +92,6 @@ export const getCart = async () => {
     throw new Error(err.response?.data?.err || 'Failed to get cart');
   }
 };
-
 
 export const updateCartItem = async (productId, quantity) => {
   try {
@@ -113,7 +109,6 @@ export const updateCartItem = async (productId, quantity) => {
   }
 };
 
-
 export const clearCart = async () => {
   try {
     const response = await axios.delete('http://localhost:3000/api/users/cart/clear', {
@@ -124,8 +119,6 @@ export const clearCart = async () => {
     throw new Error(err.response?.data?.err || 'Failed to clear cart');
   }
 };
-
-
 
 export const addToWishlist = async (productId) => {
   try {
@@ -163,5 +156,54 @@ export const getWishlist = async () => {
     return response.data;
   } catch (err) {
     throw new Error(err.response?.data?.err || 'Failed to get wishlist');
+  }
+};
+
+export const updateUserProfile = async (updateData) => {
+  try {
+    const response = await axios.put('http://localhost:3000/api/users/update-profile', updateData, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.err || 'Failed to update profile');
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    const response = await axios.post('http://localhost:3000/api/users/logout', null, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    throw new Error('Logout failed');
+  }
+};
+
+export const placeOrder = async () => {
+  try {
+    const response = await axios.post(
+      'http://localhost:3000/api/users/orders/place',
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.err || 'Failed to place order');
+  }
+};
+
+export const getOrders = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/api/users/orders', {
+      withCredentials: true,
+    });
+    return response.data.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.err || 'Failed to fetch orders');
   }
 };

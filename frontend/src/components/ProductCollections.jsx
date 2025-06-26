@@ -1,10 +1,6 @@
 import React from 'react';
 import Button from './Button';
 import { useTranslation } from 'react-i18next';
-import cactusCollection from '../images/productCollectionImg/cactusCollection.jpg';
-import aloeCollection from '../images/productCollectionImg/aloe.jpg';
-import cactusCollection2 from '../images/productCollectionImg/cactusCollection2.jpg';
-import plantPortCollection from '../images/productCollectionImg/plantPort.jpg';
 
 function ProductCollections() {
   const buttonStyle = {

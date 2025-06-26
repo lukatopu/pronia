@@ -1,5 +1,20 @@
 .homeProductsContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding: 0 18vw;
+  gap: 30px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @media (max-width: 1228px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 926px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 }

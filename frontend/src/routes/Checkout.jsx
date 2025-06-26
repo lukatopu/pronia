@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { clearCart } from '../api/api';
+import { placeOrder } from '../api/api';
+import countries from '../data/countries.json';
 
 function Checkout({ cart, setCart }) {
   const [country, setCountry] = useState('');
@@ -30,17 +31,17 @@ function Checkout({ cart, setCart }) {
     return 'Product';
   };
 
-   const handlePlaceOrder = async () => {
+  const handlePlaceOrder = async () => {
     if (!cart || cart.length === 0) {
       alert('There is nothing in the cart!');
       return;
     }
 
     try {
-      await clearCart();
-
+      await placeOrder(); // server places order and clears cart
       setCart([]);
 
+      // Reset form
       setCountry('');
       setFirstName('');
       setLastName('');
@@ -54,7 +55,7 @@ function Checkout({ cart, setCart }) {
 
       alert('Successfully placed order!');
     } catch (error) {
-      alert('Failed to clear cart on server. Please try again.');
+      alert('Failed to place order. Please try again.');
     }
   };
 
@@ -70,9 +71,14 @@ function Checkout({ cart, setCart }) {
             onChange={(e) => setCountry(e.target.value)}
           >
             <option value="">Select a country</option>
-            <option value="us">United States</option>
-            <option value="uk">United Kingdom</option>
-            <option value="ca">Canada</option>
+            {countries.map((countryObj) => (
+              <option
+                key={countryObj.code}
+                value={countryObj.code}
+              >
+                {countryObj.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="nameFields">
@@ -127,47 +133,53 @@ function Checkout({ cart, setCart }) {
             onChange={(e) => setCity(e.target.value)}
           />
         </div>
-        <div className="formGroup">
-          <label htmlFor="state">State / County</label>
-          <input
-            type="text"
-            id="state"
-            required
-            value={stateInput}
-            onChange={(e) => setStateInput(e.target.value)}
-          />
+        <div className="nameFields">
+          <div className="formGroup">
+            <label htmlFor="state">State / County</label>
+            <input
+              type="text"
+              id="state"
+              required
+              value={stateInput}
+              onChange={(e) => setStateInput(e.target.value)}
+            />
+          </div>
+          <div className="formGroup">
+            <label htmlFor="postcode">Postcode / ZIP</label>
+            <input
+              type="text"
+              id="postcode"
+              required
+              value={postcode}
+              onChange={(e) => setPostcode(e.target.value)}
+            />
+          </div>
         </div>
-        <div className="formGroup">
-          <label htmlFor="postcode">Postcode / ZIP</label>
-          <input
-            type="text"
-            id="postcode"
-            required
-            value={postcode}
-            onChange={(e) => setPostcode(e.target.value)}
-          />
-        </div>
-        <div className="formGroup">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            id="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="formGroup">
-          <label htmlFor="phone">Phone</label>
-          <input
-            type="tel"
-            id="phone"
-            required
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
+
+        <div className="nameFields">
+          <div className="formGroup">
+            <label htmlFor="email">Email address</label>
+            <input
+              type="email"
+              id="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="formGroup">
+            <label htmlFor="phone">Phone</label>
+            <input
+              type="tel"
+              id="phone"
+              required
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
         </div>
       </div>
+
       <div className="orderSummary">
         <h1>Your order</h1>
         <div className="orderItems">
@@ -176,7 +188,10 @@ function Checkout({ cart, setCart }) {
             <span>Total</span>
           </div>
           {cart.map((item) => (
-            <div key={item._id} className="order-item">
+            <div
+              key={item._id}
+              className="orderItem"
+            >
               <span>
                 {getProductName(item.productId.name)} × {item.quantity}
               </span>
@@ -205,7 +220,10 @@ function Checkout({ cart, setCart }) {
           <span>Total</span>
           <span>${total.toFixed(2)}</span>
         </div>
-        <button className="placeOrderBtn" onClick={handlePlaceOrder}>
+        <button
+          className="placeOrderBtn"
+          onClick={handlePlaceOrder}
+        >
           Place Order
         </button>
       </div>

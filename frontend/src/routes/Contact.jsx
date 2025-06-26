@@ -8,7 +8,7 @@ function Contact() {
 
   useEffect(() => useFakeLoader(), []);
 
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
 
   const [contactData, setContactData] = useState({
     fname: '',

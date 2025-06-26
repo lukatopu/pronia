@@ -11,7 +11,7 @@ function ResetPassword() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
 
   const { token } = useParams();
 

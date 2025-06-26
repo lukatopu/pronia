@@ -4,6 +4,7 @@ header {
     display: flex;
     flex-direction: column;
     width: 100%;
+
     .headerTop {
         display: flex;
         width: 100%;
@@ -12,9 +13,63 @@ header {
         align-items: center;
         background-color: $light-green;
         color: white;
-        gap: 644px;
+        gap: 40vw;
         font-size: 14px;
         text-transform: uppercase;
+
+
+        .customDropdown {
+            position: relative;
+
+            .dropdownToggle {
+                background: transparent;
+                border: none;
+                color: white;
+                font-size: 14px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .dropdownMenu {
+                position: absolute;
+                top: 120%;
+                right: 0;
+                background-color: white;
+                border-radius: 5px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+                padding: 5px 0;
+                flex-direction: column;
+                z-index: 1000;
+                min-width: 80px;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20%);
+                transition: opacity 300ms ease, transform 300ms ease, visibility 300ms;
+
+                &.open {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                }
+
+                li {
+                    list-style: none;
+                    padding: 8px 15px;
+                    color: black;
+                    cursor: pointer;
+                    transition: background-color 300ms, color 300ms;
+
+                    &:hover {
+                        background-color: $light-green;
+                        color: white;
+                    }
+                }
+            }
+        }
+
+
 
         p {
             letter-spacing: 1.1px;
@@ -38,7 +93,7 @@ header {
         justify-content: center;
         align-items: center;
         height: 120px;
-        gap: 322px;
+        gap: 20vw;
         border-bottom: 1px solid #dee2e6;
 
         nav {
@@ -76,7 +131,7 @@ header {
                         top: 100%;
                     }
 
-                   
+
 
                     button {
                         width: 100%;
@@ -131,7 +186,7 @@ header {
                 background-color: $light-green;
                 color: white;
                 border-radius: 10px;
-                
+
 
                 .phoneIcon {
                     font-size: 24px;
@@ -252,7 +307,7 @@ header {
                         top: 100%;
                     }
 
-                   
+
 
                     button {
                         width: 100%;
@@ -313,7 +368,7 @@ header {
 
 
             nav {
-                .userIcon {
+                .userIconContainer {
                     display: none;
                 }
 

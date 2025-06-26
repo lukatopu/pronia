@@ -94,11 +94,7 @@ function SingleProduct({
             className="addToCartButton"
             disabled={isInCart || isAddingToCart}
           >
-            {isAddingToCart
-              ? t('Adding...')
-              : isInCart
-              ? t('AlreadyInCart')
-              : t('AddToCart')}
+            {isAddingToCart ? t('Adding...') : isInCart ? t('AlreadyInCart') : t('AddToCart')}
           </button>
           <button
             onClick={handleAddToWishlist}
@@ -107,7 +103,10 @@ function SingleProduct({
           >
             {isInWishlist ? <PiHeartFill /> : <PiHeart />}
           </button>
-          <button className="compareButton" aria-label={t('Compare')}>
+          <button
+            className="compareButton"
+            aria-label={t('Compare')}
+          >
             <BsArrowRepeat />
           </button>
         </div>

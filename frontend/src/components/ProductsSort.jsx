@@ -16,7 +16,7 @@ function ProductsSort({ onSortChange, onViewChange }) {
       try {
         const data = await getProducts();
         setProducts(data);
-      } catch (error) { }
+      } catch (error) {}
     };
 
     fetchProducts();
@@ -62,8 +62,11 @@ function ProductsSort({ onSortChange, onViewChange }) {
           <PiListBulletsBold />
         </div>
       </div>
-      <div className="sortBy" onClick={() => setShowSortOptions(!showSortOptions)}>
-        {sortOptions.find(opt => opt.value === sortOption)?.label}
+      <div
+        className="sortBy"
+        onClick={() => setShowSortOptions(!showSortOptions)}
+      >
+        {sortOptions.find((opt) => opt.value === sortOption)?.label}
         {showSortOptions && (
           <div className="sortDropdown">
             {sortOptions.map((option) => (
