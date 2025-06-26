@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { getProducts } from '../api/api';
 import Product from './Product';
+import { useTranslation } from 'react-i18next';
 
 function NewProducts({ addToCart, addToWishlist, cart, wishlist }) {
   const [products, setProducts] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     getProducts().then((data) => setProducts(data));
@@ -15,12 +17,9 @@ function NewProducts({ addToCart, addToWishlist, cart, wishlist }) {
     <div className="newProductsWrapper">
       <div className="newProductsDescription">
         <div className="newProductsTitle">
-          <h1>NEW PRODUCTS</h1>
+          <h1>{t('NewProductsTitle')}</h1>
         </div>
-        <p>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots <br /> in
-          a piece of classical Latin literature
-        </p>
+        <p>{t('TeamSectionSub')}</p>
       </div>
       <div className="newProductsContainer">
         {newProducts.map((product) => (

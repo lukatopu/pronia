@@ -5,6 +5,7 @@ import {
   getOrders,
   getCurrentUser,
 } from '../api/api';
+import { useTranslation } from 'react-i18next';
 
 function Profile() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -17,6 +18,8 @@ function Profile() {
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(null);
   const [orders, setOrders] = useState([]);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,20 +35,20 @@ function Profile() {
         setOrders(ordersData || []);
       } catch (err) {
         console.error('Error loading profile:', err);
-        setMessage('Failed to load profile data.');
+        setMessage(t('ProfileLoadError'));
         setIsSuccess(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [t]);
 
   const handleLogout = async () => {
     try {
       await logoutUser();
       window.location.href = '/login';
     } catch (err) {
-      setMessage('Logout failed');
+      setMessage(t('LogoutFailed'));
       setIsSuccess(false);
     }
   };
@@ -58,13 +61,13 @@ function Profile() {
       (currentPassword || newPassword || confirmNewPassword) &&
       !(currentPassword && newPassword && confirmNewPassword)
     ) {
-      setMessage('Please fill all password fields to change password.');
+      setMessage(t('PasswordFieldsIncomplete'));
       setIsSuccess(false);
       return;
     }
 
     if (newPassword !== confirmNewPassword) {
-      setMessage("New password and confirm password don't match.");
+      setMessage(t('PasswordMismatch'));
       setIsSuccess(false);
       return;
     }
@@ -83,7 +86,7 @@ function Profile() {
 
       await updateUserProfile(updateData);
 
-      setMessage('Profile updated successfully!');
+      setMessage(t('ProfileUpdated'));
       setIsSuccess(true);
       setCurrentPassword('');
       setNewPassword('');
@@ -101,43 +104,43 @@ function Profile() {
           className={activeTab === 'dashboard' ? 'tabButton active' : 'tabButton'}
           onClick={() => setActiveTab('dashboard')}
         >
-          Dashboard
+          {t('Dashboard')}
         </button>
         <button
           className={activeTab === 'orders' ? 'tabButton active' : 'tabButton'}
           onClick={() => setActiveTab('orders')}
         >
-          Orders
+          {t('Orders')}
         </button>
         <button
           className={activeTab === 'addresses' ? 'tabButton active' : 'tabButton'}
           onClick={() => setActiveTab('addresses')}
         >
-          Addresses
+          {t('Addresses')}
         </button>
         <button
           className={activeTab === 'details' ? 'tabButton active' : 'tabButton'}
           onClick={() => setActiveTab('details')}
         >
-          Account Details
+          {t('AccountDetails')}
         </button>
         <button className="tabButton" onClick={handleLogout}>
-          Logout
+          {t('Logout')}
         </button>
       </div>
 
       <div className="accountTabDisplay">
         {activeTab === 'dashboard' && (
           <div className="dashboardDisplay">
-            <h1>Dashboard</h1>
+            <h1>{t('Dashboard')}</h1>
           </div>
         )}
 
         {activeTab === 'orders' && (
           <div className="ordersDisplay">
-            <h1>Orders</h1>
+            <h1>{t('Orders')}</h1>
             {Array.isArray(orders) && orders.length === 0 ? (
-              <p>You have no orders yet.</p>
+              <p>{t('NoOrders')}</p>
             ) : (
               <ul>
                 {orders.map((order) => (
@@ -152,17 +155,17 @@ function Profile() {
 
         {activeTab === 'addresses' && (
           <div className="addressesDisplay">
-            <h1>Addresses</h1>
+            <h1>{t('Addresses')}</h1>
           </div>
         )}
 
         {activeTab === 'details' && (
           <div className="detailsDisplay">
-            <h1>Account Details</h1>
+            <h1>{t('AccountDetails')}</h1>
 
             <div className="inputRow">
               <div className="inputGroup">
-                <label>First Name</label>
+                <label>{t('FirstName')}</label>
                 <input
                   type="text"
                   value={firstName}
@@ -171,7 +174,7 @@ function Profile() {
                 />
               </div>
               <div className="inputGroup">
-                <label>Last Name</label>
+                <label>{t('LastName')}</label>
                 <input
                   type="text"
                   value={lastName}
@@ -182,7 +185,7 @@ function Profile() {
             </div>
 
             <div className="inputGroup">
-              <label>Email</label>
+              <label>{t('EmailAddress')}</label>
               <input
                 type="email"
                 value={email}
@@ -192,7 +195,7 @@ function Profile() {
             </div>
 
             <div className="inputGroup">
-              <label>Current Password <small>(leave blank to leave unchanged)</small></label>
+              <label>{t('CurrentPassword')} <small>({t('LeaveBlank')})</small></label>
               <input
                 type="password"
                 value={currentPassword}
@@ -202,7 +205,7 @@ function Profile() {
             </div>
 
             <div className="inputGroup">
-              <label>New Password <small>(leave blank to leave unchanged)</small></label>
+              <label>{t('NewPassword')} <small>({t('LeaveBlank')})</small></label>
               <input
                 type="password"
                 value={newPassword}
@@ -212,7 +215,7 @@ function Profile() {
             </div>
 
             <div className="inputGroup">
-              <label>Confirm New Password</label>
+              <label>{t('ConfirmPassword')}</label>
               <input
                 type="password"
                 value={confirmNewPassword}
@@ -221,11 +224,8 @@ function Profile() {
               />
             </div>
 
-            <button
-              onClick={handleSaveChanges}
-              className="saveButton"
-            >
-              Save Changes
+            <button onClick={handleSaveChanges} className="saveButton">
+              {t('SaveChanges')}
             </button>
 
             {message && (
@@ -235,8 +235,6 @@ function Profile() {
             )}
           </div>
         )}
-
-
       </div>
     </div>
   );

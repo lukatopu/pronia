@@ -17,9 +17,9 @@ function ProductCollections() {
         <div className="bigDivCollection cactusBackground">
           <div className="overlayDiv1"></div>
           <div className="overlayDiv2"></div>
-          <p>Collection Of Cactus</p>
+          <p>{t('CactusCollection')}</p>
           <h3>
-            Pottery Pots & <br /> Plant
+            {t('PotteryPots')} <br /> {t('Plant')}
           </h3>
           <Button
             name={t('ShopNow')}
@@ -30,8 +30,8 @@ function ProductCollections() {
         <div className="smallDivCollection aloeBackground">
           <div className="overlayDiv1"></div>
           <div className="overlayDiv2"></div>
-          <p>New Collection</p>
-          <h3>Plant Port</h3>
+          <p>{t('NewCollection')}</p>
+          <h3>{t('PlantPort')}</h3>
           <Button
             name={t('ShopNow')}
             {...buttonStyle}
@@ -43,8 +43,8 @@ function ProductCollections() {
         <div className="smallDivCollection plantPortBackground">
           <div className="overlayDiv1"></div>
           <div className="overlayDiv2"></div>
-          <p>New Collection</p>
-          <h3>Plant Port</h3>
+          <p>{t('NewCollection')}</p>
+          <h3>{t('PlantPort')}</h3>
           <Button
             name={t('ShopNow')}
             {...buttonStyle}
@@ -53,9 +53,9 @@ function ProductCollections() {
         <div className="bigDivCollection cactusBackground2">
           <div className="overlayDiv1"></div>
           <div className="overlayDiv2"></div>
-          <p>Collection Of Cactus</p>
+          <p>{t('CactusCollection')}</p>
           <h3>
-            Hanging Pots & <br /> Plant
+            {t('HangingPots')} <br /> {t('Plant')}
           </h3>
           <Button
             name={t('ShopNow')}

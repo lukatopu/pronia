@@ -55,8 +55,8 @@ function RouteBanner() {
       mainTitle: 'ForgotM',
     },
     '/reset-password/:token': {
-      title: 'reset password',
-      mainTitle: 'RESET PASSWORD',
+      title: 'ResetT',
+      mainTitle: 'ResetM',
     },
     '/checkout': {
       title: 'CheckoutT',

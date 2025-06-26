@@ -73,7 +73,7 @@ function Filter({
       <div className="searchContainer">
         <input
           type="text"
-          placeholder={t('Search') || 'Search'}
+          placeholder={t('Search')}
           value={searchTerm}
           onChange={handleSearchChange}
         />
@@ -83,7 +83,7 @@ function Filter({
       <div className="filtersContainer">
         <div className="Filter">
           <button onClick={clearFilters} className="clearFiltersButton">
-            {t('Clear Filters') || 'Clear Filters'}
+            {t('ClearFilters')}
           </button>
         </div>
 
@@ -167,20 +167,20 @@ function Filter({
         </div>
 
         <div className="Filter">
-          <h2>{t('Popular Tags')}</h2>
+          <h2>{t('PopularTags')}</h2>
           <div className="tagsFilterContainer">
             <div className="tagsContainer">
               <div
                 onClick={() => handleTagClick('fashion')}
                 className={selectedTags.includes('fashion') ? 'activeTag' : ''}
               >
-                Fashion
+                {t('TagFashion')}
               </div>
               <div
                 onClick={() => handleTagClick('organic')}
                 className={selectedTags.includes('organic') ? 'activeTag' : ''}
               >
-                Organic
+                {t('TagOrganic')}
               </div>
             </div>
             <div className="tagsContainer">
@@ -188,13 +188,13 @@ function Filter({
                 onClick={() => handleTagClick('old fashion')}
                 className={selectedTags.includes('old fashion') ? 'activeTag' : ''}
               >
-                Old Fashion
+                {t('TagOldFashion')}
               </div>
               <div
                 onClick={() => handleTagClick('men')}
                 className={selectedTags.includes('men') ? 'activeTag' : ''}
               >
-                Men
+                {t('TagMen')}
               </div>
             </div>
           </div>

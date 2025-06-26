@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function CartModal({ cart = [], isCartClicked, onClose, handleCartOverlay, isCartOverlayHidden }) {
+  const { t } = useTranslation();
+
   const subtotal = cart.reduce((total, item) => {
     return total + parseFloat(item.productId.price) * item.quantity;
   }, 0);
@@ -19,7 +22,7 @@ function CartModal({ cart = [], isCartClicked, onClose, handleCartOverlay, isCar
       ></div>
       <div className={`cartModal ${isCartClicked ? 'active' : ''}`}>
         <div className="modalTitle">
-          <h1>Shopping Cart</h1>
+          <h1>{t('ShoppingCart')}</h1>
           <h3 onClick={handleCartLogic}>X</h3>
         </div>
 
@@ -36,7 +39,7 @@ function CartModal({ cart = [], isCartClicked, onClose, handleCartOverlay, isCar
                   className="cartItemImage"
                 />
                 <div className="cartItemInfo">
-                  <p>{item.productId.name?.eng || 'No name'}</p>
+                  <p>{item.productId.name?.eng || t('NoName')}</p>
                   <p>
                     {item.quantity} × ${item.productId.price}
                   </p>
@@ -44,14 +47,14 @@ function CartModal({ cart = [], isCartClicked, onClose, handleCartOverlay, isCar
               </div>
             ))
           ) : (
-            <p className="emptyCart">Your cart is empty</p>
+            <p className="emptyCart">{t('EmptyCart')}</p>
           )}
         </div>
 
         {cart.length > 0 && (
           <>
             <div className="priceContainer">
-              <p>Subtotal</p>
+              <p>{t('Subtotal')}</p>
               <p>${subtotal.toFixed(2)}</p>
             </div>
 
@@ -60,13 +63,13 @@ function CartModal({ cart = [], isCartClicked, onClose, handleCartOverlay, isCar
                 to="/cart"
                 onClick={handleCartLogic}
               >
-                <button>View Cart</button>
+                <button>{t('ViewCart')}</button>
               </Link>
               <Link
                 to="/checkout"
                 onClick={handleCartLogic}
               >
-                <button>Checkout</button>
+                <button>{t('Checkout')}</button>
               </Link>
             </div>
           </>

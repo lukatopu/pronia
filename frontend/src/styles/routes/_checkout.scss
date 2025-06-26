@@ -1,4 +1,3 @@
-
 .checkoutContainer {
  display: flex;
  padding: 20px;
@@ -50,6 +49,14 @@
 
   .formGroup {
    margin-bottom: 15px;
+
+   .errorMessage {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 5px;
+    height: 30px;
+   }
+
   }
  }
 

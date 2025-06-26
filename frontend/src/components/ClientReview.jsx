@@ -3,6 +3,7 @@ import client1 from '../images/reviewerProfiles/1.png';
 import client2 from '../images/reviewerProfiles/2.png';
 import client3 from '../images/reviewerProfiles/3.png';
 import quotation from '../images/reviewerProfiles/quotation.png';
+import { useTranslation } from 'react-i18next';
 
 const reviews = [
   { img: client1, name: 'PHOENIX BAKER', role: 'Client' },
@@ -17,12 +18,13 @@ function ClientReview() {
   const [visibleCards, setVisibleCards] = useState(3);
   const [cardWidth, setCardWidth] = useState(350);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       setIsSmallScreen(width < 540);
-      
+
       if (width <= 540) {
         setVisibleCards(1);
         setCardWidth(350);
@@ -55,12 +57,9 @@ function ClientReview() {
       <div className="clientReviewDescription">
         <div className="reviewBackground"></div>
         <div className="clientReviewTitle">
-          <h1>WHAT CLIENTS SAY</h1>
+          <h1>{t('ClientReviewTitle')}</h1>
         </div>
-        <p>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in
-          a piece of classical Latin literature
-        </p>
+        <p>{t('TeamSectionSub')}</p>
       </div>
 
       <div className="sliderContainer">
@@ -76,23 +75,22 @@ function ClientReview() {
               <div
                 className="clientReviewContainer"
                 key={i}
-                style={{ 
+                style={{
                   flex: isSmallScreen ? '0 0 350px' : `0 0 ${cardWidth}px`,
                   maxWidth: isSmallScreen ? '350px' : `${cardWidth}px`,
                   minWidth: isSmallScreen ? '350px' : `${cardWidth}px`
                 }}
               >
                 <div className="quoteMarkContainer">
-                  <img src={quotation} alt="" />
+                  <img src={quotation} alt="quotation mark" />
                 </div>
                 <div className="clientProfileContainer">
-                  <img src={review.img} alt="" />
+                  <img src={review.img} alt="client profile" />
                 </div>
                 <h6>{review.name}</h6>
-                <p>{review.role}</p>
+                <p>{t('Client')}</p>
                 <p>
-                  Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt
-                  ut labore et dolore magna.
+                  {t('ClientReviewText')}
                 </p>
               </div>
             ))}

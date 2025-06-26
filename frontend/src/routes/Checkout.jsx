@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { placeOrder } from '../api/api';
 import countries from '../data/countries.json';
+import { useTranslation } from 'react-i18next';
 
 function Checkout({ cart, setCart }) {
+  const { t, i18n } = useTranslation();
+
   const [country, setCountry] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -13,6 +16,7 @@ function Checkout({ cart, setCart }) {
   const [postcode, setPostcode] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [errors, setErrors] = useState({});
 
   const subtotal = cart.reduce((total, item) => {
     const price =
@@ -27,21 +31,32 @@ function Checkout({ cart, setCart }) {
 
   const getProductName = (nameObj) => {
     if (typeof nameObj === 'string') return nameObj;
-    if (nameObj?.eng) return nameObj.eng;
-    return 'Product';
+    return nameObj?.[i18n.language] || nameObj?.eng || t('Product');
   };
 
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validatePhone = (phone) => /^[0-9]{9}$/.test(phone);
+
   const handlePlaceOrder = async () => {
-    if (!cart || cart.length === 0) {
-      alert('There is nothing in the cart!');
-      return;
-    }
+    const newErrors = {};
+
+    if (!country) newErrors.country = t('CountryError');
+    if (firstName.trim().length < 2) newErrors.firstName = t('FirstNameError');
+    if (lastName.trim().length < 2) newErrors.lastName = t('LastNameError');
+    if (!address.trim()) newErrors.address = t('AddressError');
+    if (!city.trim()) newErrors.city = t('CityError');
+    if (!stateInput.trim()) newErrors.stateInput = t('StateError');
+    if (!postcode.trim()) newErrors.postcode = t('PostcodeError');
+    if (!validateEmail(email)) newErrors.email = t('EmailError');
+    if (!validatePhone(phone)) newErrors.phone = t('PhoneError');
+    if (!cart || cart.length === 0) newErrors.cart = t('CartEmptyError');
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
 
     try {
       await placeOrder();
       setCart([]);
-
-
       setCountry('');
       setFirstName('');
       setLastName('');
@@ -52,59 +67,60 @@ function Checkout({ cart, setCart }) {
       setPostcode('');
       setEmail('');
       setPhone('');
-
-      alert('Successfully placed order!');
+      setErrors({});
+      alert(t('OrderSuccess'));
     } catch (error) {
-      alert('Failed to place order. Please try again.');
+      alert(t('OrderFail'));
     }
   };
 
   return (
     <div className="checkoutContainer">
       <div className="billingDetails">
-        <h2>Billing details</h2>
+        <h2>{t('BillingDetails')}</h2>
         <div className="formGroup">
-          <label htmlFor="country">Country / Region</label>
+          <p className="errorMessage">{errors.country || ' '}</p>
+          <label htmlFor="country">{t('CountryRegion')}</label>
           <select
             id="country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
           >
-            <option value="">Select a country</option>
+            <option value="">{t('SelectCountry')}</option>
             {countries.map((countryObj) => (
-              <option
-                key={countryObj.code}
-                value={countryObj.code}
-              >
+              <option key={countryObj.code} value={countryObj.code}>
                 {countryObj.name}
               </option>
             ))}
           </select>
         </div>
+
         <div className="nameFields">
           <div className="formGroup">
-            <label htmlFor="firstName">First name</label>
+            <p className="errorMessage">{errors.firstName || ' '}</p>
+            <label htmlFor="firstName">{t('FirstName')}</label>
             <input
               type="text"
               id="firstName"
-              required
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
           <div className="formGroup">
-            <label htmlFor="lastName">Last name</label>
+            <p className="errorMessage">{errors.lastName || ' '}</p>
+            <label htmlFor="lastName">{t('LastName')}</label>
             <input
               type="text"
               id="lastName"
-              required
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
           </div>
         </div>
+
         <div className="formGroup">
-          <label htmlFor="company">Company name (optional)</label>
+          <p className="errorMessage">{' '}</p>
+          <label htmlFor="company">{t('CompanyOptional')}</label>
           <input
             type="text"
             id="company"
@@ -112,44 +128,47 @@ function Checkout({ cart, setCart }) {
             onChange={(e) => setCompany(e.target.value)}
           />
         </div>
+
         <div className="formGroup">
-          <label htmlFor="address">Street address</label>
+          <p className="errorMessage">{errors.address || ' '}</p>
+          <label htmlFor="address">{t('StreetAddress')}</label>
           <input
             type="text"
             id="address"
-            required
-            placeholder="House number and street name"
+            placeholder={t('HouseStreet')}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
         </div>
+
         <div className="formGroup">
-          <label htmlFor="city">Town / City</label>
+          <p className="errorMessage">{errors.city || ' '}</p>
+          <label htmlFor="city">{t('City')}</label>
           <input
             type="text"
             id="city"
-            required
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
         </div>
+
         <div className="nameFields">
           <div className="formGroup">
-            <label htmlFor="state">State / County</label>
+            <p className="errorMessage">{errors.stateInput || ' '}</p>
+            <label htmlFor="state">{t('StateCounty')}</label>
             <input
               type="text"
               id="state"
-              required
               value={stateInput}
               onChange={(e) => setStateInput(e.target.value)}
             />
           </div>
           <div className="formGroup">
-            <label htmlFor="postcode">Postcode / ZIP</label>
+            <p className="errorMessage">{errors.postcode || ' '}</p>
+            <label htmlFor="postcode">{t('PostcodeZip')}</label>
             <input
               type="text"
               id="postcode"
-              required
               value={postcode}
               onChange={(e) => setPostcode(e.target.value)}
             />
@@ -158,40 +177,42 @@ function Checkout({ cart, setCart }) {
 
         <div className="nameFields">
           <div className="formGroup">
-            <label htmlFor="email">Email address</label>
+            <p className="errorMessage">{errors.email || ' '}</p>
+            <label htmlFor="email">{t('EmailAddress')}</label>
             <input
               type="email"
               id="email"
-              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="formGroup">
-            <label htmlFor="phone">Phone</label>
+            <p className="errorMessage">{errors.phone || ' '}</p>
+            <label htmlFor="phone">{t('ContactPhone')}</label>
             <input
               type="tel"
               id="phone"
-              required
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => {
+                const input = e.target.value;
+                if (input.length <= 9 && /^[0-9]*$/.test(input)) {
+                  setPhone(input);
+                }
+              }}
             />
           </div>
         </div>
       </div>
 
       <div className="orderSummary">
-        <h1>Your order</h1>
+        <h1>{t('YourOrder')}</h1>
         <div className="orderItems">
           <div className="orderHeader">
-            <span>Product</span>
-            <span>Total</span>
+            <span>{t('Product')}</span>
+            <span>{t('Total')}</span>
           </div>
           {cart.map((item) => (
-            <div
-              key={item._id}
-              className="orderItem"
-            >
+            <div key={item._id} className="orderItem">
               <span>
                 {getProductName(item.productId.name)} × {item.quantity}
               </span>
@@ -208,23 +229,21 @@ function Checkout({ cart, setCart }) {
         </div>
         <div className="orderTotals">
           <div className="totalRow">
-            <span>Subtotal</span>
+            <span>{t('Subtotal')}</span>
             <span>${subtotal.toFixed(2)}</span>
           </div>
           <div className="totalRow">
-            <span>Shipping</span>
+            <span>{t('Shipping')}</span>
             <span>${shipping.toFixed(2)}</span>
           </div>
         </div>
         <div className="grandTotal">
-          <span>Total</span>
+          <span>{t('Total')}</span>
           <span>${total.toFixed(2)}</span>
         </div>
-        <button
-          className="placeOrderBtn"
-          onClick={handlePlaceOrder}
-        >
-          Place Order
+        <p className="errorMessage">{errors.cart || ' '}</p>
+        <button className="placeOrderBtn" onClick={handlePlaceOrder}>
+          {t('PlaceOrder')}
         </button>
       </div>
     </div>

@@ -3,6 +3,7 @@ import proniaLogo from '../images/proniaLogo.png';
 import cardsImg from '../images/cards/cardsImg.png';
 import { FaFacebookF, FaTwitter, FaPinterest } from 'react-icons/fa';
 import { BiBasketball } from 'react-icons/bi';
+import { useTranslation } from 'react-i18next';
 
 function Footer() {
   const [activeTooltips, setActiveTooltips] = useState({
@@ -11,6 +12,8 @@ function Footer() {
     pinterest: false,
     dribble: false,
   });
+
+  const { t } = useTranslation();
 
   const handleTooltip = (tooltipName) => {
     setActiveTooltips((prev) => ({
@@ -34,13 +37,19 @@ function Footer() {
           alt="Pronia Logo"
         />
         <p>
-          Lorem ipsum dolor sit amet, <br /> consec adipisl elit, sed do eiusmod <br /> tempor{' '}
-          <br />
-          incidio ut labore et dolore magna.
+          {t('FooterDescription')
+            .split('\n')
+            .map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
         </p>
+
         <div className="buttonsContainer">
           <div className="tooltipContainer">
-            <span className={`tooltip ${activeTooltips.facebook ? 'active' : ''}`}>Facebook</span>
+            <span className={`tooltip ${activeTooltips.facebook ? 'active' : ''}`}>{t('Facebook')}</span>
             <a href="https://www.facebook.com/home.php">
               <button
                 onMouseLeave={() => closeTooltip('facebook')}
@@ -51,7 +60,7 @@ function Footer() {
             </a>
           </div>
           <div className="tooltipContainer">
-            <span className={`tooltip ${activeTooltips.twitter ? 'active' : ''}`}>Twitter</span>
+            <span className={`tooltip ${activeTooltips.twitter ? 'active' : ''}`}>{t('Twitter')}</span>
             <a href="https://x.com/home?lang=en">
               <button
                 onMouseLeave={() => closeTooltip('twitter')}
@@ -62,7 +71,7 @@ function Footer() {
             </a>
           </div>
           <div className="tooltipContainer">
-            <span className={`tooltip ${activeTooltips.pinterest ? 'active' : ''}`}>Pinterest</span>
+            <span className={`tooltip ${activeTooltips.pinterest ? 'active' : ''}`}>{t('Pinterest')}</span>
             <a href="https://www.pinterest.com/">
               <button
                 onMouseLeave={() => closeTooltip('pinterest')}
@@ -73,7 +82,7 @@ function Footer() {
             </a>
           </div>
           <div className="tooltipContainer">
-            <span className={`tooltip ${activeTooltips.dribble ? 'active' : ''}`}>Dribble</span>
+            <span className={`tooltip ${activeTooltips.dribble ? 'active' : ''}`}>{t('Dribble')}</span>
             <a href="https://dribbble.com/">
               <button
                 onMouseLeave={() => closeTooltip('dribble')}
@@ -87,43 +96,43 @@ function Footer() {
       </div>
       <div className='nav'>
         <div className="usefulLinksContainer">
-          <h1>Useful Links</h1>
+          <h1>{t('UsefulLinks')}</h1>
           <div>
-            <a href="/aboutUs">About Pronia</a>
-            <a href="/shop">How to shop</a>
-            <a href="#">FAQ</a>
-            <a href="/contact">Contact us</a>
-            <a href="/logIn">Log in</a>
+            <a href="/aboutUs">{t('AboutPronia')}</a>
+            <a href="/shop">{t('HowToShop')}</a>
+            <a href="#">{t('FAQ')}</a>
+            <a href="/contact">{t('ContactUs')}</a>
+            <a href="/logIn">{t('LoginL')}</a>
           </div>
         </div>
 
         <div className="accountHelpContainer">
-          <h1>My Account</h1>
+          <h1>{t('MyAccount')}</h1>
           <div>
-            <a href="/register">Sign Up</a>
-            <a href="/cart">View Cart</a>
-            <a href="/wishlist">My Wishlist</a>
-            <a href="#">Track My Order</a>
-            <a href="#">Help</a>
+            <a href="/register">{t('Register')}</a>
+            <a href="/cart">{t('ViewCart')}</a>
+            <a href="/wishlist">{t('MyWishlist')}</a>
+            <a href="#">{t('TrackOrder')}</a>
+            <a href="#">{t('Help')}</a>
           </div>
         </div>
 
         <div className="ourServiceContainer">
-          <h1>Our Service</h1>
+          <h1>{t('OurService')}</h1>
           <div>
-            <a href="#">Payment Methods</a>
-            <a href="#">Money Guarantee!</a>
-            <a href="#">Returns</a>
-            <a href="#">Shipping</a>
-            <a href="#">Privacy Policy</a>
+            <a href="#">{t('PaymentMethods')}</a>
+            <a href="#">{t('MoneyGuarantee')}</a>
+            <a href="#">{t('Returns')}</a>
+            <a href="#">{t('Shipping')}</a>
+            <a href="#">{t('PrivacyPolicy')}</a>
           </div>
         </div>
 
         <div className="questionsContainer">
-          <h1>Got Question? Call Us</h1>
+          <h1>{t('GotQuestion')}</h1>
           <div>
             <a href="tel://123-456-789">123 456 789</a>
-            <p>Your Address Goes Here</p>
+            <p>{t('YourAddress')}</p>
             <div>
               <img
                 className="cardsImg"

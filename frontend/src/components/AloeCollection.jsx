@@ -15,8 +15,8 @@ function AloeCollection() {
     <div className="aloeBackground">
       <div className="overlayDiv1"></div>
       <div className="overlayDiv2"></div>
-      <p>New Collection</p>
-      <h3>Plant Port</h3>
+      <p>{t('NewCollection')}</p>
+      <h3>{t('PlantPort')}</h3>
       <Button
         name={t('ShopNow')}
         {...buttonStyle}

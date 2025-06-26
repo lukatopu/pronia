@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useLoader } from '../hooks/useLoader';
 import Carousel from '../components/Carousel';
 import Services from '../components/Services';
-import ProductsList from '../components/ProductsList';
 import HomeProductsFilter from '../components/HomeProductsFilter';
 import HomeProducts from '../components/HomeProducts';
 import ProductCollections from '../components/ProductCollections';

@@ -44,10 +44,10 @@
     "ForgotM": "FORGOT PASSWORD",
     "checkoutT": "Checkout",
     "checkoutM": "Checkout Page",
-    "resetT": "reset password",
-    "resetM": "RESET PASSWORD",
+    "ResetT": "reset password",
+    "ResetM": "RESET PASSWORD",
 
-
+    "PopularTags": "Popular Tags",
     
     "MyAccount": "My account",
 
@@ -108,5 +108,125 @@
     "PostComment":"POST COMMENT",
     "ContactEmail": "Email",
 
-    "ShopNow": "SHOP NOW"
+    "ShopNow": "SHOP NOW",
+
+    "Our": "Our",
+  "Story": "Story",
+  "AboutMainText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis",
+
+  "StatsTitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.",
+  "Project": "Project",
+  "Clients": "Clients",
+  "Rating": "Rating",
+  "Award": "Award",
+
+  "TeamSectionTitle": "NEW PRODUCTS",
+  "TeamSectionSub": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature",
+
+  "SalesMan": "Sales man",
+  "Facebook": "Facebook",
+  "Twitter": "Twitter",
+  "Pinterest": "Pinterest",
+
+  "Dashboard": "Dashboard",
+  "Orders": "Orders",
+  "Addresses": "Addresses",
+  "AccountDetails": "Account Details",
+  "Logout": "Logout",
+  "NoOrders": "You have no orders yet.",
+  "ProfileLoadError": "Failed to load profile data.",
+  "LogoutFailed": "Logout failed",
+  "PasswordFieldsIncomplete": "Please fill all password fields to change password.",
+  "PasswordMismatch": "New password and confirm password don't match.",
+  "ProfileUpdated": "Profile updated successfully!",
+  "LeaveBlank": "leave blank to leave unchanged",
+  "NewPassword": "New Password",
+  "SaveChanges": "Save Changes",
+
+
+  "OurProducts": "Our Products",
+  "Featured": "Featured",
+  "Bestseller": "Bestseller",
+  "Latest": "Latest",
+
+  "CactusCollection": "Collection Of Cactus",
+  "PotteryPots": "Pottery Pots &",
+  "Plant": "Plant",
+  "NewCollection": "New Collection",
+  "PlantPort": "Plant Port",
+  "HangingPots": "Hanging Pots &",
+
+  "NewProductsTitle": "NEW PRODUCTS",
+
+  "ClientReviewTitle": "WHAT CLIENTS SAY",
+  "Client": "Client",
+  "ClientReviewText": "Lorem ipsum dolor sit amet, conse adipisic elit, sed do eiusmod tempo incididunt ut labore et dolore magna.",
+
+   "FooterDescription": "Lorem ipsum dolor sit amet,\nconsec adipisl elit, sed do eiusmod\ntempor\nincido ut labore et dolore magna."
+,
+  "Dribble": "Dribble",
+  "UsefulLinks": "Useful Links",
+  "AboutPronia": "About Pronia",
+  "HowToShop": "How to shop",
+  "FAQ": "FAQ",
+  "ContactUs": "Contact us",
+  "ViewCart": "View Cart",
+  "MyWishlist": "My Wishlist",
+  "TrackOrder": "Track My Order",
+  "Help": "Help",
+  "OurService": "Our Service",
+  "PaymentMethods": "Payment Methods",
+  "MoneyGuarantee": "Money Guarantee!",
+  "Returns": "Returns",
+  "PrivacyPolicy": "Privacy Policy",
+  "GotQuestion": "Got Question? Call Us",
+  "YourAddress": "Your Address Goes Here",
+
+
+    "ClearFilters": "Clear Filters",
+  "Popular Tags": "Popular Tags",
+  "TagFashion": "Fashion",
+  "TagOrganic": "Organic",
+  "TagOldFashion": "Old Fashion",
+  "TagMen": "Men",
+  "Search": "Search",
+  "NotFoundTitle": "Oops, page not found!",
+  "BackToHome": "BACK TO HOME",
+  "SubscribeTitle": "Subscribe Our Newsletter & Get Update Everytime",
+  "EnterEmail": "Enter Your Email",
+
+  "ShoppingCart": "Shopping Cart",
+  "EmptyCart": "Your cart is empty",
+  "Subtotal": "Subtotal",
+  "Checkout": "Checkout",
+  "NoName": "No name",
+
+
+
+  "BillingDetails": "Billing details",
+  "CountryRegion": "Country / Region",
+  "SelectCountry": "Select a country",
+  "CompanyOptional": "Company name (optional)",
+  "StreetAddress": "Street address",
+  "HouseStreet": "House number and street name",
+  "City": "Town / City",
+  "StateCounty": "State / County",
+  "PostcodeZip": "Postcode / ZIP",
+  "YourOrder": "Your order",
+  "PlaceOrder": "Place Order",
+
+  "CountryError": "Please select a country.",
+  "FirstNameError": "First name must be at least 2 characters.",
+  "LastNameError": "Last name must be at least 2 characters.",
+  "AddressError": "Address is required.",
+  "CityError": "City is required.",
+  "StateError": "State is required.",
+  "PostcodeError": "Postcode is required.",
+  "EmailError": "Invalid email format.",
+  "PhoneError": "Phone number must be exactly 9 digits.",
+  "CartEmptyError": "Your cart is empty.",
+
+  "OrderSuccess": "Order placed successfully!",
+  "OrderFail": "Failed to place order. Please try again."
+  
 }
