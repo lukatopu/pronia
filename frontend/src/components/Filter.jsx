@@ -3,6 +3,7 @@ import { PiMagnifyingGlassBold } from 'react-icons/pi';
 import { useTranslation } from 'react-i18next';
 import Slider from '@mui/material/Slider';
 import AloeCollection from './AloeCollection';
+import { useCurrency } from '../context/CurrencyContext';
 
 function Filter({
   priceRange,
@@ -17,9 +18,24 @@ function Filter({
   setSelectedCategories,
 }) {
   const { t } = useTranslation();
+  const { currency } = useCurrency();
+
+  const exchangeRates = {
+    GEL: 1,
+    USD: 0.37,
+    EUR: 0.34,
+  };
+
+  const fromGEL = (value) =>
+    Math.round(value * exchangeRates[currency] * 100) / 100;
+
+  const toGEL = (value) =>
+    Math.round((value / exchangeRates[currency]) * 100) / 100;
 
   const handleSliderChange = (e, newValue) => {
-    setPriceRange(newValue);
+    const gelMin = toGEL(newValue[0]);
+    const gelMax = toGEL(newValue[1]);
+    setPriceRange([gelMin, gelMax]);
   };
 
   const handleSearchChange = (e) => {
@@ -65,7 +81,6 @@ function Filter({
       </div>
 
       <div className="filtersContainer">
-
         <div className="Filter">
           <button onClick={clearFilters} className="clearFiltersButton">
             {t('Clear Filters') || 'Clear Filters'}
@@ -94,7 +109,6 @@ function Filter({
           </div>
         </div>
 
-
         <div className="Filter">
           <h2>{t('Color')}</h2>
           <div className="FiltersContainer">
@@ -110,18 +124,18 @@ function Filter({
           </div>
         </div>
 
-
         <div className="Filter">
           <h2>{t('PriceFilter')}</h2>
           <div className="FiltersContainer">
             <Slider
               className="slider"
               getAriaLabel={() => 'Price range'}
-              value={priceRange}
+              value={[fromGEL(priceRange[0]), fromGEL(priceRange[1])]}
               onChange={handleSliderChange}
               valueLabelDisplay="on"
-              min={16}
-              max={350}
+              valueLabelFormat={(v) => `${Math.round(v)} ${currency}`}
+              min={fromGEL(16)}
+              max={fromGEL(350)}
               disableSwap
               sx={{
                 '& .MuiSlider-thumb': {
@@ -143,7 +157,7 @@ function Filter({
                   color: 'white',
                   fontSize: '10px',
                   fontWeight: 'bold',
-                  width: '2px',
+                  width: '50px',
                   height: '15px',
                   top: -6,
                 },
@@ -151,7 +165,6 @@ function Filter({
             />
           </div>
         </div>
-
 
         <div className="Filter">
           <h2>{t('Popular Tags')}</h2>
@@ -186,8 +199,6 @@ function Filter({
             </div>
           </div>
         </div>
-
-
       </div>
 
       <AloeCollection />
