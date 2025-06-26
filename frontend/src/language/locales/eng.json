@@ -36,9 +36,18 @@
     "RegisterBannerM": "REGISTER PAGE",
     "RegisterBannerT": "Register",
     "CartBannerM": "CART PAGE",
-    "CartrBannerT": "Cart Page",
+    "CartBannerT": "Cart Page",
     "WishlistBannerM": "WISHLIST PAGE",
-    "WishlistBannerT": "Wishlist",
+    "AccountT": "My Account",
+    "AccountM": "My Account Page",
+    "ForgotT": "forgot password",
+    "ForgotM": "FORGOT PASSWORD",
+    "checkoutT": "Checkout",
+    "checkoutM": "Checkout Page",
+    "resetT": "reset password",
+    "resetM": "RESET PASSWORD",
+
+
     
     "MyAccount": "My account",
 

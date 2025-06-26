@@ -21,6 +21,7 @@
 @use './routes/checkout';
 @use './routes/about';
 @use './routes/profile';
+@use './routes/notFound';
 
 
 @use './components/loading';

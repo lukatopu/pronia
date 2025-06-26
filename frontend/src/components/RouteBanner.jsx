@@ -51,13 +51,21 @@ function RouteBanner() {
       mainTitle: 'CartBannerM',
     },
     '/forgot-password': {
-      title: 'forgot password',
-      mainTitle: 'FORGOT PASSWORD',
+      title: 'ForgotT',
+      mainTitle: 'ForgotM',
     },
     '/reset-password/:token': {
       title: 'reset password',
       mainTitle: 'RESET PASSWORD',
     },
+    '/checkout': {
+      title: 'CheckoutT',
+      mainTitle: 'CheckoutM',
+    },
+    '/profile': {
+      title: 'AccountT',
+      mainTitle: 'AccountM',
+    }
   };
 
   useEffect(() => {

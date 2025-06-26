@@ -36,9 +36,18 @@
     "RegisterBannerM": "რეგისტრაციის გვერდი",
     "RegisterBannerT": "რეგისტრაცია",
     "CartBannerM": "კალათა",
-    "CartrBannerT": "კალათა",
+    "CartBannerT": "კალათა",
     "WishlistBannerM": "სურვილების სია",
     "WishlistBannerT": "სურვილების სია",
+    "AccountT": "ჩემი ანგარიში",
+    "AccountM": "ჩემი ანგარიშის გვერდი",
+    "ForgotT": "დაგავიწყდა პაროლი",
+    "ForgotM": "პაროლის აღდგენა",
+    "checkoutT": "გადახდა",
+    "checkoutM": "გადახდის გვერდი",
+    "resetT": "პაროლის შეცვლა",
+    "resetM": "პაროლის შეცვლის გვერდი",
+
 
     "MyAccount": "ჩემი ანგარიში",
 
