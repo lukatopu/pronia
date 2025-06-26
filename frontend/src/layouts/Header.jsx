@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import CartModal from '../components/CartModal';
 import HeaderBurger from '../components/HeaderBurger';
 import { getCurrentUser } from '../api/api';
+import { useCurrency } from '../context/CurrencyContext';
 
 function Header({ cart }) {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
@@ -24,11 +25,15 @@ function Header({ cart }) {
   const [isUserFixedClicked, setIsUserFixedClicked] = useState(false);
   const [isCartClicked, setIsCartClicked] = useState(false);
   const [isCartOverlayHidden, setIsCartOverlayHidden] = useState(true);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
+  const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+
   const headerRef = useRef(null);
 
+  const { currency, setCurrency } = useCurrency();
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
@@ -58,6 +63,11 @@ function Header({ cart }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [triggerHeight]);
 
+  useEffect(() => {
+    const savedCurrency = localStorage.getItem('currency');
+    if (savedCurrency) setCurrency(savedCurrency);
+  }, [setCurrency]);
+
   const handleSearch = () => setIsSearchClicked(true);
   const closeSearch = () => setIsSearchClicked(false);
 
@@ -86,7 +96,13 @@ function Header({ cart }) {
   const handleChangeLanguageCustom = (lang) => {
     i18n.changeLanguage(lang);
     localStorage.setItem('lang', lang);
-    setDropdownOpen(false);
+    setLanguageDropdownOpen(false);
+  };
+
+  const handleCurrencyChange = (cur) => {
+    setCurrency(cur);
+    localStorage.setItem('currency', cur);
+    setCurrencyDropdownOpen(false);
   };
 
   return (
@@ -94,17 +110,28 @@ function Header({ cart }) {
       <div className="headerTop">
         <p>{t('HeaderTopText')}</p>
         <div className="curAndLanguageContainer">
-          <span>
-            USD <PiCaretDownBold />
-          </span>
           <div className="customDropdown">
             <button
               className="dropdownToggle"
-              onClick={() => setDropdownOpen((prev) => !prev)}
+              onClick={() => setCurrencyDropdownOpen((prev) => !prev)}
+            >
+              {currency} <PiCaretDownBold />
+            </button>
+            <ul className={`dropdownMenu ${currencyDropdownOpen ? 'open' : ''}`}>
+              <li onClick={() => handleCurrencyChange('USD')}>USD</li>
+              <li onClick={() => handleCurrencyChange('EUR')}>EUR</li>
+              <li onClick={() => handleCurrencyChange('GEL')}>GEL</li>
+            </ul>
+          </div>
+
+          <div className="customDropdown">
+            <button
+              className="dropdownToggle"
+              onClick={() => setLanguageDropdownOpen((prev) => !prev)}
             >
               {i18n.language.toUpperCase()} <PiCaretDownBold />
             </button>
-            <ul className={`dropdownMenu ${dropdownOpen ? 'open' : ''}`}>
+            <ul className={`dropdownMenu ${languageDropdownOpen ? 'open' : ''}`}>
               <li onClick={() => handleChangeLanguageCustom('eng')}>ENG</li>
               <li onClick={() => handleChangeLanguageCustom('geo')}>GEO</li>
             </ul>
@@ -214,10 +241,10 @@ function Header({ cart }) {
       <HeaderBurger
         isOpen={isBurgerOpen}
         onClose={() => setIsBurgerOpen(false)}
-        dropdownOpen={dropdownOpen}
+        dropdownOpen={languageDropdownOpen}
         isUserMainClicked={isUserMainClicked}
         handleDropdownClick={handleDropdownClick}
-        setDropdownOpen={setDropdownOpen}
+        setDropdownOpen={setLanguageDropdownOpen}
         handleChangeLanguageCustom={handleChangeLanguageCustom}
         handleUserMainClick={handleUserMainClick}
       />

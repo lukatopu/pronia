@@ -2,6 +2,8 @@ import React from 'react';
 import { PiPhone, PiUserThin, PiHeartStraightThin, PiCaretDownBold, PiX } from 'react-icons/pi';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useCurrency } from '../context/CurrencyContext';
+
 
 function HeaderBurger({
   isOpen,
@@ -14,6 +16,18 @@ function HeaderBurger({
   handleUserMainClick,
 }) {
   const { t, i18n } = useTranslation();
+
+  const { currency, setCurrency } = useCurrency();
+
+
+  const [currencyDropdownOpen, setCurrencyDropdownOpen] = React.useState(false);
+
+  const handleCurrencyChange = (cur) => {
+    setCurrency(cur);
+    localStorage.setItem('currency', cur);
+    setCurrencyDropdownOpen(false);
+  };
+
 
   return (
     <div className={`headerBurgerContainer ${isOpen ? 'open' : ''}`}>
@@ -46,6 +60,21 @@ function HeaderBurger({
             <li onClick={() => handleChangeLanguageCustom('geo')}>GEO</li>
           </ul>
         </div>
+
+        <div className="customDropdown">
+          <button
+            className="dropdownToggle"
+            onClick={() => setCurrencyDropdownOpen((prev) => !prev)}
+          >
+            {currency} <PiCaretDownBold />
+          </button>
+          <ul className={`dropdownMenu ${currencyDropdownOpen ? 'open' : ''}`}>
+            <li onClick={() => handleCurrencyChange('USD')}>USD</li>
+            <li onClick={() => handleCurrencyChange('EUR')}>EUR</li>
+            <li onClick={() => handleCurrencyChange('GEL')}>GEL</li>
+          </ul>
+        </div>
+
 
         <div className="userIconContainer">
           <PiUserThin

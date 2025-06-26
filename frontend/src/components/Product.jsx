@@ -10,6 +10,8 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { addToCart } from '../api/api';
+import { useCurrency } from '../context/CurrencyContext';
+
 
 function Product({
   product,
@@ -23,6 +25,7 @@ function Product({
   const { i18n, t } = useTranslation();
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const navigate = useNavigate();
+  const { currency } = useCurrency();
 
   const isInCart = cart.some((item) => item.productId?._id === product._id);
   const isInWishlist = wishlist.some((item) => item._id === product._id);
@@ -53,6 +56,19 @@ function Product({
       }
     }
   };
+
+
+  const convertPrice = (gelPrice, currency) => {
+  const rates = {
+    GEL: 1,
+    USD: 0.37,
+    EUR: 0.34,
+  };
+
+  const numeric = parseFloat(gelPrice.toString().replace(/[^\d.]/g, '')) || 0;
+  return (numeric * rates[currency]).toFixed(2);
+};
+
 
   return (
     <div className={`product ${isListView ? 'list-view' : ''}`}>
@@ -98,7 +114,8 @@ function Product({
 
       <div className="productTextContainer">
         <Link to={`/product/${product._id}`}>{product.name?.[i18n.language] || product.name}</Link>
-        <p>{product.price}</p>
+        <p>{convertPrice(product.price, currency)} {currency}</p>
+
         <div className="ratingContainer">{renderStars(product.rating)}</div>
 
         {isListView && (

@@ -11,34 +11,35 @@ function Shop({ fetchCart, addToWishlist, addToCart, cart, wishlist, removeFromW
 
 
 
+
   return (
     <div className="shop">
       <Filter
-  priceRange={priceRange}
-  setPriceRange={setPriceRange}
-  searchTerm={searchTerm}
-  setSearchTerm={setSearchTerm}
-  selectedTags={selectedTags}
-  setSelectedTags={setSelectedTags}
-  selectedColors={selectedColors}
-  setSelectedColors={setSelectedColors}
-  selectedCategories={selectedCategories}
-  setSelectedCategories={setSelectedCategories}
-/>
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+        selectedColors={selectedColors}
+        setSelectedColors={setSelectedColors}
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
+      />
 
-<ProductsList
-  addToWishlist={addToWishlist}
-  addToCart={addToCart}
-  priceRange={priceRange}
-  searchTerm={searchTerm}
-  selectedTags={selectedTags}
-  selectedColors={selectedColors}
-  selectedCategories={selectedCategories}
-  cart={cart}
-  wishlist={wishlist}
-  fetchCart={fetchCart}
-  removeFromWishlist={removeFromWishlist}
-/>
+      <ProductsList
+        addToWishlist={addToWishlist}
+        addToCart={addToCart}
+        priceRange={priceRange}
+        searchTerm={searchTerm}
+        selectedTags={selectedTags}
+        selectedColors={selectedColors}
+        selectedCategories={selectedCategories}
+        cart={cart}
+        wishlist={wishlist}
+        fetchCart={fetchCart}
+        removeFromWishlist={removeFromWishlist}
+      />
 
 
     </div>
