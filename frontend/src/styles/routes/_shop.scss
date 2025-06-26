@@ -1,3 +1,5 @@
+@use '../abstracts/' as *;
+
 .shop {
  display: flex;
  gap: 4%;
@@ -6,6 +8,44 @@
  margin-left: auto;
  margin-right: auto;
  max-width: 1200px;
+
+ .productsWrapper {
+  .pagination {
+   display: flex;
+   justify-content: center;
+   gap: 8px;
+   margin-top: 30px;
+
+   button {
+    border: 1px solid #dee2e6;
+    color: #d5d5d5;
+    text-align: center;
+    padding: 0;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    background-color: transparent;
+    cursor: pointer;
+
+    &.active {
+     border-color: $light-green;
+     color: $light-green;
+    }
+
+    &.hover {
+     border-color: $light-green;
+     color: white;
+     background-color: $light-green;
+    }
+
+    &:disabled {
+     opacity: 0.5;
+     cursor: default;
+    }
+   }
+  }
+
+ }
 }
 
 @media (max-width: 1200px) {
@@ -129,6 +169,7 @@
 
     .product {
      padding-bottom: 10px;
+
      .productImageContainer {
       width: 100px;
 
@@ -138,7 +179,8 @@
       text-align: center;
 
 
-      .ratingContainer, .listButtonGroup {
+      .ratingContainer,
+      .listButtonGroup {
        width: 100%;
        display: flex;
        justify-content: center;

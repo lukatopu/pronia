@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Product from './Product';
 import { getProducts } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
@@ -18,6 +18,10 @@ function ProductsList({
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isGridView, setIsGridView] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 12;
+
+  const productTopRef = useRef(null);
   const { useDataLoader } = useLoader();
 
   useEffect(() => {
@@ -52,18 +56,10 @@ function ProductsList({
     const sorted = [...products];
     switch (sortOption) {
       case 'price-high-low':
-        sorted.sort((a, b) => {
-          const priceA = parsePrice(a.price);
-          const priceB = parsePrice(b.price);
-          return priceB - priceA;
-        });
+        sorted.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
         break;
       case 'price-low-high':
-        sorted.sort((a, b) => {
-          const priceA = parsePrice(a.price);
-          const priceB = parsePrice(b.price);
-          return priceA - priceB;
-        });
+        sorted.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
         break;
       case 'rating':
         sorted.sort((a, b) => b.rating - a.rating);
@@ -101,29 +97,44 @@ function ProductsList({
       return true;
     });
   };
-  
 
   const handleSortChange = (sortOption) => {
     const filtered = filterProducts(products);
     const sorted = sortProducts(filtered, sortOption);
     setFilteredProducts(sorted);
+    setCurrentPage(1);
   };
-
-  
 
   useEffect(() => {
     const filtered = filterProducts(products);
     setFilteredProducts(filtered);
+    setCurrentPage(1);
   }, [products, priceRange, searchTerm, selectedTags]);
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
+  const scrollToProductTop = () => {
+    if (productTopRef.current) {
+      window.scrollTo({
+        top: productTopRef.current.offsetTop - 100,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
     <div className="productsWrapper">
-      <ProductsSort
-        onSortChange={handleSortChange}
-        onViewChange={setIsGridView}
-      />
-      <div className={`productsContainer ${isGridView ? 'grid-view' : 'list-view'}`}>
-        {filteredProducts.map((product, index) => (
+      <ProductsSort onSortChange={handleSortChange} onViewChange={setIsGridView} />
+
+      <div
+        ref={productTopRef}
+        className={`productsContainer ${isGridView ? 'grid-view' : 'list-view'}`}
+      >
+        {paginatedProducts.map((product, index) => (
           <Product
             addToCart={addToCart}
             addToWishlist={addToWishlist}
@@ -137,6 +148,49 @@ function ProductsList({
           />
         ))}
       </div>
+
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button
+            onClick={() => {
+              setCurrentPage((prev) => {
+                const newPage = Math.max(prev - 1, 1);
+                scrollToProductTop();
+                return newPage;
+              });
+            }}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => {
+                setCurrentPage(page);
+                scrollToProductTop();
+              }}
+              className={page === currentPage ? 'active' : ''}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            onClick={() => {
+              setCurrentPage((prev) => {
+                const newPage = Math.min(prev + 1, totalPages);
+                scrollToProductTop();
+                return newPage;
+              });
+            }}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 }
