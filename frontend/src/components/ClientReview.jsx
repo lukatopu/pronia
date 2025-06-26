@@ -16,17 +16,23 @@ function ClientReview() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
   const [cardWidth, setCardWidth] = useState(350);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width < 770) {
+      setIsSmallScreen(width < 540);
+      
+      if (width <= 540) {
+        setVisibleCards(1);
+        setCardWidth(350);
+      } else if (width <= 770) {
         setVisibleCards(1);
         setCardWidth(480);
-      } else if (width < 990) {
+      } else if (width <= 990) {
         setVisibleCards(2);
         setCardWidth(315);
-      } else if (width < 1200) {
+      } else if (width <= 1200) {
         setVisibleCards(2);
         setCardWidth(435);
       } else {
@@ -35,8 +41,8 @@ function ClientReview() {
       }
     };
 
-    handleResize(); // Set on load
-    window.addEventListener('resize', handleResize); // Update on resize
+    handleResize();
+    window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -70,7 +76,11 @@ function ClientReview() {
               <div
                 className="clientReviewContainer"
                 key={i}
-                style={{ flex: `0 0 ${cardWidth}px` }}
+                style={{ 
+                  flex: isSmallScreen ? '0 0 350px' : `0 0 ${cardWidth}px`,
+                  maxWidth: isSmallScreen ? '350px' : `${cardWidth}px`,
+                  minWidth: isSmallScreen ? '350px' : `${cardWidth}px`
+                }}
               >
                 <div className="quoteMarkContainer">
                   <img src={quotation} alt="" />
