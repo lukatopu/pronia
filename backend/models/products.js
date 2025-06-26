@@ -25,7 +25,7 @@ const ProductsSchema = new mongoose.Schema({
   type: String,
  },
  description: {
-  type: translationSchema,
+  type: String,
  },
  categorie: {
   type: [String],

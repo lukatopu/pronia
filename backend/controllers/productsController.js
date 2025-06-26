@@ -11,8 +11,7 @@ export const getProducts = async (req, res) => {
              res.status(200).json(cachedProducts)
             return
         }
-
-
+ 
         const products = await Products.find()
 
         cache.set(key, products);

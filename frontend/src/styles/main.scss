@@ -18,6 +18,8 @@
 @use './routes/login';
 @use './routes/register'; 
 @use './routes/cart';
+@use './routes/checkout';
+@use './routes/about';
 
 
 @use './components/loading';

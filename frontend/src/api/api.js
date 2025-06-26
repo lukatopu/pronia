@@ -54,11 +54,11 @@ export const resetPasswordUser = (data, token) => {
   });
 };
 
-// Add to cart
+
 export const addToCart = async (productId, quantity) => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/api/users/cart',
+      'http://localhost:3000/api/users/cart/add',
       { productId, quantity },
       {
         headers: { 'Content-Type': 'application/json' },
@@ -71,10 +71,10 @@ export const addToCart = async (productId, quantity) => {
   }
 };
 
-// Remove from cart
+
 export const removeFromCart = async (productId) => {
   try {
-    const response = await axios.delete('http://localhost:3000/api/users/cart', {
+    const response = await axios.delete('http://localhost:3000/api/users/cart/remove', {
       data: { productId },
       withCredentials: true,
     });
@@ -84,7 +84,7 @@ export const removeFromCart = async (productId) => {
   }
 };
 
-// Get cart
+
 export const getCart = async () => {
   try {
     const response = await axios.get('http://localhost:3000/api/users/cart', {
@@ -96,11 +96,10 @@ export const getCart = async () => {
   }
 };
 
-// Update cart item quantity
+
 export const updateCartItem = async (productId, quantity) => {
   try {
     const response = await axios.put(
-      // Change from POST to PUT
       'http://localhost:3000/api/users/cart/update',
       { productId, quantity },
       {
@@ -111,5 +110,58 @@ export const updateCartItem = async (productId, quantity) => {
     return response.data;
   } catch (err) {
     throw new Error(err.response?.data?.err || 'Failed to update cart item');
+  }
+};
+
+
+export const clearCart = async () => {
+  try {
+    const response = await axios.delete('http://localhost:3000/api/users/cart/clear', {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.err || 'Failed to clear cart');
+  }
+};
+
+
+
+export const addToWishlist = async (productId) => {
+  try {
+    const response = await axios.post(
+      'http://localhost:3000/api/users/wishlist/add',
+      { productId },
+      {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.err || 'Failed to add to wishlist');
+  }
+};
+
+export const removeFromWishlist = async (productId) => {
+  try {
+    const response = await axios.delete('http://localhost:3000/api/users/wishlist/remove', {
+      data: { productId },
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.err || 'Failed to remove from wishlist');
+  }
+};
+
+export const getWishlist = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/api/users/wishlist', {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.err || 'Failed to get wishlist');
   }
 };

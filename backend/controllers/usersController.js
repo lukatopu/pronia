@@ -69,8 +69,9 @@ export const forgotPasswordUser = async (req, res) => {
 
         let user = await Users.findOne({ email: email });
         if (!user) {
-            return res.status(400).json({ msg: "Email is incorrect!" })
+            return res.status(401).json({ msg: 'Email is not signed up' });
         }
+
 
         const access_token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
         const url = `http://localhost:5173/reset-password/${access_token}`
@@ -91,7 +92,7 @@ export const forgotPasswordUser = async (req, res) => {
 
 export const resetPasswordUser = async (req, res) => {
     try {
-        const {password} = req.body;
+        const { password } = req.body;
         const token = req.header('Authorization');
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
@@ -99,23 +100,23 @@ export const resetPasswordUser = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password + process.env.BCRYPT_PEPPER, 11)
 
-        await Users.findOneAndUpdate({_id: userId}, {
+        await Users.findOneAndUpdate({ _id: userId }, {
             password: hashedPassword
         })
 
         console.log(decoded)
 
-        res.status(200).json({msg: "Password successfully changed!"})
+        res.status(200).json({ msg: "Password successfully changed!" })
     } catch (err) {
         console.log(err)
-        return res.status(500).json({msg: err.message})
+        return res.status(500).json({ msg: err.message })
     }
 
 }
 
 
 
-// Add to cart
+
 export const addToCart = async (req, res) => {
     try {
         const { productId, quantity } = req.body;
@@ -126,16 +127,13 @@ export const addToCart = async (req, res) => {
             return res.status(404).json({ err: 'User not found' });
         }
 
-        // Check if product already exists in cart
         const existingItemIndex = user.cart.findIndex(
             item => item.productId.toString() === productId
         );
 
         if (existingItemIndex >= 0) {
-            // Update quantity if product exists
             user.cart[existingItemIndex].quantity += quantity || 1;
         } else {
-            // Add new item to cart
             user.cart.push({
                 productId,
                 quantity: quantity || 1
@@ -149,7 +147,7 @@ export const addToCart = async (req, res) => {
     }
 };
 
-// Remove from cart
+
 export const removeFromCart = async (req, res) => {
     try {
         const { productId } = req.body;
@@ -160,7 +158,7 @@ export const removeFromCart = async (req, res) => {
             return res.status(404).json({ err: 'User not found' });
         }
 
-        // Remove item from cart
+
         user.cart = user.cart.filter(
             item => item.productId.toString() !== productId
         );
@@ -172,7 +170,7 @@ export const removeFromCart = async (req, res) => {
     }
 };
 
-// Get cart
+
 export const getCart = async (req, res) => {
     try {
         const userId = req.user.id;
@@ -214,4 +212,76 @@ export const updateCartItem = async (req, res) => {
     } catch (err) {
         res.status(500).json({ err: err.message });
     }
+};
+
+
+export const clearCart = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await Users.findById(userId);
+    if (!user) return res.status(404).json({ err: 'User not found' });
+
+    user.cart = [];
+    await user.save();
+
+    res.status(200).json({ msg: 'Cart cleared successfully' });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
+
+
+// Add product to wishlist
+export const addToWishlist = async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const userId = req.user.id;
+
+    const user = await Users.findById(userId);
+    if (!user) return res.status(404).json({ err: 'User not found' });
+
+    if (!user.wishlist.includes(productId)) {
+      user.wishlist.push(productId);
+      await user.save();
+    }
+
+    const populatedUser = await Users.findById(userId).populate('wishlist');
+    res.status(200).json({ data: populatedUser.wishlist });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
+// Remove product from wishlist
+export const removeFromWishlist = async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const userId = req.user.id;
+
+    const user = await Users.findById(userId);
+    if (!user) return res.status(404).json({ err: 'User not found' });
+
+    user.wishlist = user.wishlist.filter(id => id.toString() !== productId);
+    await user.save();
+
+    const populatedUser = await Users.findById(userId).populate('wishlist');
+    res.status(200).json({ data: populatedUser.wishlist });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
+// Get wishlist
+export const getWishlist = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const user = await Users.findById(userId).populate('wishlist');
+    if (!user) return res.status(404).json({ err: 'User not found' });
+
+    res.status(200).json({ data: user.wishlist });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
 };

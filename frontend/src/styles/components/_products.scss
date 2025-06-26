@@ -1,9 +1,17 @@
 @use '../abstracts' as *;
 
+.productsWrapper {
+  width: 100%;
+}
+
 .productsContainer {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+
+  &.list-view {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .product {
@@ -14,6 +22,63 @@
   align-items: center;
   cursor: pointer;
   overflow: hidden;
+
+  &.list-view {
+    flex-direction: row;
+    border: 1px solid #dee2e6;
+    transition: 300ms;
+    height: 300px;
+    cursor: auto;
+    margin-bottom: 2vw;
+
+    &:hover {
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+      border-color: transparent;
+    }
+
+
+    .productImageContainer {
+      position: relative;
+      height: 100%;
+    }
+
+    .listButtonGroup {
+      display: flex;
+      gap: 10px;
+
+      .listButton {
+        width: 42px;
+        height: 42px;
+        background-color: #ffffff;
+        font-size: 20px;
+        cursor: pointer;
+        border: 1px solid #dee2e6;
+        transition: 300ms;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .productTextContainer {
+      width: 100%;
+
+      a {
+        transition: 300ms;
+
+        &:hover {
+          color: $light-green;
+        }
+      }
+
+      .productDescription {
+        font-size: 14px;
+        line-height: 26px;
+        color: #575257;
+      }
+    }
+
+  }
 
   .productImageContainer {
     position: relative;

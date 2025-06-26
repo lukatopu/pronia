@@ -1,15 +1,19 @@
 import express from "express";
-import { 
-    loginUser, 
-    registerUser, 
-    forgotPasswordUser, 
+import {
+    loginUser,
+    registerUser,
+    forgotPasswordUser,
     resetPasswordUser,
     addToCart,
     removeFromCart,
     getCart,
-    updateCartItem
+    updateCartItem,
+    clearCart,
+    addToWishlist,
+    removeFromWishlist,
+    getWishlist
 } from "../controllers/usersController.js";
-import authMiddleware from "../middleware/authMiddleware.js"; // You'll need this
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const UsersRouter = express.Router()
 
@@ -18,11 +22,17 @@ UsersRouter.post('/register', registerUser)
 UsersRouter.put('/forgot-password', forgotPasswordUser)
 UsersRouter.put('/reset-password', resetPasswordUser)
 
-// Protected routes (require authentication)
-UsersRouter.post('/cart', authMiddleware, addToCart)
-UsersRouter.delete('/cart', authMiddleware, removeFromCart)
+
+UsersRouter.post('/cart/add', authMiddleware, addToCart)
+UsersRouter.delete('/cart/remove', authMiddleware, removeFromCart)
 UsersRouter.get('/cart', authMiddleware, getCart)
-// Add this with your other cart routes
 UsersRouter.put('/cart/update', authMiddleware, updateCartItem);
+UsersRouter.delete('/cart/clear', authMiddleware, clearCart);
+
+
+
+UsersRouter.post('/wishlist/add', authMiddleware, addToWishlist);
+UsersRouter.delete('/wishlist/remove', authMiddleware, removeFromWishlist);
+UsersRouter.get('/wishlist', authMiddleware, getWishlist);
 
 export default UsersRouter

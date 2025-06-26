@@ -1,0 +1,137 @@
+
+.checkoutContainer {
+ display: flex;
+ padding: 20px;
+ gap: 30px;
+ max-width: 1200px;
+ margin: 0 auto;
+
+ .billingDetails {
+  flex: 1;
+
+  h2 {
+   margin-bottom: 20px;
+   font-size: 1.5rem;
+   color: #333;
+  }
+
+  label {
+   display: block;
+   margin-bottom: 5px;
+   font-weight: 500;
+   color: #555;
+  }
+
+  select,
+  input {
+   width: 100%;
+   padding: 10px;
+   border-radius: 4px;
+   border: 1px solid #ccc;
+   background-color: white;
+   font-size: 1rem;
+   transition: border-color 0.3s;
+
+   &:focus {
+    outline: none;
+    border-color: #4CAF50;
+   }
+  }
+
+  .nameFields {
+   display: flex;
+   gap: 15px;
+   margin-bottom: 15px;
+
+   div {
+    flex: 1;
+   }
+  }
+
+  .formGroup {
+   margin-bottom: 15px;
+  }
+ }
+
+ .orderSummary {
+  flex: 1;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  height: fit-content;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  h1 {
+   margin-bottom: 20px;
+   font-size: 1.8rem;
+   color: #333;
+  }
+
+  .orderItems {
+   border-bottom: 1px solid #ddd;
+   padding-bottom: 15px;
+   margin-bottom: 15px;
+
+   .orderHeader {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+   }
+
+   .orderItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+   }
+  }
+
+  .orderTotals {
+   border-bottom: 1px solid #ddd;
+   padding-bottom: 15px;
+   margin-bottom: 15px;
+
+   .totalRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+   }
+  }
+
+  .grandTotal {
+   display: flex;
+   justify-content: space-between;
+   font-weight: bold;
+   font-size: 1.2em;
+   margin-top: 20px;
+   color: #333;
+  }
+
+  .placeOrderBtn {
+   width: 100%;
+   padding: 15px;
+   background-color: #4CAF50;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   font-size: 1rem;
+   margin-top: 20px;
+   cursor: pointer;
+   font-weight: bold;
+   transition: background-color 0.3s;
+   text-transform: uppercase;
+   letter-spacing: 1px;
+
+   &:hover {
+    background-color: black;
+   }
+
+   &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+   }
+  }
+ }
+}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLoader } from '../hooks/useLoader';
 import { useTranslation } from 'react-i18next';
 
-function Wishlist({ wishlist, cart, addToCart }) {
+function Wishlist({ wishlist, cart, addToCart, removeFromWishlist }) {
   const { useFakeLoader } = useLoader();
   const { i18n, t } = useTranslation();
 
@@ -29,12 +29,12 @@ function Wishlist({ wishlist, cart, addToCart }) {
           </thead>
           <tbody>
             {wishlist.map((product) => {
-              const isInCart = cart.some((item) => item._id === product._id);
+              const isInCart = cart.some((item) => item.productId?._id === product._id);
 
               return (
                 <tr key={product._id}>
                   <td>
-                    <button>x</button>
+                    <button onClick={() => removeFromWishlist(product._id)}>x</button>
                   </td>
                   <td>
                     <Link to={`/product/${product._id}`}>
@@ -56,7 +56,7 @@ function Wishlist({ wishlist, cart, addToCart }) {
                   </td>
                   <td>
                     <button
-                      onClick={() => addToCart(product)}
+                      onClick={() => addToCart(product._id, 1)}
                       disabled={isInCart}
                       className="addToCartButton"
                     >

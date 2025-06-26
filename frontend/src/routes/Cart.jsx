@@ -13,6 +13,12 @@ function Cart({ cart, fetchCart }) {
   useEffect(() => useFakeLoader(), []);
   useEffect(() => setCartItems(cart), [cart]);
 
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => {
+      return total + parseFloat(item.productId.price) * parseInt(item.quantity);
+    }, 0);
+  };
+
   const handleRemoveFromCart = async (productId) => {
     try {
       await removeFromCart(productId);
@@ -42,56 +48,73 @@ function Cart({ cart, fetchCart }) {
       {cartItems.length === 0 ? (
         <p>NOTHING IN CART</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>{t('Remove')}</th>
-              <th>{t('Images')}</th>
-              <th>{t('Product')}</th>
-              <th>{t('UnitPrice')}</th>
-              <th>{t('Quantity')}</th>
-              <th>{t('Total')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cartItems.map((item) => (
-              <tr key={item.productId._id}>
-                <td>
-                  <button onClick={() => handleRemoveFromCart(item.productId._id)}>x</button>
-                </td>
-                <td>
-                  <Link to={`/product/${item.productId._id}`}>
-                    <img
-                      className="wishlistProductImage"
-                      src={`/productImg/product${item.productId.image}.jpg`}
-                      alt={item.productId.name?.[i18n.language] || item.productId.name}
-                    />
-                  </Link>
-                </td>
-                <td>
-                  <Link to={`/product/${item.productId._id}`}>
-                    {item.productId.name?.[i18n.language] || item.productId.name}
-                  </Link>
-                </td>
-                <td>
-                  <p>${item.productId.price}</p>
-                </td>
-                <td>
-                  <Counter
-                    value={item.quantity}
-                    onChange={(newQuantity) =>
-                      handleQuantityChange(item.productId._id, newQuantity)
-                    }
-                  />
-                </td>
-                <td>
-                  <p>${(parseFloat(item.productId.price) * parseInt(item.quantity)).toFixed(2)}</p>
-                </td>
+        <>
+          <table>
+            <thead>
+              <tr>
+                <th>{t('Remove')}</th>
+                <th>{t('Images')}</th>
+                <th>{t('Product')}</th>
+                <th>{t('UnitPrice')}</th>
+                <th>{t('Quantity')}</th>
+                <th>{t('Total')}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {cartItems.map((item) => (
+                <tr key={item.productId._id}>
+                  <td>
+                    <button onClick={() => handleRemoveFromCart(item.productId._id)}>x</button>
+                  </td>
+                  <td>
+                    <Link to={`/product/${item.productId._id}`}>
+                      <img
+                        className="wishlistProductImage"
+                        src={`/productImg/product${item.productId.image}.jpg`}
+                        alt={item.productId.name?.[i18n.language] || item.productId.name}
+                      />
+                    </Link>
+                  </td>
+                  <td>
+                    <Link to={`/product/${item.productId._id}`}>
+                      {item.productId.name?.[i18n.language] || item.productId.name}
+                    </Link>
+                  </td>
+                  <td>
+                    <p>${item.productId.price}</p>
+                  </td>
+                  <td>
+                    <Counter
+                      value={item.quantity}
+                      onChange={(newQuantity) =>
+                        handleQuantityChange(item.productId._id, newQuantity)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <p>${(parseFloat(item.productId.price) * parseInt(item.quantity)).toFixed(2)}</p>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+        </>
       )}
+      <div className='cartTotal'>
+        <h1>Cart Totals</h1>
+        <div className='subTotalContainer'>
+          <p>Subtotal</p>
+          <p>${calculateTotal().toFixed(2)}</p>
+        </div>
+        <div className='totalContainer'>
+          <p>Total</p>
+          <p>${calculateTotal().toFixed(2)}</p>
+        </div>
+        <a href="/checkout">
+        <button className='proceedCheckoutButton'>Proceed To Checkout</button>
+        </a>
+      </div>
     </div>
   );
 }

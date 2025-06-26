@@ -8,10 +8,18 @@ import { useLoader } from '../hooks/useLoader.jsx';
 import Services from '../components/Services.jsx';
 import { useTranslation } from 'react-i18next';
 
-function SingleProduct({ addToWishlist, cart, wishlist, fetchCart }) {
+function SingleProduct({
+  addToWishlist,
+  removeFromWishlist,
+  cart,
+  wishlist,
+  fetchCart,
+  fetchWishlist,
+}) {
   const [products, setProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isUpdatingWishlist, setIsUpdatingWishlist] = useState(false);
   const { id } = useParams();
   const { useDataLoader } = useLoader();
   const { i18n, t } = useTranslation();
@@ -22,6 +30,8 @@ function SingleProduct({ addToWishlist, cart, wishlist, fetchCart }) {
 
   const product = products.find((p) => p._id === id || p.id === id);
 
+  if (!product) return <h2>{t('ProductNotFound')}</h2>;
+
   const isInCart = product && cart.some((item) => item.productId?._id === product._id);
   const isInWishlist = product && wishlist.some((item) => item._id === product._id);
 
@@ -29,9 +39,17 @@ function SingleProduct({ addToWishlist, cart, wishlist, fetchCart }) {
     return Array.from({ length: count }, (_, i) => <PiStarFill key={i} />);
   };
 
-  const handleAddToWishlist = () => {
-    if (product) {
-      addToWishlist(product);
+  const handleAddToWishlist = async () => {
+    if (!product || isUpdatingWishlist) return;
+    try {
+      if (isInWishlist) {
+        await removeFromWishlist(product._id);
+      } else {
+        await addToWishlist(product._id);
+      }
+      await fetchWishlist();
+    } catch (error) {
+      console.error('Failed to update wishlist:', error);
     }
   };
 
@@ -48,8 +66,6 @@ function SingleProduct({ addToWishlist, cart, wishlist, fetchCart }) {
       setIsAddingToCart(false);
     }
   };
-
-  if (!product) return <h2>Product not found</h2>;
 
   return (
     <div className="singleProductPage">
@@ -78,15 +94,20 @@ function SingleProduct({ addToWishlist, cart, wishlist, fetchCart }) {
             className="addToCartButton"
             disabled={isInCart || isAddingToCart}
           >
-            {isAddingToCart ? t('Adding...') : isInCart ? t('AlreadyInCart') : t('AddToCart')}
+            {isAddingToCart
+              ? t('Adding...')
+              : isInCart
+              ? t('AlreadyInCart')
+              : t('AddToCart')}
           </button>
           <button
             onClick={handleAddToWishlist}
             className="wishlistButton"
+            disabled={isUpdatingWishlist}
           >
             {isInWishlist ? <PiHeartFill /> : <PiHeart />}
           </button>
-          <button className="compareButton">
+          <button className="compareButton" aria-label={t('Compare')}>
             <BsArrowRepeat />
           </button>
         </div>

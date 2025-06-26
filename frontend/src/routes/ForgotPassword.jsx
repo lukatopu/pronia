@@ -17,14 +17,17 @@ function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
 
     try {
       const response = await forgotPasswordUser(formData);
       if (response.data) {
-        alert('email has sent');
+        alert('Email has been sent');
       }
     } catch (err) {
-      throw err;
+      const errorMessage = err.response?.data?.msg || err.response?.data?.err || 'Email is not signed up';
+      console.log(errorMessage);
+      setError(errorMessage);
     }
   };
 
