@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import CartModal from '../components/CartModal';
 import HeaderBurger from '../components/HeaderBurger';
+import { getCurrentUser } from '../api/api';
 
 function Header({ cart }) {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
@@ -25,26 +26,43 @@ function Header({ cart }) {
   const [isCartOverlayHidden, setIsCartOverlayHidden] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const headerRef = useRef(null);
 
   const { t, i18n } = useTranslation();
 
-  const handleSearch = () => {
-    setIsSearchClicked(true);
-  };
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        await getCurrentUser();
+        setIsLoggedIn(true);
+      } catch {
+        setIsLoggedIn(false);
+      }
+    };
+    checkAuth();
+  }, []);
 
-  const closeSearch = () => {
-    setIsSearchClicked(false);
-  };
+  useEffect(() => {
+    if (headerRef.current) {
+      setTriggerHeight(headerRef.current.offsetHeight);
+    }
+  }, []);
 
-  const handleCartModal = () => {
-    setIsCartClicked(!isCartClicked);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsFixed(window.scrollY >= triggerHeight);
+    };
 
-  const handleCartOverlay = () => {
-    setIsCartOverlayHidden(!isCartOverlayHidden);
-  };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [triggerHeight]);
 
+  const handleSearch = () => setIsSearchClicked(true);
+  const closeSearch = () => setIsSearchClicked(false);
+
+  const handleCartModal = () => setIsCartClicked(!isCartClicked);
+  const handleCartOverlay = () => setIsCartOverlayHidden(!isCartOverlayHidden);
   const handleCart = () => {
     handleCartModal();
     handleCartOverlay();
@@ -64,24 +82,6 @@ function Header({ cart }) {
     setIsUserMainClicked(false);
     setIsUserFixedClicked(false);
   };
-
-  useEffect(() => {
-    if (headerRef.current) {
-      setTriggerHeight(headerRef.current.offsetHeight);
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsFixed(window.scrollY >= triggerHeight);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [triggerHeight]);
 
   const handleChangeLanguageCustom = (lang) => {
     i18n.changeLanguage(lang);
@@ -121,47 +121,36 @@ function Header({ cart }) {
         </div>
         <div>
           <a href="/">
-            <img
-              src={proniaLogo}
-              alt="Pronia Logo"
-            />
+            <img src={proniaLogo} alt="Pronia Logo" />
           </a>
         </div>
         <nav>
           <PiMagnifyingGlassThin onClick={handleSearch} />
           <div className="userIconContainer">
-            <PiUserThin
-              onClick={handleUserMainClick}
-              className="userIcon"
-            />
+            <PiUserThin onClick={handleUserMainClick} className="userIcon" />
             <div className={`userIconDropdown ${isUserMainClicked ? 'clicked' : ''}`}>
               <Link to="/profile">
                 <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
               </Link>
-              <Link to="/login">
-                <button onClick={handleDropdownClick}>{t('LoginL')}</button>
-              </Link>
-              <Link to="/register">
-                <button onClick={handleDropdownClick}>{t('Register')}</button>
-              </Link>
+              {!isLoggedIn && (
+                <>
+                  <Link to="/login">
+                    <button onClick={handleDropdownClick}>{t('LoginL')}</button>
+                  </Link>
+                  <Link to="/register">
+                    <button onClick={handleDropdownClick}>{t('Register')}</button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
-          <Link
-            className="heartIcon"
-            to="/wishlist"
-          >
+          <Link className="heartIcon" to="/wishlist">
             <PiHeartStraightThin />
           </Link>
           <PiShoppingBagThin onClick={handleCart} />
-          <PiList
-            className="burgerIcon"
-            onClick={() => setIsBurgerOpen(true)}
-          />
+          <PiList className="burgerIcon" onClick={() => setIsBurgerOpen(true)} />
         </nav>
-        <SearchBlur
-          closeSearch={closeSearch}
-          isActive={isSearchClicked}
-        />
+        <SearchBlur closeSearch={closeSearch} isActive={isSearchClicked} />
       </div>
 
       <nav className="headerBottom">
@@ -176,11 +165,7 @@ function Header({ cart }) {
       <div className={`fixedHeader ${isFixed ? 'visible' : ''}`}>
         <div className="fixedHeaderContent">
           <a href="/">
-            <img
-              src={proniaLogo}
-              alt="Pronia Logo"
-              className="fixed-logo"
-            />
+            <img src={proniaLogo} alt="Pronia Logo" className="fixed-logo" />
           </a>
           <nav className="fixedHeaderNav">
             <Link to="/">{t('Home')}</Link>
@@ -193,20 +178,21 @@ function Header({ cart }) {
           <div className="fixedHeaderIcons">
             <PiMagnifyingGlassThin onClick={handleSearch} />
             <div className="userIconContainer">
-              <PiUserThin
-                onClick={handleUserFixedClick}
-                className="userIcon"
-              />
+              <PiUserThin onClick={handleUserFixedClick} className="userIcon" />
               <div className={`userIconDropdown ${isUserFixedClicked ? 'clicked' : ''}`}>
                 <Link to="/profile">
                   <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
                 </Link>
-                <Link to="/login">
-                  <button onClick={handleDropdownClick}>{t('LoginL')}</button>
-                </Link>
-                <Link to="/register">
-                  <button onClick={handleDropdownClick}>{t('Register')}</button>
-                </Link>
+                {!isLoggedIn && (
+                  <>
+                    <Link to="/login">
+                      <button onClick={handleDropdownClick}>{t('LoginL')}</button>
+                    </Link>
+                    <Link to="/register">
+                      <button onClick={handleDropdownClick}>{t('Register')}</button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
             <Link to="/wishlist">
@@ -216,6 +202,7 @@ function Header({ cart }) {
           </div>
         </div>
       </div>
+
       <CartModal
         handleCartOverlay={handleCartOverlay}
         isCartOverlayHidden={isCartOverlayHidden}

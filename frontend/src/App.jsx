@@ -31,6 +31,7 @@ import {
   removeFromWishlist as apiRemoveFromWishlist,
 } from './api/api.js';
 import ScrollToTopButton from './components/ScrollToTopButton.jsx';
+import RedirectIfAuthenticated from './utils/RedirectIfAuthenticated.jsx';
 
 function App() {
   useTitle();
@@ -39,7 +40,6 @@ function App() {
   const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
 
-  // Fetch cart data
   const fetchCart = async () => {
     try {
       const response = await getCart();
@@ -49,7 +49,6 @@ function App() {
     }
   };
 
-  // Fetch wishlist data
   const fetchWishlist = async () => {
     try {
       const response = await getWishlist();
@@ -64,7 +63,6 @@ function App() {
     fetchWishlist();
   }, []);
 
-  // Add product to wishlist (calls backend)
   const addToWishlist = async (productId) => {
     try {
       await apiAddToWishlist(productId);
@@ -74,7 +72,6 @@ function App() {
     }
   };
 
-  // Remove product from wishlist (calls backend)
   const removeFromWishlist = async (productId) => {
     try {
       await apiRemoveFromWishlist(productId);
@@ -89,8 +86,8 @@ function App() {
       <Header cart={cart} />
       <Main>
         {location.pathname !== '/' && <RouteBanner />}
-
         <Loading />
+
         <Routes>
           <Route
             path="/"
@@ -131,52 +128,32 @@ function App() {
               />
             }
           />
-          <Route
-            path="/aboutUs"
-            element={<About />}
-          />
-          <Route
-            path="/blog"
-            element={<Blog />}
-          />
-          <Route
-            path="/cart"
-            element={
-              <Cart
-                cart={cart}
-                fetchCart={fetchCart}
-              />
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <Checkout
-                cart={cart}
-                setCart={setCart}
-              />
-            }
-          />
-          <Route
-            path="/contact"
-            element={<Contact />}
-          />
-          <Route
-            path="/compare"
-            element={<Compare />}
-          />
+          <Route path="/aboutUs" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/cart" element={<Cart cart={cart} fetchCart={fetchCart} />} />
+          <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/compare" element={<Compare />} />
+
+          {/* ✅ Protected guest-only routes */}
           <Route
             path="/login"
-            element={<Login />}
+            element={
+              <RedirectIfAuthenticated>
+                <Login />
+              </RedirectIfAuthenticated>
+            }
           />
           <Route
             path="/register"
-            element={<Register />}
+            element={
+              <RedirectIfAuthenticated>
+                <Register />
+              </RedirectIfAuthenticated>
+            }
           />
-          <Route
-            path="/profile"
-            element={<Profile />}
-          />
+
+          <Route path="/profile" element={<Profile />} />
           <Route
             path="/wishlist"
             element={
@@ -189,22 +166,10 @@ function App() {
               />
             }
           />
-          <Route
-            path="/notFound"
-            element={<NotFound />}
-          />
-          <Route
-            path="/pages"
-            element={<Pages />}
-          />
-          <Route
-            path="/forgot-password"
-            element={<ForgotPassword />}
-          />
-          <Route
-            path="/reset-password/:token"
-            element={<ResetPassword />}
-          />
+          <Route path="/notFound" element={<NotFound />} />
+          <Route path="/pages" element={<Pages />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
         </Routes>
       </Main>
       <Footer />

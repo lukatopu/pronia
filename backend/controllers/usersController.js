@@ -379,3 +379,17 @@ export const getOrders = async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 };
+
+
+
+export const getCurrentUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await Users.findById(userId).select('firstName lastName email');
+    if (!user) return res.status(404).json({ err: 'User not found' });
+
+    res.status(200).json({ data: user });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};

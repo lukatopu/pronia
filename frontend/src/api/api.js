@@ -207,3 +207,15 @@ export const getOrders = async () => {
     throw new Error(err.response?.data?.err || 'Failed to fetch orders');
   }
 };
+
+
+export const getCurrentUser = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/api/users/me', {
+      withCredentials: true,
+    });
+    return response.data.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.err || 'Failed to get user info');
+  }
+};

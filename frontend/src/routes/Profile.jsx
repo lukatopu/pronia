@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { updateUserProfile, logoutUser, getOrders } from '../api/api';
+import {
+  updateUserProfile,
+  logoutUser,
+  getOrders,
+  getCurrentUser,
+} from '../api/api';
 
 function Profile() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -10,19 +15,29 @@ function Profile() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(null);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getOrders();
-        setOrders(data);
+        const [userData, ordersData] = await Promise.all([
+          getCurrentUser(),
+          getOrders(),
+        ]);
+
+        setFirstName(userData.firstName || '');
+        setLastName(userData.lastName || '');
+        setEmail(userData.email || '');
+        setOrders(ordersData || []);
       } catch (err) {
-        console.error('Failed to fetch orders:', err);
+        console.error('Error loading profile:', err);
+        setMessage('Failed to load profile data.');
+        setIsSuccess(false);
       }
     };
 
-    fetchOrders();
+    fetchData();
   }, []);
 
   const handleLogout = async () => {
@@ -31,26 +46,36 @@ function Profile() {
       window.location.href = '/login';
     } catch (err) {
       setMessage('Logout failed');
+      setIsSuccess(false);
     }
   };
 
   const handleSaveChanges = async () => {
     setMessage('');
+    setIsSuccess(null);
+
     if (
       (currentPassword || newPassword || confirmNewPassword) &&
       !(currentPassword && newPassword && confirmNewPassword)
     ) {
       setMessage('Please fill all password fields to change password.');
+      setIsSuccess(false);
       return;
     }
 
     if (newPassword !== confirmNewPassword) {
       setMessage("New password and confirm password don't match.");
+      setIsSuccess(false);
       return;
     }
 
     try {
-      const updateData = { firstName, lastName, email };
+      const updateData = {
+        firstName,
+        lastName,
+        email,
+      };
+
       if (currentPassword && newPassword) {
         updateData.currentPassword = currentPassword;
         updateData.newPassword = newPassword;
@@ -59,11 +84,13 @@ function Profile() {
       await updateUserProfile(updateData);
 
       setMessage('Profile updated successfully!');
+      setIsSuccess(true);
       setCurrentPassword('');
       setNewPassword('');
       setConfirmNewPassword('');
     } catch (err) {
       setMessage(err.message);
+      setIsSuccess(false);
     }
   };
 
@@ -94,10 +121,7 @@ function Profile() {
         >
           Account Details
         </button>
-        <button
-          className="tabButton"
-          onClick={handleLogout}
-        >
+        <button className="tabButton" onClick={handleLogout}>
           Logout
         </button>
       </div>
@@ -116,12 +140,11 @@ function Profile() {
               <p>You have no orders yet.</p>
             ) : (
               <ul>
-                {Array.isArray(orders) &&
-                  orders.map((order) => (
-                    <li key={order.id}>
-                      <strong>{order.date}</strong> – {order.total} – {order.status}
-                    </li>
-                  ))}
+                {orders.map((order) => (
+                  <li key={order.id}>
+                    <strong>{order.date}</strong> – {order.total} – {order.status}
+                  </li>
+                ))}
               </ul>
             )}
           </div>
@@ -136,72 +159,84 @@ function Profile() {
         {activeTab === 'details' && (
           <div className="detailsDisplay">
             <h1>Account Details</h1>
-            <div style={{ display: 'flex', gap: '20px', marginBottom: '15px' }}>
+
+            <div className="inputRow">
+              <div className="inputGroup">
+                <label>First Name</label>
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="halfInput"
+                />
+              </div>
+              <div className="inputGroup">
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="halfInput"
+                />
+              </div>
+            </div>
+
+            <div className="inputGroup">
+              <label>Email</label>
               <input
-                type="text"
-                placeholder="First Name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                style={{ flex: 1, padding: '8px' }}
-              />
-              <input
-                type="text"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                style={{ flex: 1, padding: '8px' }}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="fullInput"
               />
             </div>
 
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={{ width: '100%', marginBottom: '15px', padding: '8px' }}
-            />
+            <div className="inputGroup">
+              <label>Current Password <small>(leave blank to leave unchanged)</small></label>
+              <input
+                type="password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                className="fullInput"
+              />
+            </div>
 
-            <input
-              type="password"
-              placeholder="Current Password"
-              value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
-              style={{ width: '100%', marginBottom: '15px', padding: '8px' }}
-            />
+            <div className="inputGroup">
+              <label>New Password <small>(leave blank to leave unchanged)</small></label>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="fullInput"
+              />
+            </div>
 
-            <input
-              type="password"
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              style={{ width: '100%', marginBottom: '15px', padding: '8px' }}
-            />
-
-            <input
-              type="password"
-              placeholder="Confirm New Password"
-              value={confirmNewPassword}
-              onChange={(e) => setConfirmNewPassword(e.target.value)}
-              style={{ width: '100%', marginBottom: '15px', padding: '8px' }}
-            />
+            <div className="inputGroup">
+              <label>Confirm New Password</label>
+              <input
+                type="password"
+                value={confirmNewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                className="fullInput"
+              />
+            </div>
 
             <button
               onClick={handleSaveChanges}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#4caf50',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-              }}
+              className="saveButton"
             >
               Save Changes
             </button>
 
-            {message && <p style={{ marginTop: '15px', color: 'red' }}>{message}</p>}
+            {message && (
+              <p className={`feedbackMessage ${isSuccess ? 'success' : 'error'}`}>
+                {message}
+              </p>
+            )}
           </div>
         )}
+
+
       </div>
     </div>
   );

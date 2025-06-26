@@ -15,7 +15,8 @@ import {
     updateUserProfile,
     logoutUser,
     placeOrder,
-    getOrders
+    getOrders,
+    getCurrentUser
 } from "../controllers/usersController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
@@ -44,5 +45,6 @@ UsersRouter.get('/wishlist', authMiddleware, getWishlist);
 
 UsersRouter.post('/orders/place', authMiddleware, placeOrder);
 UsersRouter.get('/orders', authMiddleware, getOrders);
+UsersRouter.get('/me', authMiddleware, getCurrentUser);
 
 export default UsersRouter
