@@ -239,7 +239,7 @@ export const clearCart = async (req, res) => {
 
 
 
-// Add product to wishlist
+
 export const addToWishlist = async (req, res) => {
     try {
         const { productId } = req.body;
@@ -260,7 +260,7 @@ export const addToWishlist = async (req, res) => {
     }
 };
 
-// Remove product from wishlist
+
 export const removeFromWishlist = async (req, res) => {
     try {
         const { productId } = req.body;
@@ -279,7 +279,7 @@ export const removeFromWishlist = async (req, res) => {
     }
 };
 
-// Get wishlist
+
 export const getWishlist = async (req, res) => {
     try {
         const userId = req.user.id;

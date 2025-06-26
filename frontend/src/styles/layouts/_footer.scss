@@ -196,8 +196,8 @@ footer {
     max-width: 650px;
     display: flex;
     flex-direction: column;
-    justify-content: center;  // center vertically inside nav (if nav grows)
-    align-items: center;      // center horizontally (this aligns the columns)
+    justify-content: center;
+    align-items: center;
     gap: 20px;
   }
 }

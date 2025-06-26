@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { getCurrentUser } from '../api/api'; // ✅ Ensure this is implemented
+import { getCurrentUser } from '../api/api';
 
 function RedirectIfAuthenticated({ children }) {
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ function RedirectIfAuthenticated({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await getCurrentUser(); // will throw if not logged in
+        await getCurrentUser();
         setAuthenticated(true);
       } catch {
         setAuthenticated(false);

@@ -11,6 +11,8 @@ function Filter({
   setSearchTerm,
   selectedTags,
   setSelectedTags,
+  selectedColors,
+  setSelectedColors,
   selectedCategories,
   setSelectedCategories,
 }) {
@@ -30,6 +32,26 @@ function Filter({
     );
   };
 
+  const handleColorClick = (color) => {
+    setSelectedColors((prev) =>
+      prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]
+    );
+  };
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
+    );
+  };
+
+  const clearFilters = () => {
+    setPriceRange([16, 300]);
+    setSearchTerm('');
+    setSelectedTags([]);
+    setSelectedColors([]);
+    setSelectedCategories([]);
+  };
+
   return (
     <div className="filter">
       <div className="searchContainer">
@@ -43,29 +65,51 @@ function Filter({
       </div>
 
       <div className="filtersContainer">
+
+        <div className="Filter">
+          <button onClick={clearFilters} className="clearFiltersButton">
+            {t('Clear Filters') || 'Clear Filters'}
+          </button>
+        </div>
+
         <div className="Filter">
           <h2>{t('Categories')}</h2>
           <div className="FiltersContainer">
-            <a href="#">{t('CategoriesAll')}</a>
-            <a href="#">{t('CategoriesBansai')}</a>
-            <a href="#">{t('CategoriesHousePlants')}</a>
-            <a href="#">{t('CategoriesIndoorLiving')}</a>
-            <a href="#">{t('CategoriesPerennnials')}</a>
-            <a href="#">{t('CategoriesPlantForGift')}</a>
-            <a href="#">{t('CategoriesGardenTools')}</a>
+            {[
+              { key: 'bansai', label: t('CategoriesBansai') },
+              { key: 'housePlants', label: t('CategoriesHousePlants') },
+              { key: 'indoorLiving', label: t('CategoriesIndoorLiving') },
+              { key: 'perennials', label: t('CategoriesPerennnials') },
+              { key: 'plantForGift', label: t('CategoriesPlantForGift') },
+              { key: 'gardenTools', label: t('CategoriesGardenTools') },
+            ].map(({ key, label }) => (
+              <a
+                key={key}
+                onClick={() => handleCategoryClick(key)}
+                className={selectedCategories.includes(key) ? 'activeCategory' : ''}
+              >
+                {label}
+              </a>
+            ))}
           </div>
         </div>
+
 
         <div className="Filter">
           <h2>{t('Color')}</h2>
           <div className="FiltersContainer">
-            <a>{t('ColorAll')}</a>
-            <a>{t('ColorGold')}</a>
-            <a>{t('ColorGreen')}</a>
-            <a>{t('ColorWhite')}</a>
-            <a>{t('ColorBlack')}</a>
+            {['Gold', 'Green', 'White', 'Black'].map((color) => (
+              <a
+                key={color}
+                onClick={() => handleColorClick(color.toLowerCase())}
+                className={selectedColors.includes(color.toLowerCase()) ? 'activeColor' : ''}
+              >
+                {t(`Color${color}`)}
+              </a>
+            ))}
           </div>
         </div>
+
 
         <div className="Filter">
           <h2>{t('PriceFilter')}</h2>
@@ -108,6 +152,7 @@ function Filter({
           </div>
         </div>
 
+
         <div className="Filter">
           <h2>{t('Popular Tags')}</h2>
           <div className="tagsFilterContainer">
@@ -141,7 +186,10 @@ function Filter({
             </div>
           </div>
         </div>
+
+
       </div>
+
       <AloeCollection />
     </div>
   );

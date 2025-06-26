@@ -38,10 +38,10 @@ function Checkout({ cart, setCart }) {
     }
 
     try {
-      await placeOrder(); // server places order and clears cart
+      await placeOrder();
       setCart([]);
 
-      // Reset form
+
       setCountry('');
       setFirstName('');
       setLastName('');

@@ -135,7 +135,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/compare" element={<Compare />} />
 
-          {/* ✅ Protected guest-only routes */}
+
           <Route
             path="/login"
             element={
