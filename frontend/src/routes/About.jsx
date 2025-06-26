@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 import { useLoader } from '../hooks/useLoader';
 import Services from '../components/Services';
+import profile1 from '../images/aboutProfile/1.png'
+import profile2 from '../images/aboutProfile/2.png'
+import profile3 from '../images/aboutProfile/3.png'
+import profile4 from '../images/aboutProfile/4.png'
+import { FaFacebookF, FaTwitter, FaPinterest } from 'react-icons/fa';
+import FriendCompanies from '../components/FriendCompanies';
 
 function About() {
   const { useFakeLoader } = useLoader();
@@ -25,28 +31,99 @@ function About() {
       <div className="videoContainer"></div>
       <div className="ratingWrapper">
         <h1>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do{' '}
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           <span>eiusmod tempor</span> incididunt.
         </h1>
         <div className="ratingContainer">
           <div className="ratingCount">
-            <h1>150+</h1>
-            <h1>Project</h1>
+            <h3>150+</h3>
+            <h3>Project</h3>
           </div>
           <div className="ratingCount">
-            <h1>359+</h1>
-            <h1>Clients</h1>
+            <h3>159+</h3>
+            <h3>Clients</h3>
           </div>
           <div className="ratingCount">
-            <h1>251+</h1>
-            <h1>Rating</h1>
+            <h3>251+</h3>
+            <h3>Rating</h3>
           </div>
           <div className="ratingCount">
-            <h1>110+</h1>
-            <h1>Award</h1>
+            <h3>110+</h3>
+            <h3>Award</h3>
           </div>
         </div>
       </div>
+
+      <div className="teamDescription">
+        <div className="teamTitle">
+          <h1>NEW PRODUCTS</h1>
+        </div>
+        <p>
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots <br /> in
+          a piece of classical Latin literature
+        </p>
+      </div>
+
+      <div className='aboutProfileWrapper'>
+        <div className='aboutProfileContainer'>
+          <div className='profileImageContainer'>
+            <div className='profileOverlay'>
+              <p>Michal Murphy</p>
+              <p>Sales man</p>
+              <div className='nav'>
+              <div><FaFacebookF/></div>
+              <div><FaTwitter/></div>
+              <div><FaPinterest/></div>
+              </div>
+            </div>
+              <img src={profile1} alt="" />
+          </div>
+          <p>Michal Murphy</p>
+        </div>
+
+        <div className='aboutProfileContainer'>
+          <div className='profileImageContainer'>
+            <div className='profileOverlay'>
+              <p>Michal Murphy</p>
+              <p>Sales man</p>
+              <div><FaFacebookF/></div>
+              <div><FaTwitter/></div>
+              <div><FaPinterest/></div>
+            </div>
+              <img src={profile2} alt="" />
+          </div>
+          <p>Michal Murphy</p>
+        </div>
+
+        <div className='aboutProfileContainer'>
+          <div className='profileImageContainer'>
+            <div className='profileOverlay'>
+              <p>Michal Murphy</p>
+              <p>Sales man</p>
+              <div><FaFacebookF/></div>
+              <div><FaTwitter/></div>
+              <div><FaPinterest/></div>
+            </div>
+              <img src={profile3} alt="" />
+          </div>
+          <p>Michal Murphy</p>
+        </div>
+
+        <div className='aboutProfileContainer'>
+          <div className='profileImageContainer'>
+            <div className='profileOverlay'>
+              <p>Michal Murphy</p>
+              <p>Sales man</p>
+              <div><FaFacebookF/></div>
+              <div><FaTwitter/></div>
+              <div><FaPinterest/></div>
+            </div>
+            <img src={profile4} alt="" />
+          </div>
+          <p>Michal Murphy</p>
+        </div>
+      </div>
+      <FriendCompanies/>
     </div>
   );
 }

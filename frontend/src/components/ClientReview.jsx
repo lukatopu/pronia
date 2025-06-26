@@ -58,7 +58,7 @@ function ClientReview() {
           <h1>WHAT CLIENTS SAY</h1>
         </div>
         <p>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots <br /> in
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in
           a piece of classical Latin literature
         </p>
       </div>
