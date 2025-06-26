@@ -25,6 +25,7 @@ import { useState, useEffect } from 'react';
 import Register from './routes/Register';
 import Login from './routes/Login';
 import { getCart, getWishlist, addToWishlist as apiAddToWishlist, removeFromWishlist as apiRemoveFromWishlist } from './api/api.js';
+import ScrollToTopButton from './components/ScrollToTopButton.jsx';
 
 function App() {
   useTitle();
@@ -161,6 +162,7 @@ function App() {
         </Routes>
       </Main>
       <Footer />
+      <ScrollToTopButton/>
     </>
   );
 }

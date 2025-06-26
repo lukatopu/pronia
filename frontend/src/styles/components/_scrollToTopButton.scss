@@ -1,0 +1,31 @@
+@use '../abstracts/' as *;
+
+.scrollToTopButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 6px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1003;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 300ms;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+
+
+  &:hover {
+    background-color: $light-green;
+  }
+
+
+  &.active {
+   opacity: 1;
+  }
+}
