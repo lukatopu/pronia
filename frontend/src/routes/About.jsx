@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoader } from '../hooks/useLoader';
 import Services from '../components/Services';
 import profile1 from '../images/aboutProfile/1.png'
@@ -11,7 +11,28 @@ import FriendCompanies from '../components/FriendCompanies';
 function About() {
   const { useFakeLoader } = useLoader();
 
+
   useEffect(() => useFakeLoader(), []);
+
+  const [activeTooltips, setActiveTooltips] = useState({
+    facebook: false,
+    twitter: false,
+    pinterest: false
+  });
+
+  const handleTooltip = (tooltipName) => {
+    setActiveTooltips((prev) => ({
+      ...prev,
+      [tooltipName]: true,
+    }));
+  };
+
+  const closeTooltip = (tooltipName) => {
+    setActiveTooltips((prev) => ({
+      ...prev,
+      [tooltipName]: false,
+    }));
+  };
   return (
     <div className="aboutUsContainer">
       <div className="textContainer">
@@ -71,12 +92,36 @@ function About() {
               <p>Michal Murphy</p>
               <p>Sales man</p>
               <div className='nav'>
-              <div><FaFacebookF/></div>
-              <div><FaTwitter/></div>
-              <div><FaPinterest/></div>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.facebook ? 'active' : ''}`}>Facebook</span>
+                  <a href="https://www.facebook.com/home.php">
+                  <div
+                    onMouseLeave={() => closeTooltip('facebook')}
+                    onMouseEnter={() => handleTooltip('facebook')} 
+                  ><FaFacebookF /></div>
+                  </a>
+                </div>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.twitter ? 'active' : ''}`}>Twitter</span>
+                  <a href="https://x.com/home?lang=en">
+                  <div
+                    onMouseLeave={() => closeTooltip('twitter')}
+                    onMouseEnter={() => handleTooltip('twitter')} 
+                  ><FaTwitter /></div>
+                  </a>
+                </div>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.pinterest ? 'active' : ''}`}>Pinterest</span>
+                  <a href="https://www.pinterest.com/">
+                  <div
+                    onMouseLeave={() => closeTooltip('pinterest')}
+                    onMouseEnter={() => handleTooltip('pinterest')} 
+                  ><FaPinterest /></div>
+                  </a>
+                </div>
               </div>
             </div>
-              <img src={profile1} alt="" />
+            <img src={profile1} alt="" />
           </div>
           <p>Michal Murphy</p>
         </div>
@@ -86,11 +131,37 @@ function About() {
             <div className='profileOverlay'>
               <p>Michal Murphy</p>
               <p>Sales man</p>
-              <div><FaFacebookF/></div>
-              <div><FaTwitter/></div>
-              <div><FaPinterest/></div>
+              <div className='nav'>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.facebook ? 'active' : ''}`}>Facebook</span>
+                  <a href="https://www.facebook.com/home.php">
+                  <div
+                    onMouseLeave={() => closeTooltip('facebook')}
+                    onMouseEnter={() => handleTooltip('facebook')} 
+                  ><FaFacebookF /></div>
+                  </a>
+                </div>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.twitter ? 'active' : ''}`}>Twitter</span>
+                  <a href="https://x.com/home?lang=en">
+                  <div
+                    onMouseLeave={() => closeTooltip('twitter')}
+                    onMouseEnter={() => handleTooltip('twitter')} 
+                  ><FaTwitter /></div>
+                  </a>
+                </div>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.pinterest ? 'active' : ''}`}>Pinterest</span>
+                  <a href="https://www.pinterest.com/">
+                  <div
+                    onMouseLeave={() => closeTooltip('pinterest')}
+                    onMouseEnter={() => handleTooltip('pinterest')} 
+                  ><FaPinterest /></div>
+                  </a>
+                </div>
+              </div>
             </div>
-              <img src={profile2} alt="" />
+            <img src={profile2} alt="" />
           </div>
           <p>Michal Murphy</p>
         </div>
@@ -100,11 +171,37 @@ function About() {
             <div className='profileOverlay'>
               <p>Michal Murphy</p>
               <p>Sales man</p>
-              <div><FaFacebookF/></div>
-              <div><FaTwitter/></div>
-              <div><FaPinterest/></div>
+              <div className='nav'>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.facebook ? 'active' : ''}`}>Facebook</span>
+                  <a href="https://www.facebook.com/home.php">
+                  <div
+                    onMouseLeave={() => closeTooltip('facebook')}
+                    onMouseEnter={() => handleTooltip('facebook')} 
+                  ><FaFacebookF /></div>
+                  </a>
+                </div>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.twitter ? 'active' : ''}`}>Twitter</span>
+                  <a href="https://x.com/home?lang=en">
+                  <div
+                    onMouseLeave={() => closeTooltip('twitter')}
+                    onMouseEnter={() => handleTooltip('twitter')} 
+                  ><FaTwitter /></div>
+                  </a>
+                </div>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.pinterest ? 'active' : ''}`}>Pinterest</span>
+                  <a href="https://www.pinterest.com/">
+                  <div
+                    onMouseLeave={() => closeTooltip('pinterest')}
+                    onMouseEnter={() => handleTooltip('pinterest')} 
+                  ><FaPinterest /></div>
+                  </a>
+                </div>
+              </div>
             </div>
-              <img src={profile3} alt="" />
+            <img src={profile3} alt="" />
           </div>
           <p>Michal Murphy</p>
         </div>
@@ -114,16 +211,42 @@ function About() {
             <div className='profileOverlay'>
               <p>Michal Murphy</p>
               <p>Sales man</p>
-              <div><FaFacebookF/></div>
-              <div><FaTwitter/></div>
-              <div><FaPinterest/></div>
+              <div className='nav'>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.facebook ? 'active' : ''}`}>Facebook</span>
+                  <a href="https://www.facebook.com/home.php">
+                  <div
+                    onMouseLeave={() => closeTooltip('facebook')}
+                    onMouseEnter={() => handleTooltip('facebook')} 
+                  ><FaFacebookF /></div>
+                  </a>
+                </div>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.twitter ? 'active' : ''}`}>Twitter</span>
+                  <a href="https://x.com/home?lang=en">
+                  <div
+                    onMouseLeave={() => closeTooltip('twitter')}
+                    onMouseEnter={() => handleTooltip('twitter')} 
+                  ><FaTwitter /></div>
+                  </a>
+                </div>
+                <div className='tooltipContainer'>
+                  <span className={`tooltip ${activeTooltips.pinterest ? 'active' : ''}`}>Pinterest</span>
+                  <a href="https://www.pinterest.com/">
+                  <div
+                    onMouseLeave={() => closeTooltip('pinterest')}
+                    onMouseEnter={() => handleTooltip('pinterest')} 
+                  ><FaPinterest /></div>
+                  </a>
+                </div>
+              </div>
             </div>
             <img src={profile4} alt="" />
           </div>
           <p>Michal Murphy</p>
         </div>
       </div>
-      <FriendCompanies/>
+      <FriendCompanies />
     </div>
   );
 }
