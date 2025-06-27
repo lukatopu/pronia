@@ -14,10 +14,6 @@ function RouteBanner() {
       title: 'ShopBannerT',
       mainTitle: 'ShopBannerM',
     },
-    '/blog': {
-      title: 'BlogBannerT',
-      mainTitle: 'BlogBannerM',
-    },
     '/aboutUs': {
       title: 'AboutBannerT',
       mainTitle: 'AboutBannerM',

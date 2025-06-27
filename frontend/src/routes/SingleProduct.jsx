@@ -7,6 +7,8 @@ import { getProducts, addToCart } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
 import Services from '../components/Services.jsx';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
 
 function SingleProduct({
   addToWishlist,
@@ -23,6 +25,8 @@ function SingleProduct({
   const { id } = useParams();
   const { useDataLoader } = useLoader();
   const { i18n, t } = useTranslation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     useDataLoader(() => getProducts().then((data) => setProducts(data)));
@@ -61,11 +65,14 @@ function SingleProduct({
       await addToCart(product._id, quantity);
       await fetchCart();
     } catch (error) {
-      console.error('Failed to add to cart:', error);
+      if (error?.response?.status === 401 || error.message.includes('Not authorized')) {
+        navigate('/login');
+      }
     } finally {
       setIsAddingToCart(false);
     }
   };
+
 
   return (
     <div className="singleProductPage">

@@ -112,9 +112,6 @@ function HeaderBurger({
           <Link to="/shop" onClick={() => { onClose(); handleDropdownClick(); }}>
             {t('Shop')}
           </Link>
-          <Link to="/blog" onClick={() => { onClose(); handleDropdownClick(); }}>
-            {t('Blog')}
-          </Link>
           <Link to="/aboutUs" onClick={() => { onClose(); handleDropdownClick(); }}>
             {t('AboutUs')}
           </Link>

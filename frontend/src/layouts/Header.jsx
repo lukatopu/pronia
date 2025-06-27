@@ -183,7 +183,7 @@ function Header({ cart }) {
       <nav className="headerBottom">
         <Link to="/">{t('Home')}</Link>
         <Link to="/shop">{t('Shop')}</Link>
-        <Link to="/blog">{t('Blog')}</Link>
+        {/* <Link to="/blog">{t('Blog')}</Link> */}
         <Link to="/aboutUs">{t('AboutUs')}</Link>
         <Link to="/pages">{t('Pages')}</Link>
         <Link to="/contact">{t('Contact')}</Link>
@@ -197,7 +197,6 @@ function Header({ cart }) {
           <nav className="fixedHeaderNav">
             <Link to="/">{t('Home')}</Link>
             <Link to="/shop">{t('Shop')}</Link>
-            <Link to="/blog">{t('Blog')}</Link>
             <Link to="/aboutUs">{t('AboutUs')}</Link>
             <Link to="/pages">{t('Pages')}</Link>
             <Link to="/contact">{t('Contact')}</Link>

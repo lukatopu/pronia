@@ -1,7 +1,6 @@
 {
     "Home": "მთავარი",
     "Shop": "მაღაზია",
-    "Blog": "ბლოგი",
     "AboutUs": "ჩვენს შესახებ",
     "Pages": "გვერდები",
     "Contact": "კონტაქტი",
@@ -23,8 +22,6 @@
     "HomeBanner": "მთავარი",
     "ShopBannerM": "მაღაზია",
     "ShopBannerT": "მაღაზია",
-    "BlogBannerM": "ბლოგი",
-    "BlogBannerT": "ბლოგი",
     "AboutBannerM": "ჩვენს შესახებ",
     "AboutBannerT": "ჩვენს შესახებ",
     "PagesBannerM": "გვერდები",

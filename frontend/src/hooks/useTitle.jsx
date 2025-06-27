@@ -10,9 +10,6 @@ function useTitle() {
       case '/shop':
         document.title = 'Pronia - Shop';
         break;
-      case '/blog':
-        document.title = 'Pronia - Blog';
-        break;
       case '/aboutUs':
         document.title = 'Pronia - About';
         break;

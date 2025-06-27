@@ -2,7 +2,6 @@ import Header from './layouts/Header';
 import Footer from './layouts/Footer';
 import Main from './layouts/Main';
 import About from './routes/About';
-import Blog from './routes/Blog';
 import Cart from './routes/Cart';
 import Checkout from './routes/Checkout';
 import Compare from './routes/Compare';
@@ -129,7 +128,6 @@ function App() {
             }
           />
           <Route path="/aboutUs" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
           <Route path="/cart" element={<Cart cart={cart} fetchCart={fetchCart} />} />
           <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />} />
           <Route path="/contact" element={<Contact />} />
