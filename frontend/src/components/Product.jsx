@@ -71,6 +71,19 @@ function Product({
     return (numeric * rates[currency]).toFixed(2);
   };
 
+    const renderCurrencySymbol = (currency) => {
+    switch (currency) {
+      case 'USD':
+        return '$';
+      case 'EUR':
+        return '€';
+      case 'GEL':
+        return '₾';
+      default:
+        return currency;
+    }
+  };
+
   const openModal = () => {
     setSelectedProductId(product._id);
     setIsModalOpen(true);
@@ -134,7 +147,7 @@ function Product({
             {product.name?.[i18n.language] || product.name}
           </Link>
           <p>
-            {convertPrice(product.price, currency)} {currency}
+            {renderCurrencySymbol(currency)}{convertPrice(product.price, currency)}
           </p>
 
           <div className="ratingContainer">{renderStars(product.rating)}</div>
