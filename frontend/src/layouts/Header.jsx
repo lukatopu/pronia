@@ -226,6 +226,7 @@ function Header({ cart }) {
               <PiHeartStraightThin />
             </Link>
             <PiShoppingBagThin onClick={handleCart} />
+            <PiList className="burgerIcon" onClick={() => setIsBurgerOpen(true)} />
           </div>
         </div>
       </div>
