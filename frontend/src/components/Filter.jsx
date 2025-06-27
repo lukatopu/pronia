@@ -185,8 +185,8 @@ function Filter({
             </div>
             <div className="tagsContainer">
               <div
-                onClick={() => handleTagClick('old fashion')}
-                className={selectedTags.includes('old fashion') ? 'activeTag' : ''}
+                onClick={() => handleTagClick('oldFashion')}
+                className={selectedTags.includes('oldFashion') ? 'activeTag' : ''}
               >
                 {t('TagOldFashion')}
               </div>
