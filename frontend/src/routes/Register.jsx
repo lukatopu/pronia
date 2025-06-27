@@ -111,7 +111,7 @@ function Register() {
         </div>
         <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}} className='buttonContainer'>
         <button type="submit">Register</button>
-        <a href="/login">Already Have An Account?</a>
+        <a href="/login">{t('AlreadyHaveAnAccount')}</a>
         </div>
       </form>
     </div>

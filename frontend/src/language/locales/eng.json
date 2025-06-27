@@ -228,6 +228,9 @@
   "OrderSuccess": "Order placed successfully!",
   "OrderFail": "Failed to place order. Please try again.",
 
-  "NotFoundT": "ERROR 404"
+  "NotFoundT": "ERROR 404",
+
+  "AlreadyHaveAnAccount": "Already Have An Account?",
+  "DontHaveAnAccount": "Dont Have An Account?"
   
 }

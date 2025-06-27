@@ -68,7 +68,7 @@ function Login() {
           </div>
           <div className='nav'>
           <a href="/forgot-password">{t('ForgotPassword')}?</a>
-          <a href="/register">Dont Have An Account?</a>
+          <a href="/register">{t('DontHaveAnAccount')}</a>
           </div>
         </div>
         <button type="submit">{t('LoginH')}</button>
