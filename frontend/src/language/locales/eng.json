@@ -226,6 +226,8 @@
   "CartEmptyError": "Your cart is empty.",
 
   "OrderSuccess": "Order placed successfully!",
-  "OrderFail": "Failed to place order. Please try again."
+  "OrderFail": "Failed to place order. Please try again.",
+
+  "NotFoundT": "ERROR 404"
   
 }

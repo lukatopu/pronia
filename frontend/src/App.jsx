@@ -12,7 +12,6 @@ import Profile from './routes/Profile';
 import Shop from './routes/Shop';
 import SingleProduct from './routes/SingleProduct';
 import Wishlist from './routes/Wishlist';
-import Pages from './routes/Pages';
 import RouteBanner from './components/RouteBanner';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import useTitle from './hooks/useTitle';
@@ -164,8 +163,7 @@ function App() {
               />
             }
           />
-          <Route path="/notFound" element={<NotFound />} />
-          <Route path="/pages" element={<Pages />} />
+          <Route path="*" element={<NotFound />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
         </Routes>

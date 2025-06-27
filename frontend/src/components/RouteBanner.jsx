@@ -61,6 +61,10 @@ function RouteBanner() {
     '/profile': {
       title: 'AccountT',
       mainTitle: 'AccountM',
+    },
+    '*': {
+      title: '404',
+      mainTitle: 'NotFoundT',
     }
   };
 
