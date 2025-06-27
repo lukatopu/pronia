@@ -96,3 +96,13 @@ table {
     }
   }
 }
+
+
+.tableResponsive {
+  overflow-x: auto;
+  width: 100%;
+
+  table {
+    min-width: 768px;
+  }
+}

@@ -93,3 +93,103 @@
   }
  }
 }
+
+
+@media (max-width: 1200px) {
+  .Wrapper404 {
+    padding: 40px 30px;
+  }
+
+  .Background404 {
+    img {
+      width: 80%;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-size: 28px;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 30px;
+      font-size: 15px;
+    }
+  }
+
+  .subscribeContainer {
+    h1 {
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .inputContainer {
+      justify-content: center;
+      input {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .Background404 {
+    img {
+      width: 100%;
+      max-width: 350px;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    button {
+      width: 100%;
+      max-width: 250px;
+    }
+  }
+
+  .subscribeContainer {
+    padding: 20px 0;
+
+    h1 {
+      font-size: 20px;
+    }
+
+    .inputContainer {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+
+      input {
+        width: 90%;
+        max-width: 300px;
+      }
+
+      svg {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .Wrapper404 {
+    padding: 30px 15px;
+  }
+
+  .Background404 h1,
+  .subscribeContainer h1 {
+    font-size: 18px;
+  }
+
+  .inputContainer input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .Background404 button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}

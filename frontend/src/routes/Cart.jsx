@@ -110,7 +110,7 @@ function Cart({ cart, fetchCart }) {
         </div>
         <div className="totalContainer">
           <p>Total</p>
-          <p>${calculateTotal().toFixed(2)}</p>
+          <p>${(calculateTotal() + 5.99).toFixed(2)}</p>
         </div>
         <a href="/checkout">
           <button className="proceedCheckoutButton">Proceed To Checkout</button>

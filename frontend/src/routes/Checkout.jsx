@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { placeOrder } from '../api/api';
 import countries from '../data/countries.json';
 import { useTranslation } from 'react-i18next';
+import { useLoader } from '../hooks/useLoader';
+
 
 function Checkout({ cart, setCart }) {
   const { t, i18n } = useTranslation();
+  const { useFakeLoader } = useLoader();
 
   const [country, setCountry] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -17,6 +20,8 @@ function Checkout({ cart, setCart }) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [errors, setErrors] = useState({});
+
+  useEffect(() => useFakeLoader(), []);
 
   const subtotal = cart.reduce((total, item) => {
     const price =

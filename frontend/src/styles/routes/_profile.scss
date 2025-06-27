@@ -215,3 +215,85 @@
     border: 1px solid #ccc;
   }
 }
+
+
+@media (max-width: 1024px) {
+  .accountWrapper {
+    flex-direction: column;
+    align-items: center;
+
+    .accountTab {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+
+      .tabButton {
+        margin: 5px;
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+    }
+
+    .accountTabDisplay {
+      width: 90%;
+      max-width: 600px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .detailsDisplay,
+  .ordersDisplay,
+  .addressesDisplay,
+  .dashboardDisplay {
+    h1 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .inputRow {
+      flex-direction: column;
+
+      .inputGroup {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    }
+
+    .fullInput,
+    .halfInput {
+      width: 100% !important;
+    }
+
+    .saveButton {
+      width: 100%;
+    }
+  }
+
+  .accountTabDisplay {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .accountTab {
+    flex-direction: column;
+    align-items: center;
+
+    .tabButton {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .accountTabDisplay {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .feedbackMessage {
+    font-size: 14px;
+    text-align: center;
+  }
+}

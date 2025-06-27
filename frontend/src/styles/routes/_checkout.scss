@@ -142,3 +142,74 @@
   }
  }
 }
+
+
+
+@media (max-width: 1200px) {
+  .checkoutContainer {
+    padding: 60px 40px;
+    flex-direction: column;
+
+    .billingDetails,
+    .orderSummary {
+      width: 100%;
+    }
+  }
+
+  .orderSummary {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .checkoutContainer {
+    padding: 50px 20px;
+  }
+
+  .nameFields {
+    flex-direction: column;
+
+    .formGroup {
+      width: 100% !important;
+    }
+  }
+
+  .formGroup {
+    label {
+      font-size: 14px;
+    }
+
+    input,
+    select {
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    .errorMessage {
+      font-size: 13px;
+    }
+  }
+
+  .placeOrderBtn {
+    width: 100%;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkoutContainer {
+    padding: 40px 15px;
+  }
+
+  .billingDetails h2,
+  .orderSummary h1 {
+    font-size: 22px;
+  }
+
+  .orderHeader span,
+  .orderItem span,
+  .orderTotals span,
+  .grandTotal span {
+    font-size: 14px;
+  }
+}
