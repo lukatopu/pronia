@@ -7,9 +7,10 @@ import {
 } from '../api/api';
 import { useTranslation } from 'react-i18next';
 import { useLoader } from '../hooks/useLoader';
+import countries from '../data/countries.json';
 
 function Profile() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('details');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -19,9 +20,19 @@ function Profile() {
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(null);
   const [orders, setOrders] = useState([]);
+  const [addresses, setAddresses] = useState([]);
+  const [newAddressObj, setNewAddressObj] = useState({
+    country: '',
+    company: '',
+    address: '',
+    city: '',
+    state: '',
+    postcode: ''
+  });
 
   const { t } = useTranslation();
-  const { useFakeLoader } = useLoader()
+  const { useFakeLoader } = useLoader();
+
   useEffect(() => {
     useFakeLoader();
   }, []);
@@ -38,6 +49,7 @@ function Profile() {
         setLastName(userData.lastName || '');
         setEmail(userData.email || '');
         setOrders(ordersData || []);
+        setAddresses(Array.isArray(userData.addresses) ? userData.addresses : []);
       } catch (err) {
         console.error('Error loading profile:', err);
         setMessage(t('ProfileLoadError'));
@@ -56,6 +68,43 @@ function Profile() {
       setMessage(t('LogoutFailed'));
       setIsSuccess(false);
     }
+  };
+
+  const saveProfile = async (updatedAddresses) => {
+    try {
+      const updateData = {
+        firstName,
+        lastName,
+        email,
+        addresses: updatedAddresses,
+      };
+      await updateUserProfile(updateData);
+      setIsSuccess(true);
+      setMessage(t('ProfileUpdated'));
+    } catch (err) {
+      setMessage(err.message || 'Error saving address');
+      setIsSuccess(false);
+    }
+  };
+
+  const handleSaveNewAddress = async () => {
+    const updated = [...addresses, newAddressObj];
+    setAddresses(updated);
+    setNewAddressObj({
+      country: '',
+      company: '',
+      address: '',
+      city: '',
+      state: '',
+      postcode: ''
+    });
+    await saveProfile(updated);
+  };
+
+  const handleRemoveAddress = async (index) => {
+    const updated = addresses.filter((_, i) => i !== index);
+    setAddresses(updated);
+    await saveProfile(updated);
   };
 
   const handleSaveChanges = async () => {
@@ -82,6 +131,7 @@ function Profile() {
         firstName,
         lastName,
         email,
+        addresses,
       };
 
       if (currentPassword && newPassword) {
@@ -105,28 +155,13 @@ function Profile() {
   return (
     <div className="accountWrapper">
       <div className="accountTab">
-        <button
-          className={activeTab === 'dashboard' ? 'tabButton active' : 'tabButton'}
-          onClick={() => setActiveTab('dashboard')}
-        >
-          {t('Dashboard')}
-        </button>
-        <button
-          className={activeTab === 'orders' ? 'tabButton active' : 'tabButton'}
-          onClick={() => setActiveTab('orders')}
-        >
+        <button className={activeTab === 'orders' ? 'tabButton active' : 'tabButton'} onClick={() => setActiveTab('orders')}>
           {t('Orders')}
         </button>
-        <button
-          className={activeTab === 'addresses' ? 'tabButton active' : 'tabButton'}
-          onClick={() => setActiveTab('addresses')}
-        >
+        <button className={activeTab === 'addresses' ? 'tabButton active' : 'tabButton'} onClick={() => setActiveTab('addresses')}>
           {t('Addresses')}
         </button>
-        <button
-          className={activeTab === 'details' ? 'tabButton active' : 'tabButton'}
-          onClick={() => setActiveTab('details')}
-        >
+        <button className={activeTab === 'details' ? 'tabButton active' : 'tabButton'} onClick={() => setActiveTab('details')}>
           {t('AccountDetails')}
         </button>
         <button className="tabButton" onClick={handleLogout}>
@@ -135,12 +170,6 @@ function Profile() {
       </div>
 
       <div className="accountTabDisplay">
-        {activeTab === 'dashboard' && (
-          <div className="dashboardDisplay">
-            <h1>{t('Dashboard')}</h1>
-          </div>
-        )}
-
         {activeTab === 'orders' && (
           <div className="ordersDisplay">
             <h1>{t('Orders')}</h1>
@@ -161,6 +190,64 @@ function Profile() {
         {activeTab === 'addresses' && (
           <div className="addressesDisplay">
             <h1>{t('Addresses')}</h1>
+
+            <div className="inputGroup">
+              {Object.entries(newAddressObj).map(([key, value]) => (
+                key === 'country' ? (
+                  <div key={key}>
+                    <label>{t('CountryRegion')}</label>
+                    <select
+                      value={value}
+                      onChange={(e) => setNewAddressObj({ ...newAddressObj, [key]: e.target.value })}
+                      className="fullInput"
+                    >
+                      <option value="">{t('SelectCountry')}</option>
+                      {countries.map((countryObj) => (
+                        <option key={countryObj.code} value={countryObj.code}>
+                          {countryObj.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : (
+                  <div key={key}>
+                    <label>{t(key)}</label>
+                    <input
+                      type="text"
+                      value={value}
+                      onChange={(e) => setNewAddressObj({ ...newAddressObj, [key]: e.target.value })}
+                      className="fullInput"
+                    />
+                  </div>
+                )
+              ))}
+              <button onClick={handleSaveNewAddress} className="saveButton" style={{ marginTop: '10px' }}>
+                {t('AddAddress')}
+              </button>
+            </div>
+
+            <div className="inputGroup">
+              <label>{t('YourAddresses')} <span>({addresses.length})</span></label>
+              <div className="addressList">
+                {addresses.map((addr, i) => (
+                  <p style={{ color: '#abd787' }} key={i}>
+                    {Object.values(addr).filter(Boolean).join(', ')}
+                    <button
+                      onClick={() => handleRemoveAddress(i)}
+                      style={{
+                        marginLeft: '10px',
+                        color: 'red',
+                        border: 'none',
+                        background: 'none',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {t('Remove')}
+                    </button>
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 

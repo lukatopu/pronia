@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { placeOrder } from '../api/api';
+import { placeOrder, getCurrentUser } from '../api/api';
 import countries from '../data/countries.json';
 import { useTranslation } from 'react-i18next';
 import { useLoader } from '../hooks/useLoader';
-
 
 function Checkout({ cart, setCart }) {
   const { t, i18n } = useTranslation();
   const { useFakeLoader } = useLoader();
 
+  const [addresses, setAddresses] = useState([]);
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
   const [country, setCountry] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -23,11 +24,46 @@ function Checkout({ cart, setCart }) {
 
   useEffect(() => useFakeLoader(), []);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await getCurrentUser();
+        if (Array.isArray(user.addresses) && user.addresses.length > 0) {
+          setAddresses(user.addresses);
+          const selected = user.addresses[0];
+          setCountry(selected.country || '');
+          setCompany(selected.company || '');
+          setAddress(selected.address || '');
+          setCity(selected.city || '');
+          setStateInput(selected.state || '');
+          setPostcode(selected.postcode || '');
+        }
+        setFirstName(user.firstName || '');
+        setLastName(user.lastName || '');
+        setEmail(user.email || '');
+      } catch (err) {
+        console.error('Failed to fetch user:', err);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    if (addresses[selectedAddressIndex]) {
+      const selected = addresses[selectedAddressIndex];
+      setCountry(selected.country || '');
+      setCompany(selected.company || '');
+      setAddress(selected.address || '');
+      setCity(selected.city || '');
+      setStateInput(selected.state || '');
+      setPostcode(selected.postcode || '');
+    }
+  }, [selectedAddressIndex, addresses]);
+
   const subtotal = cart.reduce((total, item) => {
-    const price =
-      typeof item.productId.price === 'string'
-        ? parseFloat(item.productId.price)
-        : item.productId.price;
+    const price = typeof item.productId.price === 'string'
+      ? parseFloat(item.productId.price)
+      : item.productId.price;
     return total + price * item.quantity;
   }, 0);
 
@@ -83,22 +119,22 @@ function Checkout({ cart, setCart }) {
     <div className="checkoutContainer">
       <div className="billingDetails">
         <h2>{t('BillingDetails')}</h2>
-        <div className="formGroup">
-          <p className="errorMessage">{errors.country || ' '}</p>
-          <label htmlFor="country">{t('CountryRegion')}</label>
-          <select
-            id="country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          >
-            <option value="">{t('SelectCountry')}</option>
-            {countries.map((countryObj) => (
-              <option key={countryObj.code} value={countryObj.code}>
-                {countryObj.name}
-              </option>
-            ))}
-          </select>
-        </div>
+
+        {addresses.length > 1 && (
+          <div className="formGroup">
+            <label>{t('SelectSavedAddress')}</label>
+            <select
+              value={selectedAddressIndex}
+              onChange={(e) => setSelectedAddressIndex(Number(e.target.value))}
+            >
+              {addresses.map((addr, index) => (
+                <option key={index} value={index}>
+                  {[addr.address, addr.city, addr.state, addr.postcode, addr.country].filter(Boolean).join(', ')}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
         <div className="nameFields">
           <div className="formGroup">
@@ -140,7 +176,6 @@ function Checkout({ cart, setCart }) {
           <input
             type="text"
             id="address"
-            placeholder={t('HouseStreet')}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />

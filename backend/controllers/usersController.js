@@ -297,32 +297,33 @@ export const getWishlist = async (req, res) => {
 
 
 export const updateUserProfile = async (req, res) => {
-    try {
-        const userId = req.user.id;
-        const { firstName, lastName, email, currentPassword, newPassword } = req.body;
+  try {
+    const userId = req.user.id;
+    const { firstName, lastName, email, addresses, currentPassword, newPassword } = req.body;
 
-        const user = await Users.findById(userId);
-        if (!user) return res.status(404).json({ err: 'User not found' });
+    const user = await Users.findById(userId);
+    if (!user) return res.status(404).json({ err: 'User not found' });
 
-        if (firstName) user.firstName = firstName;
-        if (lastName) user.lastName = lastName;
-        if (email) user.email = email;
+    if (firstName) user.firstName = firstName;
+    if (lastName) user.lastName = lastName;
+    if (email) user.email = email;
+    if (Array.isArray(addresses)) user.addresses = addresses;
 
-        if (currentPassword && newPassword) {
-            const isValid = await bcrypt.compare(currentPassword + process.env.BCRYPT_PEPPER, user.password);
-            if (!isValid) {
-                return res.status(401).json({ err: 'Current password is incorrect' });
-            }
-            const hashed = await bcrypt.hash(newPassword + process.env.BCRYPT_PEPPER, 11);
-            user.password = hashed;
-        }
+    if (currentPassword && newPassword) {
+      const isValid = await bcrypt.compare(currentPassword + process.env.BCRYPT_PEPPER, user.password);
+      if (!isValid) return res.status(401).json({ err: 'Current password is incorrect' });
 
-        await user.save();
-        res.status(200).json({ data: 'Profile updated successfully' });
-    } catch (err) {
-        res.status(500).json({ err: err.message });
+      const hashed = await bcrypt.hash(newPassword + process.env.BCRYPT_PEPPER, 11);
+      user.password = hashed;
     }
+
+    await user.save();
+    res.status(200).json({ data: 'Profile updated successfully' });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
 };
+
 
 
 
@@ -385,7 +386,7 @@ export const getOrders = async (req, res) => {
 export const getCurrentUser = async (req, res) => {
   try {
     const userId = req.user.id;
-    const user = await Users.findById(userId).select('firstName lastName email');
+    const user = await Users.findById(userId).select('firstName lastName email addresses');
     if (!user) return res.status(404).json({ err: 'User not found' });
 
     res.status(200).json({ data: user });

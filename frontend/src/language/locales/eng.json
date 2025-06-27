@@ -233,6 +233,20 @@
   "AlreadyHaveAnAccount": "Already Have An Account?",
   "DontHaveAnAccount": "Dont Have An Account?",
 
-  "Adding":"Adding..."
+  "Adding":"Adding...",
+
+  "YourAddresses":"Your Addresses",
+  "NewAddress": "New Address",
+  "TypeNewAddress": "Type New Address",
+  "AddAddress":"Add Address",
+  "CurrentPassword":"Current Password",
+  "SelectSavedAddress": "Select Saved Address",
+  "country": "Country",
+  "company": "Company",
+  "address": "Address",
+  "city": "City",
+  "state": "State",
+  "postcode": "Postcode"
+
 
 }

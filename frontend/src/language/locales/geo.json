@@ -40,8 +40,8 @@
     "AccountM": "ჩემი ანგარიშის გვერდი",
     "ForgotT": "დაგავიწყდა პაროლი",
     "ForgotM": "პაროლის აღდგენა",
-    "checkoutT": "გადახდა",
-    "checkoutM": "გადახდის გვერდი",
+    "CheckoutT": "გადახდა",
+    "CheckoutM": "გადახდის გვერდი",
     "ResetT": "პაროლის შეცვლა",
     "ResetM": "პაროლის შეცვლის გვერდი",
 
@@ -238,8 +238,18 @@
   "AlreadyHaveAnAccount": "გაქვს უკვე ანგარიში?",
   "DontHaveAnAccount": "არ გაქვს ანგარიში?",
 
-  "Adding":"ემატება..."
+  "Adding":"ემატება...",
 
-
-
+  "YourAddresses":"შენი მისამართები",
+  "NewAddress": "ახალი მისამართი",
+  "TypeNewAddress": "ჩაწერე ახალი მისამართი",
+  "AddAddress":"დაამატე მისამართი",
+  "CurrentPassword":"შენი პაროლი",
+  "SelectSavedAddress": "აირჩიე დამახსოვრებული მისამართი",
+  "country": "ქვეყანა",
+  "company": "კომპანია",
+  "address": "მისამართი",
+  "city": "ქალაქი",
+  "state": "შტატი",
+  "postcode": "საფოსტო კოდი"
 }

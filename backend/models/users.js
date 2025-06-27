@@ -27,13 +27,28 @@ const UsersSchema = new mongoose.Schema({
     { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }
   ],
   orders: [
+    {
+      id: { type: String },
+      date: { type: String },
+      status: { type: String },
+      total: { type: String }
+    }
+  ], addresses: [
   {
-    id: { type: String },
-    date: { type: String },
-    status: { type: String },
-    total: { type: String }
+    country: String,
+    firstName: String,
+    lastName: String,
+    company: String,
+    address: String,
+    city: String,
+    state: String,
+    postcode: String,
+    email: String,
+    phone: String,
   }
 ]
+
+
 
 
 

@@ -232,6 +232,7 @@
         margin: 5px;
         padding: 10px 15px;
         font-size: 14px;
+        width: 100%;
       }
     }
 
@@ -280,6 +281,7 @@
   .accountTab {
     flex-direction: column;
     align-items: center;
+    width: 80%;
 
     .tabButton {
       width: 100%;
@@ -296,4 +298,26 @@
     font-size: 14px;
     text-align: center;
   }
+}
+
+
+
+@media (max-width: 480px) {
+
+  .accountWrapper {
+    padding:100px 0 ;
+
+    .accountTab {
+      width: 80%;
+    }
+      .accountTabDisplay {
+    .detailsDisplay {
+
+      h1 {
+        font-size: 10px;
+      }
+    }
+  }
+  }
+
 }
