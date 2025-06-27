@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useCurrency } from '../context/CurrencyContext';
 
-
 function HeaderBurger({
   isOpen,
   onClose,
@@ -16,9 +15,7 @@ function HeaderBurger({
   handleUserMainClick,
 }) {
   const { t, i18n } = useTranslation();
-
   const { currency, setCurrency } = useCurrency();
-
 
   const [currencyDropdownOpen, setCurrencyDropdownOpen] = React.useState(false);
 
@@ -28,13 +25,9 @@ function HeaderBurger({
     setCurrencyDropdownOpen(false);
   };
 
-
   return (
     <div className={`headerBurgerContainer ${isOpen ? 'open' : ''}`}>
-      <button
-        className="closeBurger"
-        onClick={onClose}
-      >
+      <button className="closeBurger" onClick={onClose}>
         <PiX size={24} />
       </button>
 
@@ -75,7 +68,6 @@ function HeaderBurger({
           </ul>
         </div>
 
-
         <div className="userIconContainer">
           <PiUserThin
             onClick={handleUserMainClick}
@@ -83,13 +75,19 @@ function HeaderBurger({
           />
           <div className={`userIconDropdown ${isUserMainClicked ? 'clicked' : ''}`}>
             <Link to="/profile">
-              <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
+              <button onClick={() => { onClose(); handleDropdownClick(); }}>
+                {t('MyAccount')}
+              </button>
             </Link>
             <Link to="/login">
-              <button onClick={handleDropdownClick}>{t('LoginL')}</button>
+              <button onClick={() => { onClose(); handleDropdownClick(); }}>
+                {t('LoginL')}
+              </button>
             </Link>
             <Link to="/register">
-              <button onClick={handleDropdownClick}>{t('Register')}</button>
+              <button onClick={() => { onClose(); handleDropdownClick(); }}>
+                {t('Register')}
+              </button>
             </Link>
           </div>
         </div>
@@ -97,6 +95,10 @@ function HeaderBurger({
         <Link
           className="heartIcon"
           to="/wishlist"
+          onClick={() => {
+            onClose();
+            handleDropdownClick();
+          }}
         >
           <PiHeartStraightThin />
         </Link>
@@ -104,12 +106,24 @@ function HeaderBurger({
 
       <div className="routesContainer">
         <nav className="headerBottom">
-          <Link to="/">{t('Home')}</Link>
-          <Link to="/shop">{t('Shop')}</Link>
-          <Link to="/blog">{t('Blog')}</Link>
-          <Link to="/aboutUs">{t('AboutUs')}</Link>
-          <Link to="/pages">{t('Pages')}</Link>
-          <Link to="/contact">{t('Contact')}</Link>
+          <Link to="/" onClick={() => { onClose(); handleDropdownClick(); }}>
+            {t('Home')}
+          </Link>
+          <Link to="/shop" onClick={() => { onClose(); handleDropdownClick(); }}>
+            {t('Shop')}
+          </Link>
+          <Link to="/blog" onClick={() => { onClose(); handleDropdownClick(); }}>
+            {t('Blog')}
+          </Link>
+          <Link to="/aboutUs" onClick={() => { onClose(); handleDropdownClick(); }}>
+            {t('AboutUs')}
+          </Link>
+          <Link to="/pages" onClick={() => { onClose(); handleDropdownClick(); }}>
+            {t('Pages')}
+          </Link>
+          <Link to="/contact" onClick={() => { onClose(); handleDropdownClick(); }}>
+            {t('Contact')}
+          </Link>
         </nav>
       </div>
     </div>

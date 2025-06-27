@@ -23,7 +23,7 @@
       padding-top: 35px;
       gap: 35px;
       background: url('../images/backgroundImg/contactBackground.jpg') no-repeat center/cover;
-      
+
 
       .contactDetails {
         width: 85%;
@@ -108,9 +108,68 @@
         border-radius: 10px;
         background-color: $light-green;
         color: white;
-        
+
       }
     }
 
+  }
+}
+
+
+@media (max-width: 1500px) {
+  .contactContainer {
+    padding: 100px 250px;
+    .contactWrapper {
+      flex-direction: column;
+      width: 100%;
+
+      .contactMessage {
+        width: 100%;
+      }
+
+      .contactInfoContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .contactDetails {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+
+
+@media (max-width: 1200px) {
+  .contactContainer {
+    padding: 100px 100px;
+    .contactWrapper {
+      .contactMessage {
+
+        form {
+          input {
+            width: 100%;
+          }
+          .nameInputsContainer,
+          .credentialInputsContainer {
+            flex-direction: column;
+            display: flex;
+            gap: 40px;
+          }
+
+        }
+
+      }
+    }
+  }
+}
+
+
+
+@media (max-width: 500px) {
+  .contactContainer {
+    padding: 100px 0px;
   }
 }

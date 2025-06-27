@@ -23,7 +23,8 @@
  top: 0;
  right: 0;
  height: 100vh;
- width: 450px;
+ width: 100vw;
+ max-width: 450px;
  background: white;
  z-index: 1000;
  transform: translateX(100%);
