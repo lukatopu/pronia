@@ -8,6 +8,7 @@ import { useLoader } from '../hooks/useLoader.jsx';
 import Services from '../components/Services.jsx';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useCurrency } from '../context/CurrencyContext';
 
 
 function SingleProduct({
@@ -25,6 +26,33 @@ function SingleProduct({
   const { id } = useParams();
   const { useDataLoader } = useLoader();
   const { i18n, t } = useTranslation();
+  const { currency } = useCurrency();
+
+  const convertPrice = (gelPrice, currency) => {
+    const rates = {
+      GEL: 1,
+      USD: 0.37,
+      EUR: 0.34,
+    };
+
+    const numeric = parseFloat(gelPrice.toString().replace(/[^\d.]/g, '')) || 0;
+    return (numeric * rates[currency]).toFixed(2);
+  };
+
+
+  const renderCurrencySymbol = (currency) => {
+    switch (currency) {
+      case 'USD':
+        return '$';
+      case 'EUR':
+        return '€';
+      case 'GEL':
+        return '₾';
+      default:
+        return currency;
+    }
+  };
+
 
   const navigate = useNavigate();
 
@@ -84,7 +112,10 @@ function SingleProduct({
       </div>
       <div className="singleProductDetails">
         <h1>{product.name?.[i18n.language] || product.name}</h1>
-        <p className="price">${product.price}</p>
+        <p className="price"><p className="price">
+           {renderCurrencySymbol(currency)}{convertPrice(product.price, currency)}
+        </p>
+        </p>
         <div className="ratingContainer">{renderStars(product.rating)}</div>
         <div className="productDescription">
           <p>{product.description}</p>

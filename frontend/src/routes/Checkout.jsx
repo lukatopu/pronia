@@ -3,10 +3,14 @@ import { placeOrder, getCurrentUser } from '../api/api';
 import countries from '../data/countries.json';
 import { useTranslation } from 'react-i18next';
 import { useLoader } from '../hooks/useLoader';
+import { useCurrency } from '../context/CurrencyContext';
 
 function Checkout({ cart, setCart }) {
   const { t, i18n } = useTranslation();
   const { useFakeLoader } = useLoader();
+  const { currency } = useCurrency();
+
+
 
   const [addresses, setAddresses] = useState([]);
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
@@ -48,6 +52,32 @@ function Checkout({ cart, setCart }) {
     fetchUser();
   }, []);
 
+
+  const convertPrice = (gelPrice, currency) => {
+    const rates = {
+      GEL: 1,
+      USD: 0.37,
+      EUR: 0.34,
+    };
+
+    const numeric = parseFloat(gelPrice.toString().replace(/[^\d.]/g, '')) || 0;
+    return (numeric * rates[currency]).toFixed(2);
+  };
+
+
+    const renderCurrencySymbol = (currency) => {
+    switch (currency) {
+      case 'USD':
+        return '$';
+      case 'EUR':
+        return '€';
+      case 'GEL':
+        return '₾';
+      default:
+        return currency;
+    }
+  };
+
   useEffect(() => {
     if (addresses[selectedAddressIndex]) {
       const selected = addresses[selectedAddressIndex];
@@ -61,11 +91,10 @@ function Checkout({ cart, setCart }) {
   }, [selectedAddressIndex, addresses]);
 
   const subtotal = cart.reduce((total, item) => {
-    const price = typeof item.productId.price === 'string'
-      ? parseFloat(item.productId.price)
-      : item.productId.price;
+    const price = parseFloat(convertPrice(item.productId.price, currency));
     return total + price * item.quantity;
   }, 0);
+
 
   const shipping = cart.length === 0 ? 0 : 5.99;
   const total = subtotal + shipping;
@@ -292,29 +321,25 @@ function Checkout({ cart, setCart }) {
                 {getProductName(item.productId.name)} × {item.quantity}
               </span>
               <span>
-                $
-                {(
-                  (typeof item.productId.price === 'string'
-                    ? parseFloat(item.productId.price)
-                    : item.productId.price) * item.quantity
-                ).toFixed(2)}
+                {renderCurrencySymbol(currency)} {(parseFloat(convertPrice(item.productId.price, currency)) * item.quantity).toFixed(2)}
               </span>
+
             </div>
           ))}
         </div>
         <div className="orderTotals">
           <div className="totalRow">
             <span>{t('Subtotal')}</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>{renderCurrencySymbol(currency)} {subtotal.toFixed(2)}</span>
           </div>
           <div className="totalRow">
             <span>{t('Shipping')}</span>
-            <span>${shipping.toFixed(2)}</span>
+            <span>{renderCurrencySymbol(currency)} {shipping.toFixed(2)}</span>
           </div>
         </div>
         <div className="grandTotal">
           <span>{t('Total')}</span>
-          <span>${total.toFixed(2)}</span>
+          <span>{renderCurrencySymbol(currency)} {total.toFixed(2)}</span>
         </div>
         <p className="errorMessage">{errors.cart || ' '}</p>
         <button className="placeOrderBtn" onClick={handlePlaceOrder}>

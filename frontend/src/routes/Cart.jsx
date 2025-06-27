@@ -4,6 +4,7 @@ import { useLoader } from '../hooks/useLoader';
 import Counter from '../components/Counter';
 import { useTranslation } from 'react-i18next';
 import { removeFromCart, updateCartItem } from '../api/api.js';
+import { useCurrency } from '../context/CurrencyContext';
 
 function Cart({ cart, fetchCart }) {
   const { useFakeLoader } = useLoader();
@@ -12,6 +13,35 @@ function Cart({ cart, fetchCart }) {
 
   useEffect(() => useFakeLoader(), []);
   useEffect(() => setCartItems(cart), [cart]);
+
+  const { currency } = useCurrency();
+
+
+  const convertPrice = (gelPrice, currency) => {
+    const rates = {
+      GEL: 1,
+      USD: 0.37,
+      EUR: 0.34,
+    };
+
+    const numeric = parseFloat(gelPrice.toString().replace(/[^\d.]/g, '')) || 0;
+    return (numeric * rates[currency]).toFixed(2);
+  };
+
+
+    const renderCurrencySymbol = (currency) => {
+    switch (currency) {
+      case 'USD':
+        return '$';
+      case 'EUR':
+        return '€';
+      case 'GEL':
+        return '₾';
+      default:
+        return currency;
+    }
+  };
+
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
@@ -81,7 +111,7 @@ function Cart({ cart, fetchCart }) {
                     </Link>
                   </td>
                   <td>
-                    <p>${item.productId.price}</p>
+                    <p>{renderCurrencySymbol(currency)}{convertPrice(item.productId.price, currency)}</p>
                   </td>
                   <td>
                     <Counter
@@ -93,9 +123,10 @@ function Cart({ cart, fetchCart }) {
                   </td>
                   <td>
                     <p>
-                      ${(parseFloat(item.productId.price) * parseInt(item.quantity)).toFixed(2)}
+                      {renderCurrencySymbol(currency)}{(convertPrice(item.productId.price, currency) * item.quantity).toFixed(2)}
                     </p>
                   </td>
+
                 </tr>
               ))}
             </tbody>
@@ -106,12 +137,13 @@ function Cart({ cart, fetchCart }) {
         <h1>Cart Totals</h1>
         <div className="subTotalContainer">
           <p>Subtotal</p>
-          <p>${calculateTotal().toFixed(2)}</p>
+          <p>{renderCurrencySymbol(currency)}{convertPrice(calculateTotal(), currency)}</p>
         </div>
         <div className="totalContainer">
           <p>Total</p>
-          <p>${(calculateTotal() + 5.99).toFixed(2)}</p>
+          <p>{renderCurrencySymbol(currency)}{convertPrice(calculateTotal() + 5.99, currency)}</p>
         </div>
+
         <a href="/checkout">
           <button className="proceedCheckoutButton">Proceed To Checkout</button>
         </a>
