@@ -30,6 +30,8 @@ import {
 } from './api/api.js';
 import ScrollToTopButton from './components/ScrollToTopButton.jsx';
 import RedirectIfAuthenticated from './utils/RedirectIfAuthenticated.jsx';
+import ScrollToTop from './utils/ScrollToTop.jsx';
+import RequireAuth from './utils/RequireAuth.jsx';
 
 function App() {
   useTitle();
@@ -46,6 +48,7 @@ function App() {
       console.error('Failed to fetch cart:', error);
     }
   };
+
 
   const fetchWishlist = async () => {
     try {
@@ -83,6 +86,7 @@ function App() {
     <>
       <Header cart={cart} />
       <Main>
+        <ScrollToTop />
         {location.pathname !== '/' && <RouteBanner />}
         <Loading />
 
@@ -127,7 +131,7 @@ function App() {
             }
           />
           <Route path="/aboutUs" element={<About />} />
-          <Route path="/cart" element={<Cart cart={cart} fetchCart={fetchCart} />} />
+          <Route path="/cart" element={<RequireAuth><Cart cart={cart} fetchCart={fetchCart} /></RequireAuth>} />
           <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/compare" element={<Compare />} />
@@ -150,17 +154,19 @@ function App() {
             }
           />
 
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
           <Route
             path="/wishlist"
             element={
-              <Wishlist
-                wishlist={wishlist}
-                cart={cart}
-                fetchCart={fetchCart}
-                removeFromWishlist={removeFromWishlist}
-                fetchWishlist={fetchWishlist}
-              />
+              <RequireAuth>
+                <Wishlist
+                  wishlist={wishlist}
+                  cart={cart}
+                  fetchCart={fetchCart}
+                  removeFromWishlist={removeFromWishlist}
+                  fetchWishlist={fetchWishlist}
+                />
+              </RequireAuth>
             }
           />
           <Route path="*" element={<NotFound />} />

@@ -101,7 +101,7 @@ function SingleProduct({
             className="addToCartButton"
             disabled={isInCart || isAddingToCart}
           >
-            {isAddingToCart ? t('Adding...') : isInCart ? t('AlreadyInCart') : t('AddToCart')}
+            {isAddingToCart ? t('Adding') : isInCart ? t('AlreadyInCart') : t('AddToCart')}
           </button>
           <button
             onClick={handleAddToWishlist}

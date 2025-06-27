@@ -231,6 +231,8 @@
   "NotFoundT": "ERROR 404",
 
   "AlreadyHaveAnAccount": "Already Have An Account?",
-  "DontHaveAnAccount": "Dont Have An Account?"
-  
+  "DontHaveAnAccount": "Dont Have An Account?",
+
+  "Adding":"Adding..."
+
 }

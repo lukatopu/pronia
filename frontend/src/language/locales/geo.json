@@ -236,7 +236,9 @@
   "NotFoundT": "ერორი 404",
 
   "AlreadyHaveAnAccount": "გაქვს უკვე ანგარიში?",
-  "DontHaveAnAccount": "არ გაქვს ანგარიში?"
+  "DontHaveAnAccount": "არ გაქვს ანგარიში?",
+
+  "Adding":"ემატება..."
 
 
 
