@@ -62,10 +62,14 @@ function RouteBanner() {
       title: 'AccountT',
       mainTitle: 'AccountM',
     },
+    '/compare': {
+      title: 'CompareT',
+      mainTitle: 'CompareM',
+    },
     '*': {
       title: '404',
       mainTitle: 'NotFoundT',
-    }
+    },
   };
 
   useEffect(() => {

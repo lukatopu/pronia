@@ -77,13 +77,13 @@ function App() {
 
 
   const addToCart = async (productId, quantity) => {
-  try {
-    await apiAddToCart(productId, quantity);
-    await fetchCart();
-  } catch (error) {
-    console.error('Failed to add to cart:', error);
-  }
-};
+    try {
+      await apiAddToCart(productId, quantity);
+      await fetchCart();
+    } catch (error) {
+      console.error('Failed to add to cart:', error);
+    }
+  };
 
 
   const removeFromWishlist = async (productId) => {
@@ -147,7 +147,11 @@ function App() {
           <Route path="/cart" element={<RequireAuth><Cart cart={cart} fetchCart={fetchCart} /></RequireAuth>} />
           <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/compare" element={<Compare />} />
+          <Route
+            path="/compare"
+            element={<Compare cart={cart} addToCart={addToCart} />}
+          />
+
 
 
           <Route

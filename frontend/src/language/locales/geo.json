@@ -254,7 +254,27 @@
   "postcode": "საფოსტო კოდი",
 
   "SelectCity": "აირჩიე ქალაქი",
-  "AddressFieldsIncomplete": "გთხოვთ შეავსოთ მისამართის ყველა სავალდებულო ველი."
+  "AddressFieldsIncomplete": "გთხოვთ შეავსოთ მისამართის ყველა სავალდებულო ველი.",
+  
+  "CompareT": "შედარება",
+  "CompareM": "შედარების გვერდი",
 
+
+
+
+
+  "SelectProduct": "აირჩიე პროდუქტი",
+
+  "WaitingForSelection": "გელოდებით არჩევისთვის",
+
+  "NoProductToCompare": "შედარებისთვის პროდუქტი არაა",
+
+  
+  "CompareProducts": "პროდუქტების შედარება",
+  "Attribute": "მახასიათებელი",
+  "Image": "სურათი",
+  "Name": "სახელი",
+  "Description": "აღწერა",
+  "Price": "ფასი"
 
 }

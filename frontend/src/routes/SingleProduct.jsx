@@ -102,6 +102,12 @@ function SingleProduct({
   };
 
 
+  const handleCompare = () => {
+    localStorage.setItem('compareProduct', JSON.stringify(product));
+    navigate('/compare');
+  };
+
+
   return (
     <div className="singleProductPage">
       <div className="singleProductImage">
@@ -112,9 +118,8 @@ function SingleProduct({
       </div>
       <div className="singleProductDetails">
         <h1>{product.name?.[i18n.language] || product.name}</h1>
-        <p className="price"><p className="price">
-           {renderCurrencySymbol(currency)}{convertPrice(product.price, currency)}
-        </p>
+        <p className="price">
+          {renderCurrencySymbol(currency)}{convertPrice(product.price, currency)}
         </p>
         <div className="ratingContainer">{renderStars(product.rating)}</div>
         <div className="productDescription">
@@ -141,12 +146,10 @@ function SingleProduct({
           >
             {isInWishlist ? <PiHeartFill /> : <PiHeart />}
           </button>
-          <button
-            className="compareButton"
-            aria-label={t('Compare')}
-          >
+          <button className="compareButton" onClick={handleCompare} aria-label={t('Compare')}>
             <BsArrowRepeat />
           </button>
+
         </div>
         <Services small={true} />
       </div>

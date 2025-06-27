@@ -249,7 +249,30 @@
   "postcode": "Postcode",
 
   "SelectCity": "Select a city",
-  "AddressFieldsIncomplete": "Please fill in all required address fields."
+  "AddressFieldsIncomplete": "Please fill in all required address fields.",
+  
+  "CompareT": "Compare",
+  "CompareM": "COMPARE PAGE",
+
+  "SelectProduct": "Select Product",
+  "WaitingForSelection": "Waiting for selection",
+  "NoProductToCompare": "No product to compare",
+
+  "CompareProducts_geo": "პროდუქტის შედარება",
+  "SelectProduct_geo": "პროდუქტის არჩევა",
+  "WaitingForSelection_geo": "გელით არჩევა",
+  "Adding_geo": "დამატება...",
+  "AlreadyInCart_geo": "უკვე კალათაშია",
+  "AddToCart_geo": "კალათაში დამატება",
+  "NoProductToCompare_geo": "შედარებისთვის პროდუქტი არაა",
+
+
+    "CompareProducts": "Compare Products",
+  "Attribute": "Attribute",
+  "Image": "Image",
+  "Name": "Name",
+  "Description": "Description",
+  "Price": "Price"
 
 
 
