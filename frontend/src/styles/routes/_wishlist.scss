@@ -52,6 +52,7 @@ table {
       line-height: 43px;
       width: 130px;
       transition: 0.3s;
+      cursor: pointer;
 
       &:hover {
         background-color: $light-green;
