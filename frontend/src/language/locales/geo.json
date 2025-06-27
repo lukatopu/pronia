@@ -275,6 +275,8 @@
   "Image": "სურათი",
   "Name": "სახელი",
   "Description": "აღწერა",
-  "Price": "ფასი"
+  "Price": "ფასი",
+
+  "ProductsFoundOnPage": "პროდუქტია ნაპოვნი"
 
 }

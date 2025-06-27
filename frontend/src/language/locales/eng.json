@@ -272,7 +272,9 @@
   "Image": "Image",
   "Name": "Name",
   "Description": "Description",
-  "Price": "Price"
+  "Price": "Price",
+
+  "ProductsFoundOnPage": "Product Found Of"
 
 
 

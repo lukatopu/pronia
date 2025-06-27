@@ -3,7 +3,7 @@ import { getProducts } from '../api/api.js';
 import { PiGridNineFill, PiListBulletsBold } from 'react-icons/pi';
 import { useTranslation } from 'react-i18next';
 
-function ProductsSort({ onSortChange, onViewChange }) {
+function ProductsSort({ onSortChange, onViewChange, totalProductsCount, currentPageProductsCount }) {
   const [products, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState('default');
   const [isGridView, setIsGridView] = useState(true);
@@ -43,10 +43,11 @@ function ProductsSort({ onSortChange, onViewChange }) {
   ];
 
   return (
-    <div className="productsSortContainer">
+     <div className="productsSortContainer">
       <div className="productsAmount">
-        <span className="foundProducts">{products.length}</span> <span> {t('ProductsFound')} </span>
-        <span className="foundProducts">30</span>
+        <span className="foundProducts">{currentPageProductsCount}</span> 
+        <span> {t('ProductsFoundOnPage')} </span>
+        <span className="foundProducts">{totalProductsCount}</span> 
       </div>
       <div className="viewToggle">
         <div

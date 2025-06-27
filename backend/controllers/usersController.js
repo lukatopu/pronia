@@ -355,8 +355,8 @@ export const placeOrder = async (req, res) => {
       total: `$${totalAmount.toFixed(2)} for ${totalItems} items`
     };
 
-    user.orders = [order, ...user.orders]; // prepend order
-    user.cart = []; // clear cart after order
+    user.orders = [order, ...user.orders];
+    user.cart = [];
 
     await user.save();
     res.status(200).json({ msg: 'Order placed successfully', order });

@@ -151,7 +151,7 @@ function ProductsList({
 
   return (
     <div className="productsWrapper">
-      <ProductsSort onSortChange={handleSortChange} onViewChange={setIsGridView} />
+      <ProductsSort totalProductsCount={filteredProducts.length} currentPageProductsCount={paginatedProducts.length} onSortChange={handleSortChange} onViewChange={setIsGridView} />
 
       <div
         ref={productTopRef}
