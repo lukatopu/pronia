@@ -6,6 +6,7 @@ import {
   getCurrentUser,
 } from '../api/api';
 import { useTranslation } from 'react-i18next';
+import { useLoader } from '../hooks/useLoader';
 
 function Profile() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -20,6 +21,10 @@ function Profile() {
   const [orders, setOrders] = useState([]);
 
   const { t } = useTranslation();
+  const { useFakeLoader } = useLoader()
+  useEffect(() => {
+    useFakeLoader();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

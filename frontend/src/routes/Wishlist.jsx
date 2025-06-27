@@ -1,15 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLoader } from '../hooks/useLoader';
 import { useTranslation } from 'react-i18next';
 
 function Wishlist({ wishlist, cart, addToCart, removeFromWishlist }) {
   const { useFakeLoader } = useLoader();
+  const [addingProductId, setAddingProductId] = useState(null);
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
     useFakeLoader();
   }, []);
+
+  const handleAddToCart = async (productId) => {
+    if (!productId || addingProductId) return;
+
+    try {
+      setAddingProductId(productId);
+      await addToCart(productId, 1);
+    } catch (error) {
+      console.error('Failed to add to cart:', error);
+    } finally {
+      setAddingProductId(null);
+    }
+  };
 
   return (
     <div className="wishlistPage">
@@ -31,6 +45,7 @@ function Wishlist({ wishlist, cart, addToCart, removeFromWishlist }) {
             <tbody>
               {wishlist.map((product) => {
                 const isInCart = cart.some((item) => item.productId?._id === product._id);
+                const isAdding = addingProductId === product._id;
 
                 return (
                   <tr key={product._id}>
@@ -57,11 +72,15 @@ function Wishlist({ wishlist, cart, addToCart, removeFromWishlist }) {
                     </td>
                     <td>
                       <button
-                        onClick={() => addToCart(product._id, 1)}
-                        disabled={isInCart}
+                        onClick={() => handleAddToCart(product._id)}
+                        disabled={isInCart || isAdding}
                         className="addToCartButton"
                       >
-                        {isInCart ? t('AlreadyInCart') : t('AddToCart')}
+                        {isInCart
+                          ? t('AlreadyInCart')
+                          : isAdding
+                          ? t('Adding')
+                          : t('AddToCart')}
                       </button>
                     </td>
                   </tr>

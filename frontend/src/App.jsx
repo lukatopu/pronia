@@ -32,6 +32,8 @@ import ScrollToTopButton from './components/ScrollToTopButton.jsx';
 import RedirectIfAuthenticated from './utils/RedirectIfAuthenticated.jsx';
 import ScrollToTop from './utils/ScrollToTop.jsx';
 import RequireAuth from './utils/RequireAuth.jsx';
+import { addToCart as apiAddToCart } from './api/api.js';
+
 
 function App() {
   useTitle();
@@ -72,6 +74,17 @@ function App() {
       console.error('Failed to add to wishlist:', error);
     }
   };
+
+
+  const addToCart = async (productId, quantity) => {
+  try {
+    await apiAddToCart(productId, quantity);
+    await fetchCart();
+  } catch (error) {
+    console.error('Failed to add to cart:', error);
+  }
+};
+
 
   const removeFromWishlist = async (productId) => {
     try {
@@ -165,6 +178,7 @@ function App() {
                   fetchCart={fetchCart}
                   removeFromWishlist={removeFromWishlist}
                   fetchWishlist={fetchWishlist}
+                  addToCart={addToCart}
                 />
               </RequireAuth>
             }
