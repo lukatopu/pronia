@@ -9,9 +9,6 @@ function Shop({ fetchCart, addToWishlist, addToCart, cart, wishlist, removeFromW
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-
-
-
   return (
     <div className="shop">
       <Filter
@@ -40,8 +37,6 @@ function Shop({ fetchCart, addToWishlist, addToCart, cart, wishlist, removeFromW
         fetchCart={fetchCart}
         removeFromWishlist={removeFromWishlist}
       />
-
-
     </div>
   );
 }

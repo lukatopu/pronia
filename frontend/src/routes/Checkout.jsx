@@ -10,8 +10,6 @@ function Checkout({ cart, setCart }) {
   const { useFakeLoader } = useLoader();
   const { currency } = useCurrency();
 
-
-
   const [addresses, setAddresses] = useState([]);
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
   const [country, setCountry] = useState('');
@@ -52,7 +50,6 @@ function Checkout({ cart, setCart }) {
     fetchUser();
   }, []);
 
-
   const convertPrice = (gelPrice, currency) => {
     const rates = {
       GEL: 1,
@@ -64,8 +61,7 @@ function Checkout({ cart, setCart }) {
     return (numeric * rates[currency]).toFixed(2);
   };
 
-
-    const renderCurrencySymbol = (currency) => {
+  const renderCurrencySymbol = (currency) => {
     switch (currency) {
       case 'USD':
         return '$';
@@ -94,7 +90,6 @@ function Checkout({ cart, setCart }) {
     const price = parseFloat(convertPrice(item.productId.price, currency));
     return total + price * item.quantity;
   }, 0);
-
 
   const shipping = cart.length === 0 ? 0 : 5.99;
   const total = subtotal + shipping;
@@ -157,8 +152,13 @@ function Checkout({ cart, setCart }) {
               onChange={(e) => setSelectedAddressIndex(Number(e.target.value))}
             >
               {addresses.map((addr, index) => (
-                <option key={index} value={index}>
-                  {[addr.address, addr.city, addr.state, addr.postcode, addr.country].filter(Boolean).join(', ')}
+                <option
+                  key={index}
+                  value={index}
+                >
+                  {[addr.address, addr.city, addr.state, addr.postcode, addr.country]
+                    .filter(Boolean)
+                    .join(', ')}
                 </option>
               ))}
             </select>
@@ -189,7 +189,7 @@ function Checkout({ cart, setCart }) {
         </div>
 
         <div className="formGroup">
-          <p className="errorMessage">{' '}</p>
+          <p className="errorMessage"> </p>
           <label htmlFor="company">{t('CompanyOptional')}</label>
           <input
             type="text"
@@ -220,7 +220,12 @@ function Checkout({ cart, setCart }) {
           >
             <option value="">{t('SelectCountry')}</option>
             {countries.map((c) => (
-              <option key={c.code} value={c.code}>{c.name}</option>
+              <option
+                key={c.code}
+                value={c.code}
+              >
+                {c.name}
+              </option>
             ))}
           </select>
         </div>
@@ -229,7 +234,7 @@ function Checkout({ cart, setCart }) {
           <p className="errorMessage">{errors.city || ' '}</p>
           <label htmlFor="city">{t('City')}</label>
           {(() => {
-            const selectedCountry = countries.find(c => c.code === country);
+            const selectedCountry = countries.find((c) => c.code === country);
             const cityList = selectedCountry?.cities;
 
             return cityList ? (
@@ -240,7 +245,10 @@ function Checkout({ cart, setCart }) {
               >
                 <option value="">{t('SelectCity') || 'Select a city'}</option>
                 {cityList.map((cityName) => (
-                  <option key={cityName} value={cityName}>
+                  <option
+                    key={cityName}
+                    value={cityName}
+                  >
                     {cityName}
                   </option>
                 ))}
@@ -316,33 +324,47 @@ function Checkout({ cart, setCart }) {
             <span>{t('Total')}</span>
           </div>
           {cart.map((item) => (
-            <div key={item._id} className="orderItem">
+            <div
+              key={item._id}
+              className="orderItem"
+            >
               <span>
                 {getProductName(item.productId.name)} × {item.quantity}
               </span>
               <span>
-                {renderCurrencySymbol(currency)} {(parseFloat(convertPrice(item.productId.price, currency)) * item.quantity).toFixed(2)}
+                {renderCurrencySymbol(currency)}{' '}
+                {(parseFloat(convertPrice(item.productId.price, currency)) * item.quantity).toFixed(
+                  2
+                )}
               </span>
-
             </div>
           ))}
         </div>
         <div className="orderTotals">
           <div className="totalRow">
             <span>{t('Subtotal')}</span>
-            <span>{renderCurrencySymbol(currency)} {subtotal.toFixed(2)}</span>
+            <span>
+              {renderCurrencySymbol(currency)} {subtotal.toFixed(2)}
+            </span>
           </div>
           <div className="totalRow">
             <span>{t('Shipping')}</span>
-            <span>{renderCurrencySymbol(currency)} {shipping.toFixed(2)}</span>
+            <span>
+              {renderCurrencySymbol(currency)} {shipping.toFixed(2)}
+            </span>
           </div>
         </div>
         <div className="grandTotal">
           <span>{t('Total')}</span>
-          <span>{renderCurrencySymbol(currency)} {total.toFixed(2)}</span>
+          <span>
+            {renderCurrencySymbol(currency)} {total.toFixed(2)}
+          </span>
         </div>
         <p className="errorMessage">{errors.cart || ' '}</p>
-        <button className="placeOrderBtn" onClick={handlePlaceOrder}>
+        <button
+          className="placeOrderBtn"
+          onClick={handlePlaceOrder}
+        >
           {t('PlaceOrder')}
         </button>
       </div>

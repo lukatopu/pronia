@@ -16,7 +16,6 @@ function Cart({ cart, fetchCart }) {
 
   const { currency } = useCurrency();
 
-
   const convertPrice = (gelPrice, currency) => {
     const rates = {
       GEL: 1,
@@ -28,8 +27,7 @@ function Cart({ cart, fetchCart }) {
     return (numeric * rates[currency]).toFixed(2);
   };
 
-
-    const renderCurrencySymbol = (currency) => {
+  const renderCurrencySymbol = (currency) => {
     switch (currency) {
       case 'USD':
         return '$';
@@ -41,7 +39,6 @@ function Cart({ cart, fetchCart }) {
         return currency;
     }
   };
-
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
@@ -111,7 +108,10 @@ function Cart({ cart, fetchCart }) {
                     </Link>
                   </td>
                   <td>
-                    <p>{renderCurrencySymbol(currency)}{convertPrice(item.productId.price, currency)}</p>
+                    <p>
+                      {renderCurrencySymbol(currency)}
+                      {convertPrice(item.productId.price, currency)}
+                    </p>
                   </td>
                   <td>
                     <Counter
@@ -123,10 +123,10 @@ function Cart({ cart, fetchCart }) {
                   </td>
                   <td>
                     <p>
-                      {renderCurrencySymbol(currency)}{(convertPrice(item.productId.price, currency) * item.quantity).toFixed(2)}
+                      {renderCurrencySymbol(currency)}
+                      {(convertPrice(item.productId.price, currency) * item.quantity).toFixed(2)}
                     </p>
                   </td>
-
                 </tr>
               ))}
             </tbody>
@@ -137,11 +137,17 @@ function Cart({ cart, fetchCart }) {
         <h1>Cart Totals</h1>
         <div className="subTotalContainer">
           <p>Subtotal</p>
-          <p>{renderCurrencySymbol(currency)}{convertPrice(calculateTotal(), currency)}</p>
+          <p>
+            {renderCurrencySymbol(currency)}
+            {convertPrice(calculateTotal(), currency)}
+          </p>
         </div>
         <div className="totalContainer">
           <p>Total</p>
-          <p>{renderCurrencySymbol(currency)}{convertPrice(calculateTotal() + 5.99, currency)}</p>
+          <p>
+            {renderCurrencySymbol(currency)}
+            {convertPrice(calculateTotal() + 5.99, currency)}
+          </p>
         </div>
 
         <a href="/checkout">

@@ -49,7 +49,9 @@ function Footer() {
 
         <div className="buttonsContainer">
           <div className="tooltipContainer">
-            <span className={`tooltip ${activeTooltips.facebook ? 'active' : ''}`}>{t('Facebook')}</span>
+            <span className={`tooltip ${activeTooltips.facebook ? 'active' : ''}`}>
+              {t('Facebook')}
+            </span>
             <a href="https://www.facebook.com/home.php">
               <button
                 onMouseLeave={() => closeTooltip('facebook')}
@@ -60,7 +62,9 @@ function Footer() {
             </a>
           </div>
           <div className="tooltipContainer">
-            <span className={`tooltip ${activeTooltips.twitter ? 'active' : ''}`}>{t('Twitter')}</span>
+            <span className={`tooltip ${activeTooltips.twitter ? 'active' : ''}`}>
+              {t('Twitter')}
+            </span>
             <a href="https://x.com/home?lang=en">
               <button
                 onMouseLeave={() => closeTooltip('twitter')}
@@ -71,7 +75,9 @@ function Footer() {
             </a>
           </div>
           <div className="tooltipContainer">
-            <span className={`tooltip ${activeTooltips.pinterest ? 'active' : ''}`}>{t('Pinterest')}</span>
+            <span className={`tooltip ${activeTooltips.pinterest ? 'active' : ''}`}>
+              {t('Pinterest')}
+            </span>
             <a href="https://www.pinterest.com/">
               <button
                 onMouseLeave={() => closeTooltip('pinterest')}
@@ -82,7 +88,9 @@ function Footer() {
             </a>
           </div>
           <div className="tooltipContainer">
-            <span className={`tooltip ${activeTooltips.dribble ? 'active' : ''}`}>{t('Dribble')}</span>
+            <span className={`tooltip ${activeTooltips.dribble ? 'active' : ''}`}>
+              {t('Dribble')}
+            </span>
             <a href="https://dribbble.com/">
               <button
                 onMouseLeave={() => closeTooltip('dribble')}
@@ -94,7 +102,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className='nav'>
+      <div className="nav">
         <div className="usefulLinksContainer">
           <h1>{t('UsefulLinks')}</h1>
           <div>

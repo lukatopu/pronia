@@ -16,8 +16,6 @@ function ProductsList({
   removeFromWishlist,
   selectedColors,
   selectedCategories,
-
-
 }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -107,17 +105,13 @@ function ProductsList({
 
       if (selectedCategories.length > 0) {
         const productCategories = product.categorie || [];
-        const matchesCategory = selectedCategories.some((cat) =>
-          productCategories.includes(cat)
-        );
+        const matchesCategory = selectedCategories.some((cat) => productCategories.includes(cat));
         if (!matchesCategory) return false;
       }
 
       return true;
     });
   };
-
-
 
   const handleSortChange = (sortOption) => {
     const filtered = filterProducts(products);
@@ -131,8 +125,6 @@ function ProductsList({
     setFilteredProducts(filtered);
     setCurrentPage(1);
   }, [products, priceRange, searchTerm, selectedTags, selectedColors, selectedCategories]);
-
-
 
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const paginatedProducts = filteredProducts.slice(
@@ -151,7 +143,12 @@ function ProductsList({
 
   return (
     <div className="productsWrapper">
-      <ProductsSort totalProductsCount={filteredProducts.length} currentPageProductsCount={paginatedProducts.length} onSortChange={handleSortChange} onViewChange={setIsGridView} />
+      <ProductsSort
+        totalProductsCount={filteredProducts.length}
+        currentPageProductsCount={paginatedProducts.length}
+        onSortChange={handleSortChange}
+        onViewChange={setIsGridView}
+      />
 
       <div
         ref={productTopRef}

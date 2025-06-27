@@ -26,11 +26,9 @@ function Filter({
     EUR: 0.34,
   };
 
-  const fromGEL = (value) =>
-    Math.round(value * exchangeRates[currency] * 100) / 100;
+  const fromGEL = (value) => Math.round(value * exchangeRates[currency] * 100) / 100;
 
-  const toGEL = (value) =>
-    Math.round((value / exchangeRates[currency]) * 100) / 100;
+  const toGEL = (value) => Math.round((value / exchangeRates[currency]) * 100) / 100;
 
   const handleSliderChange = (e, newValue) => {
     const gelMin = toGEL(newValue[0]);
@@ -82,7 +80,10 @@ function Filter({
 
       <div className="filtersContainer">
         <div className="Filter">
-          <button onClick={clearFilters} className="clearFiltersButton">
+          <button
+            onClick={clearFilters}
+            className="clearFiltersButton"
+          >
             {t('ClearFilters')}
           </button>
         </div>

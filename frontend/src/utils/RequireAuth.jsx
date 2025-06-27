@@ -26,9 +26,16 @@ function RequireAuth({ children }) {
     checkAuth();
   }, []);
 
-  if (loading) return <Loading/>;
+  if (loading) return <Loading />;
 
-  return authenticated ? children : <Navigate to="/login" replace />;
+  return authenticated ? (
+    children
+  ) : (
+    <Navigate
+      to="/login"
+      replace
+    />
+  );
 }
 
 export default RequireAuth;

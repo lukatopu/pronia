@@ -8,7 +8,7 @@ function ForgotPassword() {
   });
   const [error, setError] = useState('');
 
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
 
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.name]: e.target.value });

@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  updateUserProfile,
-  logoutUser,
-  getOrders,
-  getCurrentUser,
-} from '../api/api';
+import { updateUserProfile, logoutUser, getOrders, getCurrentUser } from '../api/api';
 import { useTranslation } from 'react-i18next';
 import { useLoader } from '../hooks/useLoader';
 import countries from '../data/countries.json';
@@ -27,7 +22,7 @@ function Profile() {
     address: '',
     city: '',
     state: '',
-    postcode: ''
+    postcode: '',
   });
 
   const { t } = useTranslation();
@@ -40,10 +35,7 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [userData, ordersData] = await Promise.all([
-          getCurrentUser(),
-          getOrders(),
-        ]);
+        const [userData, ordersData] = await Promise.all([getCurrentUser(), getOrders()]);
 
         setFirstName(userData.firstName || '');
         setLastName(userData.lastName || '');
@@ -89,7 +81,7 @@ function Profile() {
 
   const handleSaveNewAddress = async () => {
     const requiredFields = ['country', 'address', 'city', 'state', 'postcode'];
-    const missingFields = requiredFields.filter(field => !newAddressObj[field].trim());
+    const missingFields = requiredFields.filter((field) => !newAddressObj[field].trim());
 
     if (missingFields.length > 0) {
       setMessage(t('AddressFieldsIncomplete') || 'Please fill in all required address fields.');
@@ -105,7 +97,7 @@ function Profile() {
       address: '',
       city: '',
       state: '',
-      postcode: ''
+      postcode: '',
     });
     await saveProfile(updated);
   };
@@ -164,16 +156,28 @@ function Profile() {
   return (
     <div className="accountWrapper">
       <div className="accountTab">
-        <button className={activeTab === 'orders' ? 'tabButton active' : 'tabButton'} onClick={() => setActiveTab('orders')}>
+        <button
+          className={activeTab === 'orders' ? 'tabButton active' : 'tabButton'}
+          onClick={() => setActiveTab('orders')}
+        >
           {t('Orders')}
         </button>
-        <button className={activeTab === 'addresses' ? 'tabButton active' : 'tabButton'} onClick={() => setActiveTab('addresses')}>
+        <button
+          className={activeTab === 'addresses' ? 'tabButton active' : 'tabButton'}
+          onClick={() => setActiveTab('addresses')}
+        >
           {t('Addresses')}
         </button>
-        <button className={activeTab === 'details' ? 'tabButton active' : 'tabButton'} onClick={() => setActiveTab('details')}>
+        <button
+          className={activeTab === 'details' ? 'tabButton active' : 'tabButton'}
+          onClick={() => setActiveTab('details')}
+        >
           {t('AccountDetails')}
         </button>
-        <button className="tabButton" onClick={handleLogout}>
+        <button
+          className="tabButton"
+          onClick={handleLogout}
+        >
           {t('Logout')}
         </button>
       </div>
@@ -200,23 +204,31 @@ function Profile() {
           <div className="addressesDisplay">
             <h1>{t('Addresses')}</h1>
             {message && (
-              <p style={{marginBottom:'10px'}} className={`feedbackMessage ${isSuccess ? 'success' : 'error'}`}>
+              <p
+                style={{ marginBottom: '10px' }}
+                className={`feedbackMessage ${isSuccess ? 'success' : 'error'}`}
+              >
                 {message}
               </p>
             )}
             <div className="inputGroup">
-              {Object.entries(newAddressObj).map(([key, value]) => (
+              {Object.entries(newAddressObj).map(([key, value]) =>
                 key === 'country' ? (
                   <div key={key}>
                     <label>{t('CountryRegion')}</label>
                     <select
                       value={value}
-                      onChange={(e) => setNewAddressObj({ ...newAddressObj, [key]: e.target.value })}
+                      onChange={(e) =>
+                        setNewAddressObj({ ...newAddressObj, [key]: e.target.value })
+                      }
                       className="fullInput"
                     >
                       <option value="">{t('SelectCountry')}</option>
                       {countries.map((countryObj) => (
-                        <option key={countryObj.code} value={countryObj.code}>
+                        <option
+                          key={countryObj.code}
+                          value={countryObj.code}
+                        >
                           {countryObj.name}
                         </option>
                       ))}
@@ -225,38 +237,59 @@ function Profile() {
                 ) : (
                   <div key={key}>
                     <label>{t(key)}</label>
-                    {key === 'city' && countries.find(c => c.code === newAddressObj.country)?.cities ? (
+                    {key === 'city' &&
+                    countries.find((c) => c.code === newAddressObj.country)?.cities ? (
                       <select
                         value={value}
-                        onChange={(e) => setNewAddressObj({ ...newAddressObj, [key]: e.target.value })}
+                        onChange={(e) =>
+                          setNewAddressObj({ ...newAddressObj, [key]: e.target.value })
+                        }
                         className="fullInput"
                       >
                         <option value="">{t('SelectCity') || 'Select a city'}</option>
-                        {countries.find(c => c.code === newAddressObj.country).cities.map(city => (
-                          <option key={city} value={city}>{city}</option>
-                        ))}
+                        {countries
+                          .find((c) => c.code === newAddressObj.country)
+                          .cities.map((city) => (
+                            <option
+                              key={city}
+                              value={city}
+                            >
+                              {city}
+                            </option>
+                          ))}
                       </select>
                     ) : (
                       <input
                         type="text"
                         value={value}
-                        onChange={(e) => setNewAddressObj({ ...newAddressObj, [key]: e.target.value })}
+                        onChange={(e) =>
+                          setNewAddressObj({ ...newAddressObj, [key]: e.target.value })
+                        }
                         className="fullInput"
                       />
                     )}
                   </div>
                 )
-              ))}
-              <button onClick={handleSaveNewAddress} className="saveButton" style={{ marginTop: '10px' }}>
+              )}
+              <button
+                onClick={handleSaveNewAddress}
+                className="saveButton"
+                style={{ marginTop: '10px' }}
+              >
                 {t('AddAddress')}
               </button>
             </div>
 
             <div className="inputGroup">
-              <label>{t('YourAddresses')} <span>({addresses.length})</span></label>
+              <label>
+                {t('YourAddresses')} <span>({addresses.length})</span>
+              </label>
               <div className="addressList">
                 {addresses.map((addr, i) => (
-                  <p style={{ color: '#abd787' }} key={i}>
+                  <p
+                    style={{ color: '#abd787' }}
+                    key={i}
+                  >
                     {Object.values(addr).filter(Boolean).join(', ')}
                     <button
                       onClick={() => handleRemoveAddress(i)}
@@ -313,7 +346,9 @@ function Profile() {
             </div>
 
             <div className="inputGroup">
-              <label>{t('CurrentPassword')} <small>({t('LeaveBlank')})</small></label>
+              <label>
+                {t('CurrentPassword')} <small>({t('LeaveBlank')})</small>
+              </label>
               <input
                 type="password"
                 value={currentPassword}
@@ -323,7 +358,9 @@ function Profile() {
             </div>
 
             <div className="inputGroup">
-              <label>{t('NewPassword')} <small>({t('LeaveBlank')})</small></label>
+              <label>
+                {t('NewPassword')} <small>({t('LeaveBlank')})</small>
+              </label>
               <input
                 type="password"
                 value={newPassword}
@@ -342,14 +379,15 @@ function Profile() {
               />
             </div>
 
-            <button onClick={handleSaveChanges} className="saveButton">
+            <button
+              onClick={handleSaveChanges}
+              className="saveButton"
+            >
               {t('SaveChanges')}
             </button>
 
             {message && (
-              <p className={`feedbackMessage ${isSuccess ? 'success' : 'error'}`}>
-                {message}
-              </p>
+              <p className={`feedbackMessage ${isSuccess ? 'success' : 'error'}`}>{message}</p>
             )}
           </div>
         )}

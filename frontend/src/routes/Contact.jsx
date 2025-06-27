@@ -50,7 +50,10 @@ function Contact() {
   };
 
   return (
-    <div className="contactContainer" style={{ marginBottom: '50px' }}>
+    <div
+      className="contactContainer"
+      style={{ marginBottom: '50px' }}
+    >
       <div className="contactWrapper">
         <div className="contactInfoContainer">
           <div className="contactDetails">
@@ -150,9 +153,7 @@ function Contact() {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
-
       </div>
-
     </div>
   );
 }

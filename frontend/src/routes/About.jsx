@@ -35,12 +35,7 @@ function About() {
     }));
   };
 
-  const teamProfiles = [
-    profile1,
-    profile2,
-    profile3,
-    profile4,
-  ];
+  const teamProfiles = [profile1, profile2, profile3, profile4];
 
   return (
     <div className="aboutUsContainer">
@@ -86,7 +81,10 @@ function About() {
 
       <div className="aboutProfileWrapper">
         {teamProfiles.map((img, idx) => (
-          <div className="aboutProfileContainer" key={idx}>
+          <div
+            className="aboutProfileContainer"
+            key={idx}
+          >
             <div className="profileImageContainer">
               <div className="profileOverlay">
                 <p>Michal Murphy</p>
@@ -133,7 +131,10 @@ function About() {
                   </div>
                 </div>
               </div>
-              <img src={img} alt="team member" />
+              <img
+                src={img}
+                alt="team member"
+              />
             </div>
             <p>Michal Murphy</p>
           </div>

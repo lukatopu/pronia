@@ -28,9 +28,7 @@ function Compare({ cart, addToCart }) {
     fetch();
   }, []);
 
-  const secondProduct = products.find(
-    (p) => p._id === secondProductId || p.id === secondProductId
-  );
+  const secondProduct = products.find((p) => p._id === secondProductId || p.id === secondProductId);
 
   const convertPrice = (gelPrice) => {
     const rates = { GEL: 1, USD: 0.37, EUR: 0.34 };
@@ -127,8 +125,8 @@ function Compare({ cart, addToCart }) {
                       {addingIds.includes(firstProduct._id)
                         ? t('Adding')
                         : isInCart(firstProduct._id)
-                        ? t('AlreadyInCart')
-                        : t('AddToCart')}
+                          ? t('AlreadyInCart')
+                          : t('AddToCart')}
                     </button>
                   </td>
                   <td>
@@ -149,8 +147,8 @@ function Compare({ cart, addToCart }) {
                           {addingIds.includes(secondProduct._id)
                             ? t('Adding')
                             : isInCart(secondProduct._id)
-                            ? t('AlreadyInCart')
-                            : t('AddToCart')}
+                              ? t('AlreadyInCart')
+                              : t('AddToCart')}
                         </button>
                       </>
                     ) : (
@@ -161,7 +159,9 @@ function Compare({ cart, addToCart }) {
                 <tr>
                   <td>{t('Name')}</td>
                   <td>{firstProduct.name[i18n.language] || firstProduct.name}</td>
-                  <td>{secondProduct ? secondProduct.name[i18n.language] || secondProduct.name : '-'}</td>
+                  <td>
+                    {secondProduct ? secondProduct.name[i18n.language] || secondProduct.name : '-'}
+                  </td>
                 </tr>
                 <tr>
                   <td>{t('Description')}</td>

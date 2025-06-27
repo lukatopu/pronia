@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import client1 from '../images/reviewerProfiles/1.png';
 import client2 from '../images/reviewerProfiles/2.png';
 import client3 from '../images/reviewerProfiles/3.png';
@@ -123,14 +123,20 @@ function ClientReview() {
                 style={{
                   flex: isSmallScreen ? '0 0 350px' : `0 0 ${cardWidth}px`,
                   maxWidth: isSmallScreen ? '350px' : `${cardWidth}px`,
-                  minWidth: isSmallScreen ? '350px' : `${cardWidth}px`
+                  minWidth: isSmallScreen ? '350px' : `${cardWidth}px`,
                 }}
               >
                 <div className="quoteMarkContainer">
-                  <img src={quotation} alt="quotation mark" />
+                  <img
+                    src={quotation}
+                    alt="quotation mark"
+                  />
                 </div>
                 <div className="clientProfileContainer">
-                  <img src={review.img} alt="client profile" />
+                  <img
+                    src={review.img}
+                    alt="client profile"
+                  />
                 </div>
                 <h6>{review.name}</h6>
                 <p>{t('Client')}</p>

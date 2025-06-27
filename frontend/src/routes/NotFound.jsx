@@ -11,18 +11,26 @@ function NotFound() {
   useEffect(() => useFakeLoader(), []);
 
   return (
-    <div className='Wrapper404'>
-      <div className='Background404'>
-        <img src={image404} alt="404" />
+    <div className="Wrapper404">
+      <div className="Background404">
+        <img
+          src={image404}
+          alt="404"
+        />
         <h1>{t('NotFoundTitle')}</h1>
         <a href="/">
           <button>{t('BackToHome')}</button>
         </a>
       </div>
-      <div className='subscribeContainer'>
+      <div className="subscribeContainer">
         <h1>{t('SubscribeTitle')}</h1>
-        <div className='inputContainer'>
-          <input placeholder={t('EnterEmail')} type="text" name="email" id="email" />
+        <div className="inputContainer">
+          <input
+            placeholder={t('EnterEmail')}
+            type="text"
+            name="email"
+            id="email"
+          />
           <PiPaperPlaneTiltLight />
         </div>
       </div>

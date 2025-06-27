@@ -27,13 +27,12 @@ import {
   getWishlist,
   addToWishlist as apiAddToWishlist,
   removeFromWishlist as apiRemoveFromWishlist,
+  addToCart as apiAddToCart,
 } from './api/api.js';
 import ScrollToTopButton from './components/ScrollToTopButton.jsx';
 import RedirectIfAuthenticated from './utils/RedirectIfAuthenticated.jsx';
 import ScrollToTop from './utils/ScrollToTop.jsx';
 import RequireAuth from './utils/RequireAuth.jsx';
-import { addToCart as apiAddToCart } from './api/api.js';
-
 
 function App() {
   useTitle();
@@ -50,7 +49,6 @@ function App() {
       console.error('Failed to fetch cart:', error);
     }
   };
-
 
   const fetchWishlist = async () => {
     try {
@@ -75,7 +73,6 @@ function App() {
     }
   };
 
-
   const addToCart = async (productId, quantity) => {
     try {
       await apiAddToCart(productId, quantity);
@@ -84,7 +81,6 @@ function App() {
       console.error('Failed to add to cart:', error);
     }
   };
-
 
   const removeFromWishlist = async (productId) => {
     try {
@@ -143,16 +139,43 @@ function App() {
               />
             }
           />
-          <Route path="/aboutUs" element={<About />} />
-          <Route path="/cart" element={<RequireAuth><Cart cart={cart} fetchCart={fetchCart} /></RequireAuth>} />
-          <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/aboutUs"
+            element={<About />}
+          />
+          <Route
+            path="/cart"
+            element={
+              <RequireAuth>
+                <Cart
+                  cart={cart}
+                  fetchCart={fetchCart}
+                />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <Checkout
+                cart={cart}
+                setCart={setCart}
+              />
+            }
+          />
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
           <Route
             path="/compare"
-            element={<Compare cart={cart} addToCart={addToCart} />}
+            element={
+              <Compare
+                cart={cart}
+                addToCart={addToCart}
+              />
+            }
           />
-
-
 
           <Route
             path="/login"
@@ -171,7 +194,14 @@ function App() {
             }
           />
 
-          <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
           <Route
             path="/wishlist"
             element={
@@ -187,9 +217,18 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword />}
+          />
+          <Route
+            path="/reset-password/:token"
+            element={<ResetPassword />}
+          />
         </Routes>
       </Main>
       <Footer />

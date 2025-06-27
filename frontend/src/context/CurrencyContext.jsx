@@ -7,11 +7,7 @@ export const CurrencyProvider = ({ children }) => {
 
   const value = { currency, setCurrency };
 
-  return (
-    <CurrencyContext.Provider value={value}>
-      {children}
-    </CurrencyContext.Provider>
-  );
+  return <CurrencyContext.Provider value={value}>{children}</CurrencyContext.Provider>;
 };
 
 export const useCurrency = () => useContext(CurrencyContext);

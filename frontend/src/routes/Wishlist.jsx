@@ -76,11 +76,7 @@ function Wishlist({ wishlist, cart, addToCart, removeFromWishlist }) {
                         disabled={isInCart || isAdding}
                         className="addToCartButton"
                       >
-                        {isInCart
-                          ? t('AlreadyInCart')
-                          : isAdding
-                          ? t('Adding')
-                          : t('AddToCart')}
+                        {isInCart ? t('AlreadyInCart') : isAdding ? t('Adding') : t('AddToCart')}
                       </button>
                     </td>
                   </tr>

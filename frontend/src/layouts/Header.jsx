@@ -148,13 +148,19 @@ function Header({ cart }) {
         </div>
         <div>
           <a href="/">
-            <img src={proniaLogo} alt="Pronia Logo" />
+            <img
+              src={proniaLogo}
+              alt="Pronia Logo"
+            />
           </a>
         </div>
         <nav>
           <PiMagnifyingGlassThin onClick={handleSearch} />
           <div className="userIconContainer">
-            <PiUserThin onClick={handleUserMainClick} className="userIcon" />
+            <PiUserThin
+              onClick={handleUserMainClick}
+              className="userIcon"
+            />
             <div className={`userIconDropdown ${isUserMainClicked ? 'clicked' : ''}`}>
               <Link to="/profile">
                 <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
@@ -171,13 +177,22 @@ function Header({ cart }) {
               )}
             </div>
           </div>
-          <Link className="heartIcon" to="/wishlist">
+          <Link
+            className="heartIcon"
+            to="/wishlist"
+          >
             <PiHeartStraightThin />
           </Link>
           <PiShoppingBagThin onClick={handleCart} />
-          <PiList className="burgerIcon" onClick={() => setIsBurgerOpen(true)} />
+          <PiList
+            className="burgerIcon"
+            onClick={() => setIsBurgerOpen(true)}
+          />
         </nav>
-        <SearchBlur closeSearch={closeSearch} isActive={isSearchClicked} />
+        <SearchBlur
+          closeSearch={closeSearch}
+          isActive={isSearchClicked}
+        />
       </div>
 
       <nav className="headerBottom">
@@ -192,7 +207,11 @@ function Header({ cart }) {
       <div className={`fixedHeader ${isFixed ? 'visible' : ''}`}>
         <div className="fixedHeaderContent">
           <a href="/">
-            <img src={proniaLogo} alt="Pronia Logo" className="fixed-logo" />
+            <img
+              src={proniaLogo}
+              alt="Pronia Logo"
+              className="fixed-logo"
+            />
           </a>
           <nav className="fixedHeaderNav">
             <Link to="/">{t('Home')}</Link>
@@ -204,7 +223,10 @@ function Header({ cart }) {
           <div className="fixedHeaderIcons">
             <PiMagnifyingGlassThin onClick={handleSearch} />
             <div className="userIconContainer">
-              <PiUserThin onClick={handleUserFixedClick} className="userIcon" />
+              <PiUserThin
+                onClick={handleUserFixedClick}
+                className="userIcon"
+              />
               <div className={`userIconDropdown ${isUserFixedClicked ? 'clicked' : ''}`}>
                 <Link to="/profile">
                   <button onClick={handleDropdownClick}>{t('MyAccount')}</button>
@@ -225,7 +247,10 @@ function Header({ cart }) {
               <PiHeartStraightThin />
             </Link>
             <PiShoppingBagThin onClick={handleCart} />
-            <PiList className="burgerIcon" onClick={() => setIsBurgerOpen(true)} />
+            <PiList
+              className="burgerIcon"
+              onClick={() => setIsBurgerOpen(true)}
+            />
           </div>
         </div>
       </div>

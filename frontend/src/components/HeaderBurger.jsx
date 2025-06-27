@@ -27,7 +27,10 @@ function HeaderBurger({
 
   return (
     <div className={`headerBurgerContainer ${isOpen ? 'open' : ''}`}>
-      <button className="closeBurger" onClick={onClose}>
+      <button
+        className="closeBurger"
+        onClick={onClose}
+      >
         <PiX size={24} />
       </button>
 
@@ -75,17 +78,32 @@ function HeaderBurger({
           />
           <div className={`userIconDropdown ${isUserMainClicked ? 'clicked' : ''}`}>
             <Link to="/profile">
-              <button onClick={() => { onClose(); handleDropdownClick(); }}>
+              <button
+                onClick={() => {
+                  onClose();
+                  handleDropdownClick();
+                }}
+              >
                 {t('MyAccount')}
               </button>
             </Link>
             <Link to="/login">
-              <button onClick={() => { onClose(); handleDropdownClick(); }}>
+              <button
+                onClick={() => {
+                  onClose();
+                  handleDropdownClick();
+                }}
+              >
                 {t('LoginL')}
               </button>
             </Link>
             <Link to="/register">
-              <button onClick={() => { onClose(); handleDropdownClick(); }}>
+              <button
+                onClick={() => {
+                  onClose();
+                  handleDropdownClick();
+                }}
+              >
                 {t('Register')}
               </button>
             </Link>
@@ -106,19 +124,49 @@ function HeaderBurger({
 
       <div className="routesContainer">
         <nav className="headerBottom">
-          <Link to="/" onClick={() => { onClose(); handleDropdownClick(); }}>
+          <Link
+            to="/"
+            onClick={() => {
+              onClose();
+              handleDropdownClick();
+            }}
+          >
             {t('Home')}
           </Link>
-          <Link to="/shop" onClick={() => { onClose(); handleDropdownClick(); }}>
+          <Link
+            to="/shop"
+            onClick={() => {
+              onClose();
+              handleDropdownClick();
+            }}
+          >
             {t('Shop')}
           </Link>
-          <Link to="/aboutUs" onClick={() => { onClose(); handleDropdownClick(); }}>
+          <Link
+            to="/aboutUs"
+            onClick={() => {
+              onClose();
+              handleDropdownClick();
+            }}
+          >
             {t('AboutUs')}
           </Link>
-          <Link to="/pages" onClick={() => { onClose(); handleDropdownClick(); }}>
+          <Link
+            to="/pages"
+            onClick={() => {
+              onClose();
+              handleDropdownClick();
+            }}
+          >
             {t('Pages')}
           </Link>
-          <Link to="/contact" onClick={() => { onClose(); handleDropdownClick(); }}>
+          <Link
+            to="/contact"
+            onClick={() => {
+              onClose();
+              handleDropdownClick();
+            }}
+          >
             {t('Contact')}
           </Link>
         </nav>

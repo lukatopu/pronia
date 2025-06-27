@@ -13,7 +13,6 @@ import { addToCart } from '../api/api';
 import { useCurrency } from '../context/CurrencyContext';
 import ProductModal from './ProductModal';
 
-
 function Product({
   product,
   addToWishlist,
@@ -23,7 +22,7 @@ function Product({
   fetchCart,
   isListView,
 }) {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
@@ -61,7 +60,6 @@ function Product({
     }
   };
 
-
   const convertPrice = (gelPrice, currency) => {
     const rates = {
       GEL: 1,
@@ -82,8 +80,6 @@ function Product({
     setIsModalOpen(false);
     setSelectedProductId(null);
   };
-
-
 
   return (
     <>
@@ -111,26 +107,35 @@ function Product({
                 {isInWishlist ? <PiHeartFill style={{ color: '#000000' }} /> : <PiHeart />}
               </button>
 
-              <button className="productHoverButton" onClick={openModal}>
+              <button
+                className="productHoverButton"
+                onClick={openModal}
+              >
                 <PiEye />
               </button>
-
-
 
               <button
                 disabled={isInCart || isAddingToCart}
                 onClick={handleAddToCart}
                 className="productHoverButton"
               >
-                {isInCart ? <PiShoppingCartFill style={{ color: '#000000' }} /> : <PiShoppingCart />}
+                {isInCart ? (
+                  <PiShoppingCartFill style={{ color: '#000000' }} />
+                ) : (
+                  <PiShoppingCart />
+                )}
               </button>
             </div>
           )}
         </div>
 
         <div className="productTextContainer">
-          <Link to={`/product/${product._id}`}>{product.name?.[i18n.language] || product.name}</Link>
-          <p>{convertPrice(product.price, currency)} {currency}</p>
+          <Link to={`/product/${product._id}`}>
+            {product.name?.[i18n.language] || product.name}
+          </Link>
+          <p>
+            {convertPrice(product.price, currency)} {currency}
+          </p>
 
           <div className="ratingContainer">{renderStars(product.rating)}</div>
 
@@ -166,22 +171,18 @@ function Product({
             </>
           )}
         </div>
-
       </div>
 
-
-        <ProductModal
-          productId={selectedProductId}
-          addToWishlist={addToWishlist}
-          removeFromWishlist={removeFromWishlist}
-          cart={cart}
-          wishlist={wishlist}
-          fetchCart={fetchCart}
-          onClose={closeModal}
-          isOpen={isModalOpen}
-        />
-
-
+      <ProductModal
+        productId={selectedProductId}
+        addToWishlist={addToWishlist}
+        removeFromWishlist={removeFromWishlist}
+        cart={cart}
+        wishlist={wishlist}
+        fetchCart={fetchCart}
+        onClose={closeModal}
+        isOpen={isModalOpen}
+      />
     </>
   );
 }

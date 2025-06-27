@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { PiStarFill, PiHeart, PiHeartFill } from 'react-icons/pi';
 import { BsArrowRepeat } from 'react-icons/bs';
 import Counter from '../components/Counter';
@@ -7,9 +7,7 @@ import { getProducts, addToCart } from '../api/api.js';
 import { useLoader } from '../hooks/useLoader.jsx';
 import Services from '../components/Services.jsx';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import { useCurrency } from '../context/CurrencyContext';
-
 
 function SingleProduct({
   addToWishlist,
@@ -39,7 +37,6 @@ function SingleProduct({
     return (numeric * rates[currency]).toFixed(2);
   };
 
-
   const renderCurrencySymbol = (currency) => {
     switch (currency) {
       case 'USD':
@@ -52,7 +49,6 @@ function SingleProduct({
         return currency;
     }
   };
-
 
   const navigate = useNavigate();
 
@@ -101,12 +97,10 @@ function SingleProduct({
     }
   };
 
-
   const handleCompare = () => {
     localStorage.setItem('compareProduct', JSON.stringify(product));
     navigate('/compare');
   };
-
 
   return (
     <div className="singleProductPage">
@@ -119,7 +113,8 @@ function SingleProduct({
       <div className="singleProductDetails">
         <h1>{product.name?.[i18n.language] || product.name}</h1>
         <p className="price">
-          {renderCurrencySymbol(currency)}{convertPrice(product.price, currency)}
+          {renderCurrencySymbol(currency)}
+          {convertPrice(product.price, currency)}
         </p>
         <div className="ratingContainer">{renderStars(product.rating)}</div>
         <div className="productDescription">
@@ -146,10 +141,13 @@ function SingleProduct({
           >
             {isInWishlist ? <PiHeartFill /> : <PiHeart />}
           </button>
-          <button className="compareButton" onClick={handleCompare} aria-label={t('Compare')}>
+          <button
+            className="compareButton"
+            onClick={handleCompare}
+            aria-label={t('Compare')}
+          >
             <BsArrowRepeat />
           </button>
-
         </div>
         <Services small={true} />
       </div>
