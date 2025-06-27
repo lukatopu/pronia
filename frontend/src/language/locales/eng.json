@@ -246,7 +246,11 @@
   "address": "Address",
   "city": "City",
   "state": "State",
-  "postcode": "Postcode"
+  "postcode": "Postcode",
+
+  "SelectCity": "Select a city",
+  "AddressFieldsIncomplete": "Please fill in all required address fields."
+
 
 
 }

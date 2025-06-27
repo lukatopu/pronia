@@ -26,7 +26,7 @@ function Login() {
     e.preventDefault();
     try {
       await loginUser(formData.email, formData.password);
-      navigate('/');
+      navigate('/profile');
     } catch (err) {
       setError(err.message);
     }

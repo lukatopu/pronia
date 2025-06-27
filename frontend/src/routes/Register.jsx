@@ -35,7 +35,7 @@ function Register() {
 
     try {
       await registerUser(formData.firstName, formData.lastName, formData.email, formData.password);
-      navigate('/');
+      navigate('/profile');
     } catch (err) {
       setError(err.message);
     }

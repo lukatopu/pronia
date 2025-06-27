@@ -182,14 +182,49 @@ function Checkout({ cart, setCart }) {
         </div>
 
         <div className="formGroup">
+          <p className="errorMessage">{errors.country || ' '}</p>
+          <label htmlFor="country">{t('CountryRegion')}</label>
+          <select
+            id="country"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          >
+            <option value="">{t('SelectCountry')}</option>
+            {countries.map((c) => (
+              <option key={c.code} value={c.code}>{c.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="formGroup">
           <p className="errorMessage">{errors.city || ' '}</p>
           <label htmlFor="city">{t('City')}</label>
-          <input
-            type="text"
-            id="city"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
+          {(() => {
+            const selectedCountry = countries.find(c => c.code === country);
+            const cityList = selectedCountry?.cities;
+
+            return cityList ? (
+              <select
+                id="city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              >
+                <option value="">{t('SelectCity') || 'Select a city'}</option>
+                {cityList.map((cityName) => (
+                  <option key={cityName} value={cityName}>
+                    {cityName}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type="text"
+                id="city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            );
+          })()}
         </div>
 
         <div className="nameFields">

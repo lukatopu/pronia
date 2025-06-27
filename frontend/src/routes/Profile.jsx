@@ -88,6 +88,15 @@ function Profile() {
   };
 
   const handleSaveNewAddress = async () => {
+    const requiredFields = ['country', 'address', 'city', 'state', 'postcode'];
+    const missingFields = requiredFields.filter(field => !newAddressObj[field].trim());
+
+    if (missingFields.length > 0) {
+      setMessage(t('AddressFieldsIncomplete') || 'Please fill in all required address fields.');
+      setIsSuccess(false);
+      return;
+    }
+
     const updated = [...addresses, newAddressObj];
     setAddresses(updated);
     setNewAddressObj({
@@ -190,7 +199,11 @@ function Profile() {
         {activeTab === 'addresses' && (
           <div className="addressesDisplay">
             <h1>{t('Addresses')}</h1>
-
+            {message && (
+              <p style={{marginBottom:'10px'}} className={`feedbackMessage ${isSuccess ? 'success' : 'error'}`}>
+                {message}
+              </p>
+            )}
             <div className="inputGroup">
               {Object.entries(newAddressObj).map(([key, value]) => (
                 key === 'country' ? (
@@ -212,12 +225,25 @@ function Profile() {
                 ) : (
                   <div key={key}>
                     <label>{t(key)}</label>
-                    <input
-                      type="text"
-                      value={value}
-                      onChange={(e) => setNewAddressObj({ ...newAddressObj, [key]: e.target.value })}
-                      className="fullInput"
-                    />
+                    {key === 'city' && countries.find(c => c.code === newAddressObj.country)?.cities ? (
+                      <select
+                        value={value}
+                        onChange={(e) => setNewAddressObj({ ...newAddressObj, [key]: e.target.value })}
+                        className="fullInput"
+                      >
+                        <option value="">{t('SelectCity') || 'Select a city'}</option>
+                        {countries.find(c => c.code === newAddressObj.country).cities.map(city => (
+                          <option key={city} value={city}>{city}</option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input
+                        type="text"
+                        value={value}
+                        onChange={(e) => setNewAddressObj({ ...newAddressObj, [key]: e.target.value })}
+                        className="fullInput"
+                      />
+                    )}
                   </div>
                 )
               ))}
