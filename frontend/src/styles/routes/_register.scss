@@ -23,20 +23,33 @@
     color: #525252;
   }
 
-  button {
-    width: 165px;
-    height: 50px;
-    font-size: 16px;
-    background-color: $light-green;
-    color: white;
-    border-radius: 23.5px;
-    cursor: pointer;
-    transition: 300ms;
+  .buttonContainer {
+    button {
+      width: 165px;
+      height: 50px;
+      font-size: 16px;
+      background-color: $light-green;
+      color: white;
+      border-radius: 23.5px;
+      cursor: pointer;
+      transition: 300ms;
 
-    &:hover {
-      background-color: #525252;
+      &:hover {
+        background-color: #525252;
+      }
+    }
+
+    a {
+      color: #525252;
+      transition: 200ms;
+
+      &:hover {
+        color: $light-green;
+      }
     }
   }
+
+
 
   .nameInputContainer,
   .passwordsContainer {

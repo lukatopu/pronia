@@ -62,11 +62,14 @@ function Login() {
           />
         </div>
         <div className="loginAddOns">
-          <div className="checkboxContainer">
-            <input type="checkbox" />
+          <div style={{alignItems:'flex-start'}} className="checkboxContainer">
+            <input style={{marginTop: '3px'}} type="checkbox" />
             <label>{t('RememberMe')}</label>
           </div>
+          <div className='nav'>
           <a href="/forgot-password">{t('ForgotPassword')}?</a>
+          <a href="/register">Dont Have An Account?</a>
+          </div>
         </div>
         <button type="submit">{t('LoginH')}</button>
       </form>
