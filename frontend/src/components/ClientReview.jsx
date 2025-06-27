@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import client1 from '../images/reviewerProfiles/1.png';
 import client2 from '../images/reviewerProfiles/2.png';
 import client3 from '../images/reviewerProfiles/3.png';
@@ -19,6 +19,15 @@ function ClientReview() {
   const [cardWidth, setCardWidth] = useState(350);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const { t } = useTranslation();
+
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [deltaX, setDeltaX] = useState(0);
+
+  const gap = 30;
+  const maxIndex = Math.max(reviews.length - visibleCards, 0);
+  const baseX = -(currentIndex * (cardWidth + gap));
+  const translateX = isDragging ? baseX + deltaX : baseX;
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,9 +57,31 @@ function ClientReview() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const gap = 30;
-  const maxIndex = Math.max(reviews.length - visibleCards, 0);
-  const translateX = -(currentIndex * (cardWidth + gap));
+  const handlePointerDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX || e.touches?.[0]?.pageX);
+    setDeltaX(0);
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDragging) return;
+    const x = e.pageX || e.touches?.[0]?.pageX;
+    setDeltaX(x - startX);
+  };
+
+  const handlePointerUp = () => {
+    if (!isDragging) return;
+
+    const threshold = cardWidth / 4;
+    if (deltaX > threshold && currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    } else if (deltaX < -threshold && currentIndex < maxIndex) {
+      setCurrentIndex(currentIndex + 1);
+    }
+
+    setIsDragging(false);
+    setDeltaX(0);
+  };
 
   return (
     <div className="clientReviewWrapper">
@@ -62,13 +93,27 @@ function ClientReview() {
         <p>{t('TeamSectionSub')}</p>
       </div>
 
-      <div className="sliderContainer">
-        <div className="sliderTrackWrapper">
+      <div
+        className="sliderContainer"
+        style={{ userSelect: 'none' }}
+      >
+        <div
+          className="sliderTrackWrapper"
+          onMouseDown={handlePointerDown}
+          onMouseMove={handlePointerMove}
+          onMouseUp={handlePointerUp}
+          onMouseLeave={handlePointerUp}
+          onTouchStart={handlePointerDown}
+          onTouchMove={handlePointerMove}
+          onTouchEnd={handlePointerUp}
+        >
           <div
             className="sliderTrack"
             style={{
               transform: `translateX(${translateX}px)`,
-              transition: 'transform 0.3s ease',
+              transition: isDragging ? 'none' : 'transform 0.3s ease',
+              display: 'flex',
+              gap: `${gap}px`,
             }}
           >
             {reviews.map((review, i) => (
@@ -89,9 +134,7 @@ function ClientReview() {
                 </div>
                 <h6>{review.name}</h6>
                 <p>{t('Client')}</p>
-                <p>
-                  {t('ClientReviewText')}
-                </p>
+                <p>{t('ClientReviewText')}</p>
               </div>
             ))}
           </div>

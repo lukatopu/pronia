@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getProducts = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/api/products');
+    const response = await axios.get('/api/products');
     return response.data;
   } catch {
     throw new Error('Error fetching products');
@@ -12,7 +12,7 @@ export const getProducts = async () => {
 export const loginUser = async (email, password) => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/api/users/login',
+      '/api/users/login',
       { email, password },
       {
         headers: { 'Content-Type': 'application/json' },
@@ -28,7 +28,7 @@ export const loginUser = async (email, password) => {
 export const registerUser = async (firstName, lastName, email, password) => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/api/users/register',
+      '/api/users/register',
       { firstName, lastName, email, password },
       {
         headers: { 'Content-Type': 'application/json' },
@@ -42,13 +42,13 @@ export const registerUser = async (firstName, lastName, email, password) => {
 };
 
 export const forgotPasswordUser = (data) => {
-  return axios.put(`http://localhost:3000/api/users/forgot-password`, data, {
+  return axios.put(`/api/users/forgot-password`, data, {
     withCredentials: true,
   });
 };
 
 export const resetPasswordUser = (data, token) => {
-  return axios.put(`http://localhost:3000/api/users/reset-password`, data, {
+  return axios.put(`/api/users/reset-password`, data, {
     headers: { Authorization: token },
     withCredentials: true,
   });
@@ -57,7 +57,7 @@ export const resetPasswordUser = (data, token) => {
 export const addToCart = async (productId, quantity) => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/api/users/cart/add',
+      '/api/users/cart/add',
       { productId, quantity },
       {
         headers: { 'Content-Type': 'application/json' },
@@ -72,7 +72,7 @@ export const addToCart = async (productId, quantity) => {
 
 export const removeFromCart = async (productId) => {
   try {
-    const response = await axios.delete('http://localhost:3000/api/users/cart/remove', {
+    const response = await axios.delete('/api/users/cart/remove', {
       data: { productId },
       withCredentials: true,
     });
@@ -84,7 +84,7 @@ export const removeFromCart = async (productId) => {
 
 export const getCart = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/api/users/cart', {
+    const response = await axios.get('/api/users/cart', {
       withCredentials: true,
     });
     return response.data;
@@ -96,7 +96,7 @@ export const getCart = async () => {
 export const updateCartItem = async (productId, quantity) => {
   try {
     const response = await axios.put(
-      'http://localhost:3000/api/users/cart/update',
+      '/api/users/cart/update',
       { productId, quantity },
       {
         headers: { 'Content-Type': 'application/json' },
@@ -111,7 +111,7 @@ export const updateCartItem = async (productId, quantity) => {
 
 export const clearCart = async () => {
   try {
-    const response = await axios.delete('http://localhost:3000/api/users/cart/clear', {
+    const response = await axios.delete('/api/users/cart/clear', {
       withCredentials: true,
     });
     return response.data;
@@ -123,7 +123,7 @@ export const clearCart = async () => {
 export const addToWishlist = async (productId) => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/api/users/wishlist/add',
+      '/api/users/wishlist/add',
       { productId },
       {
         headers: { 'Content-Type': 'application/json' },
@@ -138,7 +138,7 @@ export const addToWishlist = async (productId) => {
 
 export const removeFromWishlist = async (productId) => {
   try {
-    const response = await axios.delete('http://localhost:3000/api/users/wishlist/remove', {
+    const response = await axios.delete('/api/users/wishlist/remove', {
       data: { productId },
       withCredentials: true,
     });
@@ -150,7 +150,7 @@ export const removeFromWishlist = async (productId) => {
 
 export const getWishlist = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/api/users/wishlist', {
+    const response = await axios.get('/api/users/wishlist', {
       withCredentials: true,
     });
     return response.data;
@@ -161,7 +161,7 @@ export const getWishlist = async () => {
 
 export const updateUserProfile = async (updateData) => {
   try {
-    const response = await axios.put('http://localhost:3000/api/users/update-profile', updateData, {
+    const response = await axios.put('/api/users/update-profile', updateData, {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     });
@@ -173,7 +173,7 @@ export const updateUserProfile = async (updateData) => {
 
 export const logoutUser = async () => {
   try {
-    const response = await axios.post('http://localhost:3000/api/users/logout', null, {
+    const response = await axios.post('/api/users/logout', null, {
       withCredentials: true,
     });
     return response.data;
@@ -185,7 +185,7 @@ export const logoutUser = async () => {
 export const placeOrder = async () => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/api/users/orders/place',
+      '/api/users/orders/place',
       {},
       {
         withCredentials: true,
@@ -199,7 +199,7 @@ export const placeOrder = async () => {
 
 export const getOrders = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/api/users/orders', {
+    const response = await axios.get('/api/users/orders', {
       withCredentials: true,
     });
     return response.data.data;
@@ -211,7 +211,7 @@ export const getOrders = async () => {
 
 export const getCurrentUser = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/api/users/me', {
+    const response = await axios.get('/api/users/me', {
       withCredentials: true,
     });
     return response.data.data;
