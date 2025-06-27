@@ -81,7 +81,7 @@ export const forgotPasswordUser = async (req, res) => {
 
 
         const access_token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
-        const url = `http://localhost:5173/reset-password/${access_token}`
+        const url = `/reset-password/${access_token}`
         console.log(process.env.JWT_SECRET_KEY)
 
         console.log('EMAIL:', process.env.MAIL_SENDER_EMAIL);
