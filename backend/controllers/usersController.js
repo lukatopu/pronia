@@ -81,13 +81,10 @@ export const forgotPasswordUser = async (req, res) => {
 
 
         const access_token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' });
-        const url = `https://pronia.onrender.com/reset-password/${access_token}`
-        console.log(process.env.JWT_SECRET_KEY)
+        const appUrl = process.env.APP_URL || 'https://pronia.onrender.com';
+        const url = new URL(`/reset-password/${access_token}`, appUrl).href;
 
-        console.log('EMAIL:', process.env.MAIL_SENDER_EMAIL);
-        console.log('PASS:', process.env.MAIL_SENDER_PASS);
-
-        await mailSender(process.env.MAIL_SENDER_EMAIL, email, url)
+        await mailSender(email, url)
 
         res.status(200).json({ msg: "Check your email for further instructions" })
     } catch (err) {

@@ -132,7 +132,7 @@ function Footer() {
             <a href="#">{t('MoneyGuarantee')}</a>
             <a href="#">{t('Returns')}</a>
             <a href="#">{t('Shipping')}</a>
-            <a href="#">{t('PrivacyPolicy')}</a>
+            <a href="/privacy-policy">{t('PrivacyPolicy')}</a>
           </div>
         </div>
 

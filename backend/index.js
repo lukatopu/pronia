@@ -57,6 +57,9 @@ app.use('/api/users', UsersRouter)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+app.get('/privacy-policy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'privacy-policy.html'));
+});
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/*', (req, res) => {
