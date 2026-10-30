@@ -1,8 +1,12 @@
+import nodemailer from 'nodemailer';
+
 const mailSender = async (to, url) => {
- const apiKey = process.env.RESEND_API_KEY;
- const from = process.env.MAIL_FROM;
- if (!apiKey || !from) {
-  throw new Error('Password-reset email is not configured. Set RESEND_API_KEY and MAIL_FROM.');
+ const clientId = process.env.GMAIL_CLIENT_ID;
+ const clientSecret = process.env.GMAIL_CLIENT_SECRET;
+ const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
+ const from = process.env.MAIL_SENDER_EMAIL;
+ if (!clientId || !clientSecret || !refreshToken || !from) {
+  throw new Error('Password-reset email is not configured. Set GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN and MAIL_SENDER_EMAIL.');
  }
  const safeUrl = url.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;');
 
@@ -38,18 +42,37 @@ const mailSender = async (to, url) => {
 
 
 
- const response = await fetch('https://api.resend.com/emails', {
+ const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  signal: AbortSignal.timeout(15000),
+  body: new URLSearchParams({
+   client_id: clientId,
+   client_secret: clientSecret,
+   refresh_token: refreshToken,
+   grant_type: 'refresh_token',
+  }).toString(),
+ });
+ const token = await tokenResponse.json();
+ if (!tokenResponse.ok || !token.access_token) {
+  throw new Error(`Gmail authorization failed (${tokenResponse.status}). Check the Gmail OAuth credentials and refresh token.`);
+ }
+
+ // Nodemailer only builds the MIME message here; delivery uses HTTPS, not SMTP.
+ const composer = nodemailer.createTransport({ streamTransport: true, buffer: true, newline: 'windows' });
+ const message = await composer.sendMail(mailOptions);
+ const response = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
   method: 'POST',
   headers: {
-   Authorization: `Bearer ${apiKey}`,
+   Authorization: `Bearer ${token.access_token}`,
    'Content-Type': 'application/json',
   },
   signal: AbortSignal.timeout(15000),
-  body: JSON.stringify(mailOptions),
+  body: JSON.stringify({ raw: message.message.toString('base64url') }),
  });
  const result = await response.json();
  if (!response.ok || !result.id) {
-  throw new Error(`Email service rejected the request: ${result.message || response.status}`);
+  throw new Error(`Gmail rejected the email (${response.status}). Check the sender account, gmail.send permission and Gmail sending limits.`);
  }
  return result;
 }

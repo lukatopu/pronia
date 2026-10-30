@@ -20,7 +20,7 @@ body{margin:0;background:#f6f8f3;color:#253025;font:17px/1.7 system-ui,sans-seri
 <p>Information is used to create and authenticate accounts, display saved shopping information, update profiles, record demonstration orders and send requested password-reset emails. Reset links expire after 15 minutes. Email acceptance by a sending provider does not guarantee delivery to your inbox.</p>
 <h2>Storage, hosting and email providers</h2>
 <p>Account and shopping data are stored in MongoDB Atlas. Render hosts the website and backend. Hosting and infrastructure providers may process connection information, such as IP addresses and request logs, to operate their services.</p>
-<p>Depending on the deployed email configuration, password-reset messages are sent through Resend or the project operator's Gmail account using Google services. The sending provider processes the recipient address and message, including the reset link. The project does not sell account information.</p>
+<p>Password-reset messages are sent through the project operator's Gmail account using the Gmail API. Google processes the recipient address and message, including the reset link. The project does not sell account information.</p>
 <h2>Google account access</h2>
 <p>If the Gmail API integration is enabled, the project operator authorizes the Pronia sender account with Google's gmail.send permission solely to send project emails, including requested password resets. This integration does not request permission to read Gmail inboxes. Visitors do not authorize access to their Google accounts to receive email. Sender authorization credentials are intended for server-side configuration and are not used for advertising.</p>
 <h2>Cookies and browser storage</h2>
